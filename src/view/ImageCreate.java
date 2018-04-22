@@ -38,6 +38,10 @@ public class ImageCreate {
 		
 	}//constructor
 	
+	public HashMap<String, BufferedImage[]> getImgs(){
+		return imgs;
+	}
+	
 	   private BufferedImage[] createImages(String dir){
 	    	BufferedImage bufferedImage;
 	    	BufferedImage[] imgs = new BufferedImage[count];
