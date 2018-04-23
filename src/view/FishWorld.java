@@ -66,14 +66,14 @@ public class FishWorld extends JPanel {
 	public static void main(String[] args){
 		JFrame frame = new JFrame();
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(1280, 960);
+		frame.setSize(960, 960);
 
 		
 		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
-		loFloating.add(new ProtectedSpecies("bogTurtle", 4 , 5));
-		loFloating.add(new InvasiveSpecies("bass", 4 , 5));
-		loFloating.add(new InvasiveSpecies("catfish", 4 , 5));
-		loFloating.add(new ProtectedSpecies("horseshoeCrab", 4 , 5));
+		loFloating.add(new ProtectedSpecies("bogTurtle", 480 , 500));
+		loFloating.add(new InvasiveSpecies("bass", 480 , 500));
+		loFloating.add(new InvasiveSpecies("catfish", 480 , 500));
+		loFloating.add(new ProtectedSpecies("horseshoeCrab", 480 , 500));
 		
 		ModelWorld world = new ModelWorld(loFloating);
 		FishWorld eg1 = new FishWorld(world.getListOfFloatingObjs());
