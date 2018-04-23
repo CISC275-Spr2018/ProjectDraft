@@ -26,6 +26,10 @@ public class Controller {
 		model.updateScore(i);
 	}
 	
+	public int getScore(){
+		return model.getScore();
+	}
+	
 	public static void main(String args[]) {
 		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
 		loFloating.add(new ProtectedSpecies("bogturtle", 400 , 5));
@@ -33,15 +37,23 @@ public class Controller {
 		loFloating.add(new InvasiveSpecies("catFish", 400 , 500));
 		loFloating.add(new ProtectedSpecies("horseshoeCrab", 4 , 5));
 		Controller a = new Controller(loFloating);
-		while(true){
+		int i = 0;
+		while(i++ < 30){
 			a.updateController(loFloating);	
 			a.updateScore(1);
-		try {
-    		Thread.sleep(100);
-    	} catch (InterruptedException e) {
-    		e.printStackTrace();
-    	}
-		}		
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}//while
+		HighScore h1 = new HighScore(a.getScore());
+		ArrayList<HighScore> hs = new ArrayList<HighScore>();
+		hs.add(h1);
+		HighScore.showHighScoreList(hs);
+		
+		HighScore.writeOut("outSample", hs);
+		//HighScore.showHighScoreList(HighScore.readIn("outSample"));
 	}
 	
 }
