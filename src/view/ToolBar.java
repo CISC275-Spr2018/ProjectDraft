@@ -1,7 +1,11 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -13,18 +17,20 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
 
 public class ToolBar extends JPanel {
 	public String tool = "Invasion";
 	
 	public ToolBar(){
-		this.setLayout(new FlowLayout());
+		GridLayout g = new GridLayout(4,0);
+		this.setLayout(g);
 		setBtn();
 		
 		ImageIcon icon = new ImageIcon(createImages("Dialogue2"));
-		JLabel label = new JLabel("Score:" + 0, icon, 0);
+		JLabel label = new JLabel(icon);
+		JLabel score = new JLabel("" +0);
+		score.setFont(new Font("SansSerif",Font.ITALIC ,48) ) ;
+		label.add(score);
 		this.add(label);
 	}//constructor
 	
@@ -34,12 +40,15 @@ public class ToolBar extends JPanel {
 	private void setBtn(){
 		ImageIcon icon = new ImageIcon(createImages("net"));
 		JRadioButton invasiveTool = new JRadioButton("Invasion", icon);
+		invasiveTool.setFont(new Font("SansSerif",Font.BOLD, 22));
 		
 		icon = new ImageIcon(createImages("camera"));
 		JRadioButton protectedTool = new JRadioButton("Protected", icon);
+		protectedTool.setFont(new Font("SansSerif",Font.BOLD, 22));
 		
 		icon = new ImageIcon(createImages("trashpicker"));
 		JRadioButton litterTool = new JRadioButton("Litter", icon);
+		litterTool.setFont(new Font("SansSerif",Font.BOLD, 22));
 		ButtonGroup bp = new ButtonGroup();
 		bp.add(invasiveTool);
 		bp.add(protectedTool);

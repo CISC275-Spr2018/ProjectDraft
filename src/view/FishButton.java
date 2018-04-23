@@ -72,6 +72,7 @@ public class FishButton extends JButton {
     	});
 		frame.setSize(1280, 960);
 		frame.getContentPane().add(bassBtn);
+		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
 		int i = 0;
 		while(i < 400){

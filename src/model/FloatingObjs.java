@@ -12,7 +12,7 @@ public abstract class FloatingObjs {
 		this.name = n;
 		this.xloc = x;
 		this.yloc =y;
-		speed = 1;
+		speed = 30;
 		score = 100;
 		duration = 600;
 	}

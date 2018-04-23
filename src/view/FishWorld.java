@@ -33,7 +33,7 @@ public class FishWorld extends JPanel {
 			this.add(btn);
 		}
 		
-		this.setLayout(new FlowLayout());
+		this.setLayout(null);
 	}
 	
 	public void removeFloat(String name){
