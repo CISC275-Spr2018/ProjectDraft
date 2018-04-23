@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class ModelWorld {
 	private ArrayList<FloatingObjs> lof;
+	private int score;
 	
 	public ModelWorld(ArrayList<FloatingObjs> l){
 		this.lof = l;
@@ -33,13 +34,21 @@ public class ModelWorld {
 		}
 	}
 	
+	public void updateScore(int s){
+		score += s;
+	}
+	
+	public int getScore(){
+		return score;
+	}
+	
 	public void destory(){}
 	
 	public void spawn(){}
 
 	public static void main(String[] args){
 		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
-		loFloating.add(new ProtectedSpecies("bogturle", 4 , 5));
+		loFloating.add(new ProtectedSpecies("bogturtle", 4 , 5));
 		loFloating.add(new InvasiveSpecies("bass", 4 , 5));
 		loFloating.add(new InvasiveSpecies("catFish", 4 , 5));
 		loFloating.add(new ProtectedSpecies("horseshoeCrab", 4 , 5));

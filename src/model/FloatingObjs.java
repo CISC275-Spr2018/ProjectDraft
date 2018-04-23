@@ -11,7 +11,7 @@ public abstract class FloatingObjs {
 	public FloatingObjs(String n, int x, int y){
 		this.name = n;
 		this.xloc = x;
-		this.yloc =y;
+		this.yloc = y;
 		speed = 30;
 		score = 100;
 		duration = 600;

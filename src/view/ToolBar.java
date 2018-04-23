@@ -13,6 +13,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,11 +28,10 @@ public class ToolBar extends JPanel {
 		setBtn();
 		
 		ImageIcon icon = new ImageIcon(createImages("Dialogue2"));
-		JLabel label = new JLabel(icon);
-		JLabel score = new JLabel("" +0);
-		score.setFont(new Font("SansSerif",Font.ITALIC ,48) ) ;
-		label.add(score);
-		this.add(label);
+		JButton scoreBtn = new JButton("Score: 0");
+		scoreBtn.setFont(new Font("SansSerif",Font.ITALIC ,48));
+		scoreBtn.setEnabled(false);
+		this.add(scoreBtn);
 	}//constructor
 	
 
@@ -71,8 +71,8 @@ public class ToolBar extends JPanel {
 	}//createStatusImages
 	
 	public void updateScore(int score){
-		JLabel label = ((JLabel) this.getComponent(3));
-		label.setText("" +score);
+		JButton label = ((JButton) this.getComponent(3));
+		label.setText("Score: "+score);
 	}
 	
 	public static void main(String[] args){
