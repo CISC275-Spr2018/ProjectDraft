@@ -12,7 +12,6 @@ import view.View;
 public class Controller {
 	private ModelWorld model;
 	private View view;
-	private FishWorld W;
 	public Controller(ArrayList<FloatingObjs> loFloating) {
 		model = new ModelWorld(loFloating);
 		view = new View(loFloating);
@@ -20,6 +19,11 @@ public class Controller {
 	public void updateController(ArrayList<FloatingObjs> obj) {
 		this.model.move();
 		this.view.updateView(obj);
+		this.view.getTbar().updateScore(model.getScore());
+	}
+	
+	public void updateScore(int i){
+		model.updateScore(i);
 	}
 	
 	public static void main(String args[]) {
@@ -30,7 +34,8 @@ public class Controller {
 		loFloating.add(new ProtectedSpecies("horseshoeCrab", 4 , 5));
 		Controller a = new Controller(loFloating);
 		while(true){
-			a.updateController(loFloating);			
+			a.updateController(loFloating);	
+			a.updateScore(1);
 		try {
     		Thread.sleep(100);
     	} catch (InterruptedException e) {
