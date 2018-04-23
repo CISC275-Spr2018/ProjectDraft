@@ -27,7 +27,6 @@ public class Controller {
 		loFloating.add(new ProtectedSpecies("bogTurtle", 330 , 250));
 		loFloating.add(new InvasiveSpecies("bass", 400 , 365));
 		loFloating.add(new InvasiveSpecies("catFish", 255 , 550));
-		loFloating.add(new ProtectedSpecies("horseshoeCrab", 270 , 120));
 		Controller a = new Controller(loFloating);
 		while(true){
 			a.updateController(loFloating);			
