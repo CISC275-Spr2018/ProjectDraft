@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class FishWorld extends JPanel {
 			temp.move(f.getXloc(),f.getYloc());
 			btns.put(f.getName(), temp);
 		}catch(IllegalArgumentException e){
-			System.out.println("not in Enum!!!!!2333333333333");
+			System.out.println("not in Enum!!!!!");
 		}
 	}
 	
