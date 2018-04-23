@@ -23,7 +23,6 @@ public class ImageCreate {
 		this.imgs.put(dir, createImages(dir));
 		dir = "right";
 		this.imgs.put(dir, createImages(dir));
-		
 	}//constructor
 	
 	public ImageCreate(FloatingElements e){

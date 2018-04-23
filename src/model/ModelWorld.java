@@ -15,6 +15,10 @@ public class ModelWorld {
 		}
 	}
 	
+	public ArrayList<FloatingObjs> getListOfFloatingObjs(){
+		return lof;
+	}
+	
 	public String toString(){
 		String str = "";
 		for(FloatingObjs f : lof){
@@ -23,15 +27,21 @@ public class ModelWorld {
 		return str;
 	}
 	
+	public void move(){
+		for(FloatingObjs f : lof){
+			f.move();
+		}
+	}
+	
 	public void destory(){}
 	
 	public void spawn(){}
 
 	public static void main(String[] args){
 		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
-		loFloating.add(new ProtectedSpecies("bogtoturle", 4 , 5));
+		loFloating.add(new ProtectedSpecies("bogturle", 4 , 5));
 		loFloating.add(new InvasiveSpecies("bass", 4 , 5));
-		loFloating.add(new InvasiveSpecies("cafFish", 4 , 5));
+		loFloating.add(new InvasiveSpecies("catFish", 4 , 5));
 		loFloating.add(new ProtectedSpecies("horseshoeCrab", 4 , 5));
 		
 		ModelWorld world = new ModelWorld(loFloating);

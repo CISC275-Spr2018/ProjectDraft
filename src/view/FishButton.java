@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -32,6 +33,7 @@ public class FishButton extends JButton {
 		this.setBounds(xpos, ypos, imgWidth, imgHeight);
 		ImageIcon icon = new ImageIcon(pics.get("left")[count]);
 		this.setIcon(icon);
+		//this.setBackground(null);
 	}
 	
 	public int getX(){
@@ -48,6 +50,8 @@ public class FishButton extends JButton {
 		this.ypos = y;
 		count = (count+1)%frameCount;
 		ImageIcon icon = new ImageIcon(pics.get(dir)[count]);
+		this.setContentAreaFilled(false); 
+		this.setBorderPainted(false); 
 		this.setIcon(icon);
 		this.setBounds(xpos, ypos, imgWidth, imgHeight);
 	}
@@ -55,8 +59,6 @@ public class FishButton extends JButton {
 	public static void main(String[] args){
 		JFrame frame = new JFrame();
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    	int x = 0;
-    	int y = 0;
     	ImageCreate bass = new ImageCreate(FloatingElements.BASS);
     	FishButton bassBtn = new FishButton(FloatingElements.BASS, bass.getImgs());
     	bassBtn.addActionListener(new ActionListener(){
@@ -68,7 +70,7 @@ public class FishButton extends JButton {
 			}
     		
     	});
-		frame.setSize(800, 800);
+		frame.setSize(1280, 960);
 		frame.getContentPane().add(bassBtn);
 		frame.setVisible(true);
 		int i = 0;
@@ -81,7 +83,6 @@ public class FishButton extends JButton {
     			e.printStackTrace();
     		}
 			frame.repaint();
-			System.out.println("Update~~~~~~~~~~~~~~~~~~~~~~~~");
 		}
 	}
 
