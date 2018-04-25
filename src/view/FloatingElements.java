@@ -4,7 +4,7 @@ public enum FloatingElements {
 	BASS("bass",249, 132, 1),
 	BOGTURTLE("bogTurtle",227,125,3),
 	CATFISH("catfish", 241, 249,2),
-	HORSESHOECRAB("horseshoeCrab",253,173,2),
+	HORSESHOECRAB("horseshoeCrab",283,193,2),
 	MITTENCRAB("mittenCrab", 254,142,3),
 	PICKEREL("pickerel",252,84,1),
 	TROUT("trout",253,95,1),

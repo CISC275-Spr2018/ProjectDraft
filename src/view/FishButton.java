@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 
 import model.FloatingObjs;
 
-public class FishButton extends JButton {
+public class FishButton extends JButton{
 	private String cmd;
 	private int xpos = 0;
 	private int ypos = 0;
@@ -33,6 +33,7 @@ public class FishButton extends JButton {
 		this.setBounds(xpos, ypos, imgWidth, imgHeight);
 		ImageIcon icon = new ImageIcon(pics.get("left")[count]);
 		this.setIcon(icon);
+		//this.addActionListener(this);
 		//this.setBackground(null);
 	}
 	
@@ -61,6 +62,7 @@ public class FishButton extends JButton {
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	ImageCreate bass = new ImageCreate(FloatingElements.BASS);
     	FishButton bassBtn = new FishButton(FloatingElements.BASS, bass.getImgs());
+    	/**
     	bassBtn.addActionListener(new ActionListener(){
 
 			@Override
@@ -69,7 +71,7 @@ public class FishButton extends JButton {
 				System.out.println("---------->"+e.getActionCommand()+"<---------");
 			}
     		
-    	});
+    	});**/
 		frame.setSize(1280, 960);
 		frame.getContentPane().add(bassBtn);
 		frame.getContentPane().setLayout(null);
@@ -86,5 +88,7 @@ public class FishButton extends JButton {
 			frame.repaint();
 		}
 	}
+
+	
 
 }

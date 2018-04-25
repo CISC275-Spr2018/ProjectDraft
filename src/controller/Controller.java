@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import model.FloatingObjs;
@@ -9,12 +11,13 @@ import model.ProtectedSpecies;
 import view.FishWorld;
 import view.View;
 
-public class Controller {
+public class Controller  implements ActionListener{
 	private ModelWorld model;
 	private View view;
 	public Controller(ArrayList<FloatingObjs> loFloating) {
 		model = new ModelWorld(loFloating);
 		view = new View(loFloating);
+		//view.eg1.
 	}
 	public void updateController(ArrayList<FloatingObjs> obj) {
 		this.model.move();
@@ -42,6 +45,11 @@ public class Controller {
     		e.printStackTrace();
     	}
 		}		
+	}
+	@Override
+	public void actionPerformed(ActionEvent arg0) {	
+		System.out.println("aaaaa");
+		
 	}
 	
 }

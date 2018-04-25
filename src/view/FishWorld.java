@@ -40,6 +40,9 @@ public class FishWorld extends JPanel {
 	public void removeFloat(String name){
 		btns.remove(name);
 	}
+	public FishWorld getFishWorld() {
+		return this;
+	}
 	
 	public void addFloat(FloatingObjs f){
 		String strName = f.getName().toUpperCase();

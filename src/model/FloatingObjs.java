@@ -27,6 +27,9 @@ public abstract class FloatingObjs {
 	public String getName(){
 		return name;
 	}
+	public void destory() {
+		
+	}
 	public void onClick(){};
 	public void move() {
 		double rand = Math.random() * 3;//[0,3)
@@ -35,7 +38,7 @@ public abstract class FloatingObjs {
 		rand = Math.random() * 3;
 		int yInc = (int) rand - 1;//[-1, 1]
 		yloc += yInc * speed;
-		System.out.println(xloc +"~~~~~~~~~~~~~~"+yloc);
+		//System.out.println(xloc +"~~~~~~~~~~~~~~"+yloc);
 	}//move
 	
 	public String toString(){
