@@ -40,7 +40,6 @@ public class View extends JFrame {
 		//this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);  
     	this.setVisible(true);
     	
-		
 	}
 	public void updateView(ArrayList<FloatingObjs> ob1) {
 		eg1.updateBtns(ob1);

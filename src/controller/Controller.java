@@ -35,6 +35,12 @@ public class Controller  implements ActionListener{
 		loFloating.add(new InvasiveSpecies("bass", 4 , 500));
 		loFloating.add(new InvasiveSpecies("catFish", 400 , 500));
 		loFloating.add(new ProtectedSpecies("horseshoeCrab", 4 , 5));
+		loFloating.add(new InvasiveSpecies("redswampcrayfish", 200 , 335));
+		loFloating.add(new InvasiveSpecies("snakehead", 300 , 235));
+		loFloating.add(new InvasiveSpecies("snakehead", 200 , 135));
+		loFloating.add(new InvasiveSpecies("paper", 267 , 235));
+		loFloating.add(new ProtectedSpecies("salamander", 267 , 235));
+		loFloating.add(new ProtectedSpecies("Sturgeon", 435 , 135));
 		Controller a = new Controller(loFloating);
 		while(true){
 			a.updateController(loFloating);	

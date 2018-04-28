@@ -8,7 +8,13 @@ public enum FloatingElements {
 	MITTENCRAB("mittenCrab", 254,142,3),
 	PICKEREL("pickerel",252,84,1),
 	TROUT("trout",253,95,1),
-	TROUTGRP("troutGrp",256,256,1);
+	TROUTGRP("troutGrp",256,256,1),
+	REDSWAMPCRAYFISH("redswampcrayfish",200,122,1),
+	SNAKEHEAD("snakehead",300,99,1),
+	STURGEON("sturgeon",300,64,1),
+	PAPER("paper",99,99,4),
+	SALAMANDER("salamander",200,53,1)
+	;
 	
 	private String name;
 	private int imgWidth;
