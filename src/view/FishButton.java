@@ -33,7 +33,8 @@ public class FishButton extends JButton {
 		this.setBounds(xpos, ypos, imgWidth, imgHeight);
 		ImageIcon icon = new ImageIcon(pics.get("left")[count]);
 		this.setIcon(icon);
-		//this.setBackground(null);
+		this.setContentAreaFilled(false); 
+		this.setBorderPainted(false); 
 	}
 	
 	public int getX(){
@@ -50,8 +51,7 @@ public class FishButton extends JButton {
 		this.ypos = y;
 		count = (count+1)%frameCount;
 		ImageIcon icon = new ImageIcon(pics.get(dir)[count]);
-		this.setContentAreaFilled(false); 
-		this.setBorderPainted(false); 
+
 		this.setIcon(icon);
 		this.setBounds(xpos, ypos, imgWidth, imgHeight);
 	}

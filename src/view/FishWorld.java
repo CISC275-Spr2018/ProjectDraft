@@ -16,18 +16,11 @@ import model.ProtectedSpecies;
 
 public class FishWorld extends JPanel {
 	private HashMap<String, FishButton> btns = new HashMap<String, FishButton>();
+	private ActionListener buttonHandler;
 	
 	public FishWorld(ArrayList<FloatingObjs> lof){
 		for(FloatingObjs f : lof){
-			String name = f.getName().toUpperCase();
-			try{
-				FloatingElements fe = FloatingElements.valueOf(name);
-				FishButton temp = new FishButton(fe, new ImageCreate(fe).getImgs());
-				temp.move(f.getXloc(),f.getYloc());
-				btns.put(f.getName(), temp);
-			}catch(IllegalArgumentException e){
-				System.out.println("not in Enum!!!!!");
-			}
+			addFloat(f);
 		}
 		
 		for(FishButton btn : btns.values()){
@@ -38,19 +31,31 @@ public class FishWorld extends JPanel {
 	}
 	
 	public void removeFloat(String name){
+		FishButton temp = btns.get(name);
 		btns.remove(name);
+		this.remove(temp);
 	}
 	
-	public void addFloat(FloatingObjs f){
+	public void setActionListener(ActionListener al){
+		this.buttonHandler = al;
+		for(FishButton fb : btns.values()){
+			fb.addActionListener(buttonHandler);
+		}
+	}
+	
+	public FishButton addFloat(FloatingObjs f){
 		String strName = f.getName().toUpperCase();
+		FishButton temp = null;
 		try{
 			FloatingElements fe = FloatingElements.valueOf(strName);
-			FishButton temp = new FishButton(fe, new ImageCreate(fe).getImgs());
+			 temp = new FishButton(fe, new ImageCreate(fe).getImgs());
 			temp.move(f.getXloc(),f.getYloc());
 			btns.put(f.getName(), temp);
 		}catch(IllegalArgumentException e){
 			System.out.println("not in Enum!!!!!");
 		}
+		
+		return temp;
 	}
 	
 	public void updateBtns(ArrayList<FloatingObjs> lof){
@@ -59,10 +64,13 @@ public class FishWorld extends JPanel {
 			if(temp != null){
 				temp.move(f.getXloc(), f.getYloc());
 			}else{
-				addFloat(f);
-			}
-		}
-	}
+				temp = addFloat(f);
+				if(temp != null){
+					temp.addActionListener(buttonHandler);
+				}//inner-if
+			}//if-else
+		}//for
+	}//updateBtns
 	
 	public static void main(String[] args){
 		JFrame frame = new JFrame();
@@ -77,14 +85,14 @@ public class FishWorld extends JPanel {
 		loFloating.add(new ProtectedSpecies("horseshoeCrab", 480 , 500));
 		
 		ModelWorld world = new ModelWorld(loFloating);
-		FishWorld eg1 = new FishWorld(world.getListOfFloatingObjs());
+		FishWorld eg1 = new FishWorld(world.getListOfExistedFloatingObjs());
 		frame.getContentPane().add(eg1);
 		
 		frame.setVisible(true);
 		
 		while(true){
 			world.move();
-			eg1.updateBtns(world.getListOfFloatingObjs());
+			eg1.updateBtns(world.getListOfExistedFloatingObjs());
 			try {
     			Thread.sleep(100);
     		} catch (InterruptedException e) {

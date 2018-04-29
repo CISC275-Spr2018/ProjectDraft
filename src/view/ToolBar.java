@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +21,9 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 public class ToolBar extends JPanel {
-	public String tool = "Invasion";
+	private JRadioButton invasiveTool;
+	private JRadioButton protectedTool;
+	private JRadioButton litterTool;
 	
 	public ToolBar(){
 		GridLayout g = new GridLayout(4,0);
@@ -39,16 +42,20 @@ public class ToolBar extends JPanel {
 	
 	private void setBtn(){
 		ImageIcon icon = new ImageIcon(createImages("net"));
-		JRadioButton invasiveTool = new JRadioButton("Invasion", icon);
+		invasiveTool = new JRadioButton("Invasion", icon);
 		invasiveTool.setFont(new Font("SansSerif",Font.BOLD, 22));
+		invasiveTool.setActionCommand("Invasion");//prime num used to find the species
 		
 		icon = new ImageIcon(createImages("camera"));
-		JRadioButton protectedTool = new JRadioButton("Protected", icon);
+		protectedTool = new JRadioButton("Protected", icon);
 		protectedTool.setFont(new Font("SansSerif",Font.BOLD, 22));
+		protectedTool.setActionCommand("Protected");//prime num used to find the species
 		
 		icon = new ImageIcon(createImages("trashpicker"));
-		JRadioButton litterTool = new JRadioButton("Litter", icon);
+		litterTool = new JRadioButton("Litter", icon);
 		litterTool.setFont(new Font("SansSerif",Font.BOLD, 22));
+		litterTool.setActionCommand("Litter");//prime num used to find the species
+		
 		ButtonGroup bp = new ButtonGroup();
 		bp.add(invasiveTool);
 		bp.add(protectedTool);
@@ -73,6 +80,12 @@ public class ToolBar extends JPanel {
 	public void updateScore(int score){
 		JButton label = ((JButton) this.getComponent(3));
 		label.setText("Score: "+score);
+	}
+	
+	public void setActionListener(ActionListener tAL){
+		invasiveTool.addActionListener(tAL);
+		protectedTool.addActionListener(tAL);
+		litterTool.addActionListener(tAL);
 	}
 	
 	public static void main(String[] args){

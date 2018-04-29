@@ -1,23 +1,36 @@
 package model;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ModelWorld {
-	private ArrayList<FloatingObjs> lof;
+	private ArrayList<FloatingObjs> lof;//list of floatingObjs that will spam
+	private ArrayList<FloatingObjs> loEf;//list of existed floatingObjs
 	private int score;
 	
 	public ModelWorld(ArrayList<FloatingObjs> l){
 		this.lof = l;
+		this.loEf = new ArrayList<FloatingObjs>();
+		this.spawn();
+		this.spawn();
+		this.spawn();
+		this.spawn();
+		this.spawn();
+		this.spawn();
 	}//constructor
 	
 	public void updateWorld(){
-		for(FloatingObjs f : lof){
+		for(FloatingObjs f : loEf){
 			f.move();
+			f.updateDuration();
+			if(f.getDuration() <= 0){
+				this.destory(f);
+			}
 		}
 	}
 	
-	public ArrayList<FloatingObjs> getListOfFloatingObjs(){
-		return lof;
+	public ArrayList<FloatingObjs> getListOfExistedFloatingObjs(){
+		return loEf;
 	}
 	
 	public String toString(){
@@ -29,7 +42,7 @@ public class ModelWorld {
 	}
 	
 	public void move(){
-		for(FloatingObjs f : lof){
+		for(FloatingObjs f : loEf){
 			f.move();
 		}
 	}
@@ -42,9 +55,18 @@ public class ModelWorld {
 		return score;
 	}
 	
-	public void destory(){}
+	public void destory(FloatingObjs f){
+		loEf.remove(f);
+	}
 	
-	public void spawn(){}
+	public void spawn(){
+		int len = lof.size();
+		int i = (int) (Math.random() * len);
+		FloatingObjs temp = lof.get(i);
+		loEf.add(temp);
+		i = loEf.indexOf(temp);
+		temp.addIndexId(i);
+	}
 
 	public static void main(String[] args){
 		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
