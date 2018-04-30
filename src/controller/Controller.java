@@ -33,7 +33,7 @@ public class Controller  implements ActionListener{
 		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
 		loFloating.add(new ProtectedSpecies("bogturtle", 400 , 5));
 		loFloating.add(new InvasiveSpecies("bass", 4 , 500));
-		loFloating.add(new InvasiveSpecies("catFish", 400 , 500));
+		loFloating.add(new InvasiveSpecies("bluecatFish", 400 , 500));
 		loFloating.add(new ProtectedSpecies("horseshoeCrab", 4 , 5));
 		loFloating.add(new InvasiveSpecies("redswampcrayfish", 200 , 335));
 		loFloating.add(new InvasiveSpecies("snakehead", 300 , 235));

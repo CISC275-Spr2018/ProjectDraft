@@ -3,7 +3,7 @@ package view;
 public enum FloatingElements {
 	BASS("bass",249, 132, 1),
 	BOGTURTLE("bogTurtle",227,125,3),
-	CATFISH("catfish", 241, 249,2),
+	BLUECATFISH("bluecatfish", 250, 73,1),
 	HORSESHOECRAB("horseshoeCrab",283,193,2),
 	MITTENCRAB("mittenCrab", 254,142,3),
 	PICKEREL("pickerel",252,84,1),
