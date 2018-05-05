@@ -2,11 +2,15 @@ package view;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.FloatingObjs;
@@ -15,9 +19,21 @@ import model.ModelWorld;
 import model.ProtectedSpecies;
 
 public class FishWorld extends JPanel {
+	
+	
 	private HashMap<String, FishButton> btns = new HashMap<String, FishButton>();
 	
+	public void initialBG() {
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Image bgImg = tk.createImage("resources\\img\\background\\bg.jpg");
+		ImageIcon bgIcon = new ImageIcon(bgImg);  
+	    JLabel jlBackgroundimg = new JLabel(bgIcon);
+	    jlBackgroundimg.setBounds(0, 0,1920,1080);
+	    this.add(jlBackgroundimg);
+	}
+	
 	public FishWorld(ArrayList<FloatingObjs> lof){
+		
 		for(FloatingObjs f : lof){
 			String name = f.getName().toUpperCase();
 			try{
@@ -35,6 +51,7 @@ public class FishWorld extends JPanel {
 		}
 		
 		this.setLayout(null);
+		initialBG();
 	}
 	
 	public void removeFloat(String name){
@@ -71,13 +88,13 @@ public class FishWorld extends JPanel {
 		JFrame frame = new JFrame();
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(960, 960);
-
+		 	
 		
 		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
-		loFloating.add(new ProtectedSpecies("bogTurtle", 480 , 500));
-		loFloating.add(new InvasiveSpecies("bass", 480 , 500));
-		loFloating.add(new InvasiveSpecies("catfish", 480 , 500));
-		loFloating.add(new ProtectedSpecies("horseshoeCrab", 480 , 500));
+		//loFloating.add(new ProtectedSpecies("bogTurtle", 480 , 500));
+		loFloating.add(new InvasiveSpecies("snakeHead", 480 , 500));
+		loFloating.add(new InvasiveSpecies("blueCatfish", 480 , 500));
+		loFloating.add(new ProtectedSpecies("horseShoeCrab", 480 , 500));
 		
 		ModelWorld world = new ModelWorld(loFloating);
 		FishWorld eg1 = new FishWorld(world.getListOfFloatingObjs());
@@ -94,7 +111,7 @@ public class FishWorld extends JPanel {
     			e.printStackTrace();
     		}
 			frame.repaint();
-			System.out.println("Update@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+			//System.out.println("Update@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 	}
 }

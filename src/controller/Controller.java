@@ -31,16 +31,15 @@ public class Controller  implements ActionListener{
 	
 	public static void main(String args[]) {
 		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
-		loFloating.add(new ProtectedSpecies("bogturtle", 400 , 5));
-		loFloating.add(new InvasiveSpecies("bass", 4 , 500));
-		loFloating.add(new InvasiveSpecies("bluecatFish", 400 , 500));
-		loFloating.add(new ProtectedSpecies("horseshoeCrab", 4 , 5));
-		loFloating.add(new InvasiveSpecies("redswampcrayfish", 200 , 335));
-		loFloating.add(new InvasiveSpecies("snakehead", 300 , 235));
-		loFloating.add(new InvasiveSpecies("snakehead", 200 , 135));
-		loFloating.add(new InvasiveSpecies("paper", 267 , 235));
-		loFloating.add(new ProtectedSpecies("salamander", 267 , 235));
-		loFloating.add(new ProtectedSpecies("Sturgeon", 435 , 135));
+		loFloating.add(new ProtectedSpecies("bogturtle", 800 , 765));
+		loFloating.add(new InvasiveSpecies("bluecatFish", 900 , 700));
+		loFloating.add(new ProtectedSpecies("horseshoeCrab", 400 , 516));
+		loFloating.add(new InvasiveSpecies("redswampcrayfish", 1200 , 535));
+		loFloating.add(new InvasiveSpecies("snakehead", 1300 , 935));
+		loFloating.add(new InvasiveSpecies("snakehead", 1200 , 1035));
+		loFloating.add(new InvasiveSpecies("paper", 1267 , 635));
+		loFloating.add(new ProtectedSpecies("salamander", 1267 , 735));
+		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835));
 		Controller a = new Controller(loFloating);
 		while(true){
 			a.updateController(loFloating);	
