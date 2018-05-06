@@ -2,11 +2,15 @@ package view;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.FloatingObjs;
@@ -15,12 +19,31 @@ import model.ModelWorld;
 import model.ProtectedSpecies;
 
 public class FishWorld extends JPanel {
+	
+	
 	private HashMap<String, FishButton> btns = new HashMap<String, FishButton>();
-	private ActionListener buttonHandler;
+	
+	public void initialBG() {
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Image bgImg = tk.createImage("resources/img/background/bg.jpg");
+		ImageIcon bgIcon = new ImageIcon(bgImg);  
+	    JLabel jlBackgroundimg = new JLabel(bgIcon);
+	    jlBackgroundimg.setBounds(0, 0,1920,1080);
+	    this.add(jlBackgroundimg);
+	}
 	
 	public FishWorld(ArrayList<FloatingObjs> lof){
+		
 		for(FloatingObjs f : lof){
-			addFloat(f);
+			String name = f.getName().toUpperCase();
+			try{
+				FloatingElements fe = FloatingElements.valueOf(name);
+				FishButton temp = new FishButton(fe, new ImageCreate(fe).getImgs());
+				temp.move(f.getXloc(),f.getYloc());
+				btns.put(f.getName(), temp);
+			}catch(IllegalArgumentException e){
+				System.out.println("not in Enum!!!!!");
+			}
 		}
 		
 		for(FishButton btn : btns.values()){
@@ -28,34 +51,26 @@ public class FishWorld extends JPanel {
 		}
 		
 		this.setLayout(null);
+		initialBG();
 	}
 	
 	public void removeFloat(String name){
-		FishButton temp = btns.get(name);
 		btns.remove(name);
-		this.remove(temp);
+	}
+	public FishWorld getFishWorld() {
+		return this;
 	}
 	
-	public void setActionListener(ActionListener al){
-		this.buttonHandler = al;
-		for(FishButton fb : btns.values()){
-			fb.addActionListener(buttonHandler);
-		}
-	}
-	
-	public FishButton addFloat(FloatingObjs f){
+	public void addFloat(FloatingObjs f){
 		String strName = f.getName().toUpperCase();
-		FishButton temp = null;
 		try{
 			FloatingElements fe = FloatingElements.valueOf(strName);
-			 temp = new FishButton(fe, new ImageCreate(fe).getImgs());
+			FishButton temp = new FishButton(fe, new ImageCreate(fe).getImgs());
 			temp.move(f.getXloc(),f.getYloc());
 			btns.put(f.getName(), temp);
 		}catch(IllegalArgumentException e){
 			System.out.println("not in Enum!!!!!");
 		}
-		
-		return temp;
 	}
 	
 	public void updateBtns(ArrayList<FloatingObjs> lof){
@@ -64,42 +79,39 @@ public class FishWorld extends JPanel {
 			if(temp != null){
 				temp.move(f.getXloc(), f.getYloc());
 			}else{
-				temp = addFloat(f);
-				if(temp != null){
-					temp.addActionListener(buttonHandler);
-				}//inner-if
-			}//if-else
-		}//for
-	}//updateBtns
+				addFloat(f);
+			}
+		}
+	}
 	
 	public static void main(String[] args){
 		JFrame frame = new JFrame();
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(960, 960);
-
+		 	
 		
 		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
-		loFloating.add(new ProtectedSpecies("bogTurtle", 480 , 500));
-		loFloating.add(new InvasiveSpecies("bass", 480 , 500));
-		loFloating.add(new InvasiveSpecies("catfish", 480 , 500));
-		loFloating.add(new ProtectedSpecies("horseshoeCrab", 480 , 500));
+		//loFloating.add(new ProtectedSpecies("bogTurtle", 480 , 500));
+		loFloating.add(new InvasiveSpecies("snakeHead", 480 , 500));
+		loFloating.add(new InvasiveSpecies("blueCatfish", 480 , 500));
+		loFloating.add(new ProtectedSpecies("horseShoeCrab", 480 , 500));
 		
 		ModelWorld world = new ModelWorld(loFloating);
-		FishWorld eg1 = new FishWorld(world.getListOfExistedFloatingObjs());
+		FishWorld eg1 = new FishWorld(world.getListOfFloatingObjs());
 		frame.getContentPane().add(eg1);
 		
 		frame.setVisible(true);
 		
 		while(true){
 			world.move();
-			eg1.updateBtns(world.getListOfExistedFloatingObjs());
+			eg1.updateBtns(world.getListOfFloatingObjs());
 			try {
     			Thread.sleep(100);
     		} catch (InterruptedException e) {
     			e.printStackTrace();
     		}
 			frame.repaint();
-			System.out.println("Update@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+			//System.out.println("Update@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		}
 	}
 }
