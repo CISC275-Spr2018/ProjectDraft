@@ -5,8 +5,6 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -15,59 +13,62 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.FloatingObjs;
 import model.ModelWorld;
 
-public class View extends JFrame  {
+public class View extends JFrame{
 	
 	final int frameCount = 10;
-	final static int FWIDTH = 1920;
+	final static int FWIDTH = 1960;
 	final static int FHEIGHT = 1080;
-	public FishWorld eg1;
-	public ToolBar tb1;
-	Image bgImg;
-	JLabel jlBackgroundimg;
-	ImageIcon bgIcon;
+	private FishWorld eg1;
+	private ToolBar tb1;
+	//private BackgroundPanel bgp;
 	
-	public static JPanel GImage = null; 
-	 
-
-	 public void initFrame(ArrayList<FloatingObjs> objs) {
-		this.getContentPane().setLayout(null); 
-        eg1 = new FishWorld(objs);
+	
+	public View() {
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setSize(FWIDTH, FHEIGHT);
+		eg1 = new FishWorld(new ArrayList<FloatingObjs>());
 		tb1 = new ToolBar();
-		tb1.setBounds(0,0,260,1080);
-		eg1.setBounds(0,0,FWIDTH,FHEIGHT);
-		this.add(tb1);
-		this.add(eg1);
+       // bgp=new BackgroundPanel((new ImageIcon("resources/img/background/underwater2.png")).getImage());
+        //bgp.setBounds(0,0,1920,1080);     
+		this.setTitle("beta");
+		//this.getContentPane().add(bgp);
+		this.getContentPane().add(tb1,"West");
+		this.getContentPane().add(eg1);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setSize(FWIDTH, FHEIGHT);
+		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);  
+		this.pack();
+    	this.setVisible(true);
 		
-		
-		
-        this.setTitle("BG test");  
-        
-        this.pack();  
-        this.setSize(FWIDTH,FHEIGHT);
-        this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-  
-    }  
-	 //
-	//JButton click;
-	public View(ArrayList<FloatingObjs> objs) {
-		initFrame(objs);
 	}
 	public void updateView(ArrayList<FloatingObjs> ob1) {
 		eg1.updateBtns(ob1);
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		//this.repaint();
 	}
+	
 	
 	public ToolBar getTbar(){
 		return tb1;
 	}
 	
+	public FishWorld getFworld(){
+		return eg1;
+	}
+	
+	public void setActionListener(ActionListener fBListener, ActionListener tBListener){
+		eg1.setActionListener(fBListener);
+		tb1.setActionListener(tBListener);
+	}
 	
 }
