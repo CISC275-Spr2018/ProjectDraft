@@ -9,6 +9,12 @@ public abstract class Animal extends FloatingObjs{
 		this.id = "Animal";
 	}
 	
+	public Animal(FloatingObjs f) {
+		// TODO Auto-generated constructor stub
+		super(f);
+	}
+
+	
 	public void move(){
 		double condition = Math.random() * 200;
 		if(condition <=10){

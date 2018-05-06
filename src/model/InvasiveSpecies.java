@@ -7,6 +7,12 @@ public class InvasiveSpecies extends Animal {
 		// TODO Auto-generated constructor stub
 		this.id = "Invasion";
 	}
+	
+	public InvasiveSpecies(FloatingObjs f) {
+		// TODO Auto-generated constructor stub
+		super(f);
+		this.id = "Invasion";
+	}
 
 	public String toString(){
 		return "bad: " + super.toString();

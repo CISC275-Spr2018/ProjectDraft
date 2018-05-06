@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import model.FloatingObjs;
+import model.InvasiveSpecies;
 
 public class FishButton extends JButton {
 	private String cmd;
@@ -22,17 +23,24 @@ public class FishButton extends JButton {
 	private int frameCount;
 	private HashMap<String, BufferedImage[]> pics;
 	
-	public FishButton(FloatingElements e, HashMap<String, BufferedImage[]> imgs){
+	public FishButton(FloatingObjs f, HashMap<String, BufferedImage[]> imgs){
 		super();
-		cmd = e.getName();
+		cmd = f.getId();
 		this.setActionCommand(cmd);
-		this.imgWidth = e.getWidth();
-		this.imgHeight = e.getHeight();
-		this.frameCount = e.getCount();
+		String nameStr = f.getName().toUpperCase();
+		try{
+			FloatingElements e = FloatingElements.valueOf(nameStr);
+			this.imgWidth = e.getWidth();
+			this.imgHeight = e.getHeight();
+			this.frameCount = e.getCount();
+		}catch(IllegalArgumentException e){
+			System.out.println("not in Enum!!!!!");
+		}
 		this.pics = imgs;
 		this.setBounds(xpos, ypos, imgWidth, imgHeight);
 		ImageIcon icon = new ImageIcon(pics.get("left")[count]);
 		this.setIcon(icon);
+		this.setOpaque(true);
 		this.setContentAreaFilled(false); 
 		this.setBorderPainted(false); 
 	}
@@ -60,7 +68,7 @@ public class FishButton extends JButton {
 		JFrame frame = new JFrame();
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	ImageCreate bass = new ImageCreate(FloatingElements.BASS);
-    	FishButton bassBtn = new FishButton(FloatingElements.BASS, bass.getImgs());
+    	FishButton bassBtn = new FishButton(new InvasiveSpecies("bass", 5, 4), bass.getImgs());
     	bassBtn.addActionListener(new ActionListener(){
 
 			@Override

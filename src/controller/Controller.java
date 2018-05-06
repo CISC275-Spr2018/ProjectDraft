@@ -18,14 +18,27 @@ public class Controller {
 	
 	public Controller(ArrayList<FloatingObjs> loFloating) {
 		model = new ModelWorld(loFloating);
-		view = new View(model.getListOfExistedFloatingObjs());
+		view = new View();
+		view.setActionListener(new FishButtonListener(), new ToolBarListener());
+		this.view.updateView(model.getListOfExistedFloatingObjs());
 		currentTool = "Invasion";
 	}
 	
+	//this function setup model for each game
 	public void setupModeles(){}
-	public void updateController(ArrayList<FloatingObjs> obj) {
+	
+	public void updateController() {
 		this.model.updateWorld();
-		this.view.updateView(obj);		
+		ArrayList<FloatingObjs> obj = model.getListOfExistedFloatingObjs();
+		for(FloatingObjs f : obj){
+			if(f.getDuration() <= 0){
+				int index = model.getListOfExistedFloatingObjs().indexOf(f);
+				view.getFworld().removeFloat(index);
+				model.destory(index);
+			}
+		}
+		this.view.updateView(obj);	
+		
 	}
 	
 	public void updateScore(int i){
@@ -45,6 +58,12 @@ public class Controller {
 			String[] temp = e.getActionCommand().split(" ");
 			int index = Integer.parseInt(temp[1]);
 			String spices = temp[0];
+			int isPos = (spices.equalsIgnoreCase(currentTool))? 1: -1;
+			view.getFworld().removeFloat(index);
+			int score = model.findFloat(index).getScore();
+			updateScore(score*isPos);
+			model.destory(index);
+			//System.out.println(spices);
 		}
 		
 	}//FishButtonListener
@@ -55,6 +74,7 @@ public class Controller {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			currentTool = e.getActionCommand();
+			System.out.println("the tool is now: " + currentTool);
 		}
 		
 	}//FishButtonListener
@@ -69,22 +89,22 @@ public class Controller {
 		loFloating.add(new ProtectedSpecies("horseshoeCrab", 4 , 5));
 		Controller a = new Controller(loFloating);
 		int i = 0;
-		while(i++ < 30){
-			a.updateController(loFloating);	
-			a.updateScore(1);
+		while(i++ < 100){
+			a.updateController();	
+			//a.updateScore(1);
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}//while
-		HighScore h1 = new HighScore(a.getScore());
+		/*HighScore h1 = new HighScore(a.getScore());
 		ArrayList<HighScore> hs = new ArrayList<HighScore>();
 		hs.add(h1);
 		HighScore.showHighScoreList(hs);
 		
 		HighScore.writeOut("outSample", hs);
-		//HighScore.showHighScoreList(HighScore.readIn("outSample"));
+		//HighScore.showHighScoreList(HighScore.readIn("outSample"));*/
 	}
 	
 }
