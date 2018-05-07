@@ -165,14 +165,14 @@ public class Controller {
 	
 	public static void main(String args[]) {
 		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
-		loFloating.add(new ProtectedSpecies("bogturtle", 800 , 765,55,200,100));
-		loFloating.add(new InvasiveSpecies("bluecatFish", 900 , 700,75,45,110));
-		loFloating.add(new ProtectedSpecies("horseshoeCrab", 400 , 516,50,300,200));
-		loFloating.add(new InvasiveSpecies("redswampcrayfish", 1200 , 535,40,30,150));
-		loFloating.add(new InvasiveSpecies("snakehead", 1200 , 1035,95,160,60));
-		loFloating.add(new Trash("paper", 1267, 635,45,100,100));
-		loFloating.add(new ProtectedSpecies("salamander", 1267 , 735,70,350,150));
-		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835,85,230,60));
+		loFloating.add(new ProtectedSpecies("bogturtle", 800 , 765,5,200,100));
+		loFloating.add(new InvasiveSpecies("bluecatFish", 900 , 700,8,45,110));
+		loFloating.add(new ProtectedSpecies("horseshoeCrab", 400 , 516,10,300,200));
+		loFloating.add(new InvasiveSpecies("redswampcrayfish", 1200 , 535,18,30,150));
+		loFloating.add(new InvasiveSpecies("snakehead", 1200 , 1035,11,75,60));
+		loFloating.add(new Trash("paper", 1267, 635,12,100,100));
+		loFloating.add(new ProtectedSpecies("salamander", 1267 , 735,17,350,150));
+		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835,13,230,60));
 		
 		EventQueue.invokeLater(new Runnable() {
 			
@@ -180,11 +180,11 @@ public class Controller {
 			public void run() {
 				Controller a = new Controller(loFloating);
 					
-				Timer t = new Timer(30,a.getact());
+				Timer t = new Timer(1,a.getact());
 				t.start();
 				
 				//System.out.println(i);
-				if(a.counter>30) {
+				if(a.counter>60) {
 					t.stop();
 					System.out.println("Game OVer!!");
 				}

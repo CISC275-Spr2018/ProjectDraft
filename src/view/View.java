@@ -56,11 +56,11 @@ public class View extends JFrame{
 		//this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);  
 		//this.setResizable(false);
 		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
-		this.pack();
+		
 		//this.setSize(FWIDTH, FHEIGHT);
 		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
 		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
-		
+		this.pack();
     	this.setVisible(true);
     	this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
     	
