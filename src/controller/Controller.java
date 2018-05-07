@@ -8,6 +8,7 @@ import model.FloatingObjs;
 import model.InvasiveSpecies;
 import model.ModelWorld;
 import model.ProtectedSpecies;
+import model.Trash;
 import view.FishWorld;
 import view.View;
 
@@ -35,13 +36,13 @@ public class Controller {
 		for(FloatingObjs f : obj){
 			if(f.getDuration() <= 0){
 				int index = model.getListOfExistedFloatingObjs().indexOf(f);
-				view.getFworld().removeFloat(index);
-				model.destory(index);
+				//view.getFworld().removeFloat(index);
+				System.out.println("removed!!!");
+				//model.destory(index);
 			}
 		}
 		
 		this.view.updateView(obj);	
-		
 	}
 	
 	public void updateScore(int i){
@@ -86,15 +87,14 @@ public class Controller {
 	
 	public static void main(String args[]) {
 		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
-		loFloating.add(new ProtectedSpecies("bogturtle", 800 , 765));
-		loFloating.add(new InvasiveSpecies("bluecatFish", 900 , 700));
-		loFloating.add(new ProtectedSpecies("horseshoeCrab", 400 , 516));
-		loFloating.add(new InvasiveSpecies("redswampcrayfish", 1200 , 535));
-		loFloating.add(new InvasiveSpecies("snakehead", 1300 , 935));
-		loFloating.add(new InvasiveSpecies("snakehead", 1200 , 1035));
-		loFloating.add(new InvasiveSpecies("paper", 1267 , 635));
-		loFloating.add(new ProtectedSpecies("salamander", 1267 , 735));
-		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835));
+		loFloating.add(new ProtectedSpecies("bogturtle", 800 , 765,55,200,100));
+		loFloating.add(new InvasiveSpecies("bluecatFish", 900 , 700,75,45,110));
+		loFloating.add(new ProtectedSpecies("horseshoeCrab", 400 , 516,50,300,200));
+		loFloating.add(new InvasiveSpecies("redswampcrayfish", 1200 , 535,40,30,150));
+		loFloating.add(new InvasiveSpecies("snakehead", 1200 , 1035,95,160,60));
+		loFloating.add(new Trash("paper", 1267, 635,45,100,100));
+		loFloating.add(new ProtectedSpecies("salamander", 1267 , 735,70,350,150));
+		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835,85,230,60));
 		Controller a = new Controller(loFloating);
 		int i = 0;
 		while(true){

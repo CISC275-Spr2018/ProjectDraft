@@ -11,6 +11,15 @@ public abstract class FloatingObjs {
 	protected int score;
 	protected int duration;
 	
+	public FloatingObjs(String n, int x, int y,int spee,int sco, int due){
+		this.name = n;
+		this.xloc = x;
+		this.yloc = y;
+		this.id = "FloatingObjs";
+		speed = spee;
+		score = sco;
+		duration = due;
+	}
 	public FloatingObjs(String n, int x, int y){
 		this.name = n;
 		this.xloc = x;
@@ -20,7 +29,6 @@ public abstract class FloatingObjs {
 		score = 100;
 		duration = 600;
 	}
-	
 	public FloatingObjs(FloatingObjs f){
 		this.name = f.getName();
 		this.id = f.getId();
@@ -35,6 +43,12 @@ public abstract class FloatingObjs {
 	public int getYloc() {
 		return yloc;
 	}
+	public int setXloc() {
+		return xloc;
+	}
+	public int setYloc() {
+		return yloc;
+	}
 	
 	public String getName(){
 		return name;
@@ -43,6 +57,9 @@ public abstract class FloatingObjs {
 	public int getSpeed(){
 		return speed;
 	}
+	public void setSpeed(int newspeed){
+		speed = newspeed;
+	}
 
 	public void move() {
 		double rand = Math.random() * 3;//[0,3)
@@ -50,7 +67,7 @@ public abstract class FloatingObjs {
 		xloc += xInc * speed;
 		rand = Math.random() * 3;
 		yInc = (int) rand - 1;//[-1, 1]
-		yloc += yInc * speed;
+		yloc += yInc * speed ;
 		System.out.println(xloc +"~~~~~~~~~~~~~~"+yloc);
 	}//move
 	

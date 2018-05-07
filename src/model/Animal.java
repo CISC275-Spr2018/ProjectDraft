@@ -8,7 +8,11 @@ public abstract class Animal extends FloatingObjs{
 		// TODO Auto-generated constructor stub
 		this.id = "Animal";
 	}
-	
+	public Animal(String n, int x, int y,int spee,int sco, int due) {
+		super(n, x, y,spee,sco,due);
+		// TODO Auto-generated constructor stub
+		this.id = "Animal";
+	}
 	public Animal(FloatingObjs f) {
 		// TODO Auto-generated constructor stub
 		super(f);
@@ -24,6 +28,9 @@ public abstract class Animal extends FloatingObjs{
 			yInc = (int) rand - 1;//[-1, 1]
 		}
 		yloc += yInc * speed;
+		yloc = Math.floorMod(yloc,1080);
 		xloc += xInc * speed;
+		xloc = Math.floorMod(xloc,1980);
 	}
+	
 }

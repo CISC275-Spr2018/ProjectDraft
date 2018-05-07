@@ -63,7 +63,10 @@ public class FishWorld extends JPanel {
 	}
 	public void removeFloat(int i){
 		FishButton temp = btns.get(i);
+		temp.setVisible(false);
 		btns.remove(i);
+		
+		
 		this.remove(temp);
 	}
 	
