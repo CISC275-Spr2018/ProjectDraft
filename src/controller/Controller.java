@@ -58,7 +58,7 @@ public class Controller {
 	public void updateController() {
 			if(view.getMenu().isStarted()&&(view.isAdded==false)) {//stage 1
 				view.initStage1();
-			}else {
+			}else if(view.isAdded){
 				System.out.println("wa");
 				this.model.updateWorld();
 				ArrayList<FloatingObjs> obj = model.getListOfExistedFloatingObjs();
@@ -144,7 +144,7 @@ public class Controller {
 		loFloating.add(new ProtectedSpecies("salamander", 1267 , 735,70,350,150));
 		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835,85,230,60));
 		Controller a = new Controller(loFloating);
-		
+		int i = 0;
 		BufferedImage bufferedImage = null;
     	try{
 	    	bufferedImage = ImageIO.read(new File("resources/img/background/Intro11.png"));

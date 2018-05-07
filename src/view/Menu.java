@@ -60,7 +60,7 @@ public class Menu extends JPanel{
 			if(!started) {
 				g.drawImage(new ImageIcon(bgImg).getImage(),0,0,1920,1080,this);
 			}else {
-				setBackground(Color.BLUE);
+				//setBackground(Color.CYAN);
 			}
 	}
 	public static void main(String args[]) {

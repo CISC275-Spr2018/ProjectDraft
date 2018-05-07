@@ -34,9 +34,10 @@ public class View extends JFrame{
 	public boolean isAdded;
 	
 	public View() {
-		
+		menu= new Menu();
+		add(menu);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(FWIDTH, FHEIGHT);
+		
 		
 		eg1 = new FishWorld(new ArrayList<FloatingObjs>());
 		tb1 = new ToolBar();
@@ -45,17 +46,21 @@ public class View extends JFrame{
 		this.setTitle("beta");
 		//this.getContentPane().add(bgp);
 		isAdded = false;
-		menu= new Menu();
-		add(menu);
+		
 		//initStage1();
 		 //this.getContentPane().add(tb1,"West");
 		//this.getContentPane().add(eg1);
 		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(FWIDTH, FHEIGHT);
-		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);  
+		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//this.setSize(FWIDTH, FHEIGHT);
+		//this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);  
 		this.pack();
+		//this.setSize(FWIDTH, FHEIGHT);
+		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);  
+		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);  
+		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);  
     	this.setVisible(true);
+    	this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);  
 		
 	}
 	public Menu getMenu() {

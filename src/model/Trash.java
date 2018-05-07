@@ -21,7 +21,9 @@ public class Trash extends FloatingObjs {
 
 	public void move(){
 		yloc += yInc * speed;
+		yloc = Math.floorMod(yloc,1080);
 		xloc += xInc * speed;
+		xloc = Math.floorMod(xloc,1980);
 	}//move
 
 }
