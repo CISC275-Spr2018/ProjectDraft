@@ -2,15 +2,33 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 import model.FloatingObjs;
 import model.InvasiveSpecies;
 import model.ModelWorld;
 import model.ProtectedSpecies;
 import model.Trash;
+
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+
 import view.FishWorld;
+
 import view.Menu;
+
+import view.SoundBar;
+
 import view.View;
 
 public class Controller {
@@ -29,6 +47,9 @@ public class Controller {
 		this.view.updateView(model.getListOfExistedFloatingObjs());
 		currentTool = "Invasion";
 		view.getFworld().initialBG();
+
+		SoundBar.music();
+
 	}
 	
 	//this function setup model for each game
@@ -48,12 +69,14 @@ public class Controller {
 	public void updateScore(int i){
 		model.updateScore(i);
 		this.view.getTbar().updateScore(model.getScore());
+
 	}
 	
 	public int getScore(){
 		return model.getScore();
 	}
 	
+
 	public class FishButtonListener implements ActionListener{
 
 		@Override
@@ -63,6 +86,9 @@ public class Controller {
 			int index = Integer.parseInt(temp[1]);
 			String spices = temp[0];
 			int isPos = (spices.equalsIgnoreCase(currentTool))? 1: -1;
+
+			beep(isPos);
+
 			view.getFworld().removeFloat(index);
 			int score = model.findFloat(index).getScore();
 			updateScore(score*isPos);
@@ -72,6 +98,28 @@ public class Controller {
 		
 	}//FishButtonListener
 	
+
+
+	private void beep(int i){
+		String input = (i==1)? "correct" : "wrong";
+        AudioPlayer MGP = AudioPlayer.player;
+        AudioStream BGM;
+
+        try{
+            InputStream test = new FileInputStream("resources//music//" + input + ".wav");
+            BGM = new AudioStream(test);
+            AudioPlayer.player.start(BGM);
+        }
+        catch(FileNotFoundException e){
+            System.out.print(e.toString());
+        }
+        catch(IOException error)
+        {
+            System.out.print(error.toString());
+        }
+    }
+	
+
 	public class ToolBarListener implements ActionListener{
 
 		@Override
@@ -96,7 +144,16 @@ public class Controller {
 		loFloating.add(new ProtectedSpecies("salamander", 1267 , 735,70,350,150));
 		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835,85,230,60));
 		Controller a = new Controller(loFloating);
-		int i = 0;
+		
+		BufferedImage bufferedImage = null;
+    	try{
+	    	bufferedImage = ImageIO.read(new File("resources/img/background/Intro11.png"));
+	    } catch (IOException e) {
+	    	e.printStackTrace();
+	    }
+    	ImageIcon icon = new ImageIcon(bufferedImage);
+    	JOptionPane.showConfirmDialog(null, "", "Introduction", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
+    	
 		while(true){
 			a.updateController();	
 			//a.updateScore(1);

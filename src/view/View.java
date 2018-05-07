@@ -29,6 +29,7 @@ public class View extends JFrame{
 	
 	private FishWorld eg1;
 	private ToolBar tb1;
+	
 	//private BackgroundPanel bgp;
 	public boolean isAdded;
 	
@@ -90,5 +91,6 @@ public class View extends JFrame{
 		eg1.setActionListener(fBListener);
 		tb1.setActionListener(tBListener);
 	}
+	
 	
 }
