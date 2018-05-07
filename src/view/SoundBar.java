@@ -55,7 +55,9 @@ public class SoundBar extends JPanel{
         ContinuousAudioDataStream loop = null;
 
         try{
+
             InputStream test = new FileInputStream("resources/music/bg.wav");
+
             BGM = new AudioStream(test);
             AudioPlayer.player.start(BGM);
         }
