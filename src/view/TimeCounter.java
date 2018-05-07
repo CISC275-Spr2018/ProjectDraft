@@ -15,11 +15,30 @@ public class TimeCounter extends JPanel{
 		//paint stuff
 		g.setFont(new Font("SansSerif",Font.BOLD, 22));
 		g.setColor(Color.WHITE);
-		g.drawString(minute+":"+second, 1660, 1015);
 		super.paintComponent(g);
 		timer.start();
 		//operation
+		g.drawString(minute+":"+second, 1660, 1015);
 		timer.stop();
 	}
+	class FishTimer implements ActionListener{
+
+		 public void actionPerformed(ActionEvent e)
+		    {
+			 //game lasts no more than 2 minutes
+			 while(minute<2){
+			 second++;
+			 minute=second%60;}
+		     repaint();
+		    }
+	}
+	public static void main(String[] args){
+		JFrame frame = new JFrame();
+    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(320, 960);
+		TimeCounter tc = new TimeCounter();
+		frame.getContentPane().add(tc);
+		frame.setVisible(true);
+	}//main
 	
 }
