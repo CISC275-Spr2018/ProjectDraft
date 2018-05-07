@@ -26,7 +26,9 @@ public class FishWorld extends JPanel {
 	
 	public void initialBG() {
 		Toolkit tk = Toolkit.getDefaultToolkit();
-		Image bgImg = tk.createImage("resources\\img\\background\\bg.jpg");
+
+		Image bgImg = tk.createImage("resources/img/background/bg.jpg");
+
 		ImageIcon bgIcon = new ImageIcon(bgImg);  
 	    JLabel jlBackgroundimg = new JLabel(bgIcon);
 	    jlBackgroundimg.setBounds(0, 0,1920,1080);

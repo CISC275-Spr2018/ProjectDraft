@@ -1,5 +1,6 @@
 package controller;
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
@@ -16,6 +17,7 @@ import model.Trash;
 
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
+
 
 import view.FishWorld;
 import view.SoundBar;
@@ -61,6 +63,7 @@ public class Controller {
 		model.updateScore(i);
 		this.view.getTbar().updateScore(model.getScore());
 
+
 	}
 	
 	public int getScore(){
@@ -78,7 +81,9 @@ public class Controller {
 			String spices = temp[0];
 			int isPos = (spices.equalsIgnoreCase(currentTool))? 1: -1;
 
+
 			beep(isPos);
+
 
 			view.getFworld().removeFloat(index);
 			int score = model.findFloat(index).getScore();
@@ -89,8 +94,6 @@ public class Controller {
 		
 	}//FishButtonListener
 	
-
-
 	private void beep(int i){
 		String input = (i==1)? "correct" : "wrong";
         AudioPlayer MGP = AudioPlayer.player;
@@ -109,7 +112,6 @@ public class Controller {
             System.out.print(error.toString());
         }
     }
-	
 
 	public class ToolBarListener implements ActionListener{
 
