@@ -10,17 +10,21 @@ import model.ModelWorld;
 import model.ProtectedSpecies;
 import model.Trash;
 import view.FishWorld;
+import view.Menu;
 import view.View;
 
 public class Controller {
 	private ModelWorld model;
 	private View view;
 	private String currentTool;
-	
+
 	public Controller(ArrayList<FloatingObjs> loFloating) {
-		
 		model = new ModelWorld(loFloating);
 		view = new View();
+		stage1(loFloating);	
+	}
+	public void stage1(ArrayList<FloatingObjs> loFloating) {
+		
 		view.setActionListener(new FishButtonListener(), new ToolBarListener());
 		this.view.updateView(model.getListOfExistedFloatingObjs());
 		currentTool = "Invasion";
@@ -31,18 +35,14 @@ public class Controller {
 	public void setupModeles(){}
 	
 	public void updateController() {
-		this.model.updateWorld();
-		ArrayList<FloatingObjs> obj = model.getListOfExistedFloatingObjs();
-		for(FloatingObjs f : obj){
-			if(f.getDuration() <= 0){
-				int index = model.getListOfExistedFloatingObjs().indexOf(f);
-				//view.getFworld().removeFloat(index);
-				System.out.println("removed!!!");
-				//model.destory(index);
+			if(view.getMenu().isStarted()&&(view.isAdded==false)) {//stage 1
+				view.initStage1();
+			}else {
+				System.out.println("wa");
+				this.model.updateWorld();
+				ArrayList<FloatingObjs> obj = model.getListOfExistedFloatingObjs();
+				this.view.updateView(obj);	
 			}
-		}
-		
-		this.view.updateView(obj);	
 	}
 	
 	public void updateScore(int i){
