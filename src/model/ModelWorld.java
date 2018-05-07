@@ -4,6 +4,9 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ModelWorld {
+	//the class handles all data and object we imported
+	//takes a list of animals and update their status
+	
 	private ArrayList<FloatingObjs> lof;//list of floatingObjs that will spam
 	private ArrayList<FloatingObjs> loEf;//list of existed floatingObjs
 	private int score;
@@ -23,11 +26,13 @@ public class ModelWorld {
 		for(FloatingObjs f : loEf){
 			f.move();
 			f.updateDuration();
+			
 		}
-		int i = (int) (Math.random() * 30);
-		if(i == 1){
+		
+		if(loEf.size()<5){//make sure there is always more than 5 objs on the screen
 			this.spawn();
 		}
+		
 	}
 	
 	public ArrayList<FloatingObjs> getListOfExistedFloatingObjs(){
@@ -45,7 +50,12 @@ public class ModelWorld {
 	public void move(){
 		for(FloatingObjs f : loEf){
 			f.move();
+			if(f.getDuration()<=0) {
+				//
+				System.out.println("sth escaped!");
+			};
 		}
+		
 	}
 	
 	public void updateScore(int s){
@@ -97,9 +107,7 @@ public class ModelWorld {
 		loFloating.add(new InvasiveSpecies("bass", 4 , 5));
 		loFloating.add(new InvasiveSpecies("catFish", 4 , 5));
 		loFloating.add(new ProtectedSpecies("horseshoeCrab", 4 , 5));
-		
 		ModelWorld world = new ModelWorld(loFloating);
-		
 		System.out.println(world);
 		
 		world.destory(1);

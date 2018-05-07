@@ -14,6 +14,8 @@ import model.FloatingObjs;
 import model.InvasiveSpecies;
 
 public class FishButton extends JButton {
+	//individual component that acts as a button but function as a animal object
+	//contains action listener as well
 	private String cmd;
 	private int xpos = 0;
 	private int ypos = 0;
@@ -88,7 +90,7 @@ public class FishButton extends JButton {
 			bassBtn.move(i, i*2);
 			try {
     			Thread.sleep(100);
-    		} catch (InterruptedException e) {
+    		}catch (InterruptedException e) {
     			e.printStackTrace();
     		}
 			frame.repaint();

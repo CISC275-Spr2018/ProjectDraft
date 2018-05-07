@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 public class ToolBar extends JPanel {
+	//a JPanel that contains tool images and shows scores 
 	private JRadioButton invasiveTool;
 	private JRadioButton protectedTool;
 	private JRadioButton litterTool;
