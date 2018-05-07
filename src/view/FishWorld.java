@@ -21,7 +21,8 @@ import model.ProtectedSpecies;
 public class FishWorld extends JPanel {
 	
 	
-	private HashMap<String, FishButton> btns = new HashMap<String, FishButton>();
+	private HashMap<Integer, FishButton> btns = new HashMap<Integer, FishButton>();
+	private ActionListener buttonHandler;
 	
 	public void initialBG() {
 		Toolkit tk = Toolkit.getDefaultToolkit();
@@ -33,7 +34,14 @@ public class FishWorld extends JPanel {
 	}
 	
 	public FishWorld(ArrayList<FloatingObjs> lof){
+		this.setLayout(null);
 		
+		for(FloatingObjs f : lof){
+			addFloat(f);
+		}
+		this.setBackground(Color.cyan);
+		//initialBG();
+		/**
 		for(FloatingObjs f : lof){
 			String name = f.getName().toUpperCase();
 			try{
@@ -50,10 +58,24 @@ public class FishWorld extends JPanel {
 			this.add(btn);
 		}
 		
-		this.setLayout(null);
-		initialBG();
+		this.setLayout(null);**/
+		
+	}
+	public void removeFloat(int i){
+		FishButton temp = btns.get(i);
+		temp.setVisible(false);
+		btns.remove(i);
+		
+		
+		this.remove(temp);
 	}
 	
+	public void setActionListener(ActionListener al){
+		this.buttonHandler = al;
+		for(FishButton fb : btns.values()){
+			fb.addActionListener(buttonHandler);
+		}
+	}
 	public void removeFloat(String name){
 		btns.remove(name);
 	}
@@ -61,28 +83,40 @@ public class FishWorld extends JPanel {
 		return this;
 	}
 	
-	public void addFloat(FloatingObjs f){
+	public FishButton addFloat(FloatingObjs f){
 		String strName = f.getName().toUpperCase();
+		FishButton temp = null;
 		try{
 			FloatingElements fe = FloatingElements.valueOf(strName);
-			FishButton temp = new FishButton(fe, new ImageCreate(fe).getImgs());
+			temp = new FishButton(f, new ImageCreate(fe).getImgs());
 			temp.move(f.getXloc(),f.getYloc());
-			btns.put(f.getName(), temp);
+			String[] ss = f.getId().split(" ");;
+			if(ss.length > 1){
+				System.out.println(ss[1]);
+				int index = Integer.parseInt(ss[1]);
+				btns.put(index, temp);
+				this.add(temp);
+				temp.addActionListener(buttonHandler);}
 		}catch(IllegalArgumentException e){
 			System.out.println("not in Enum!!!!!");
 		}
+		
+		return temp;
 	}
 	
 	public void updateBtns(ArrayList<FloatingObjs> lof){
 		for(FloatingObjs f : lof){
-			FishButton temp = btns.get(f.getName());
+			String[] ss = f.getId().split(" ");
+				int index = (ss.length > 1)?Integer.parseInt(ss[1]): -1;
+			FishButton temp = btns.get(index);
 			if(temp != null){
 				temp.move(f.getXloc(), f.getYloc());
 			}else{
-				addFloat(f);
-			}
-		}
-	}
+				temp = addFloat(f);
+			}//if-else
+		}//for
+		this.repaint();
+	}//updateBtns
 	
 	public static void main(String[] args){
 		JFrame frame = new JFrame();
@@ -97,14 +131,14 @@ public class FishWorld extends JPanel {
 		loFloating.add(new ProtectedSpecies("horseShoeCrab", 480 , 500));
 		
 		ModelWorld world = new ModelWorld(loFloating);
-		FishWorld eg1 = new FishWorld(world.getListOfFloatingObjs());
+		FishWorld eg1 = new FishWorld(world.getListOfExistedFloatingObjs());
 		frame.getContentPane().add(eg1);
 		
 		frame.setVisible(true);
 		
 		while(true){
 			world.move();
-			eg1.updateBtns(world.getListOfFloatingObjs());
+			eg1.updateBtns(world.getListOfExistedFloatingObjs());
 			try {
     			Thread.sleep(100);
     		} catch (InterruptedException e) {
