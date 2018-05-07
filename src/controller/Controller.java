@@ -38,7 +38,7 @@ import view.SoundBar;
 
 import view.View;
 
-public class Controller {
+public class Controller { // controller class runs the game 
 	private ModelWorld model;
 	private View view;
 	private String currentTool;
@@ -97,7 +97,9 @@ public class Controller {
 	}
 	
 
-	public class FishButtonListener implements ActionListener{
+	public class FishButtonListener implements ActionListener{ 
+		//for each Animal button, listener will
+		//apply action towards their ID and count score
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -141,6 +143,7 @@ public class Controller {
 	
 
 	public class ToolBarListener implements ActionListener{
+		//using radio button to change tools 
 
 		@Override
 		public void actionPerformed(ActionEvent e) {

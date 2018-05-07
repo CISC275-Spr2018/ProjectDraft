@@ -18,6 +18,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Menu extends JPanel{
+	//draw a JPanel as the Menu 
+	//added action listener that will initialize the game
 	boolean started = false;
 	public Menu() {
 		setLayout(null);

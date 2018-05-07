@@ -20,7 +20,7 @@ import model.FloatingObjs;
 import model.ModelWorld;
 
 public class View extends JFrame{
-	
+	//a JFrame that takes everything thing and present the layers of images 
 	Menu menu;
 	final int frameCount = 10;
 	final static int FWIDTH = 1960;

@@ -1,7 +1,8 @@
 package model;
 
 public class Trash extends FloatingObjs {
-
+	//subclass of floating object, have different ID than other instances'
+	//has different speed 
 	public Trash(String n, int x, int y) {
 		super(n, x, y);
 		// TODO Auto-generated constructor stub

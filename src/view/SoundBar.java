@@ -19,6 +19,7 @@ import javax.swing.JRadioButton;
 import sun.audio.*;
 
 public class SoundBar extends JPanel{
+	//JPanel that contains two sound buttons and music source
 	
 	private JRadioButton sound;
 	
