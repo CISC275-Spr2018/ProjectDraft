@@ -1,6 +1,7 @@
 package view;
 
 public enum FloatingElements {
+	//List of all floating objects and holds their strings and image sizes, sprite numbers
 	BASS("bass",249, 132, 1),
 	BOGTURTLE("bogTurtle",227,125,3),
 	BLUECATFISH("blueCatfish", 250, 73,1),
@@ -13,8 +14,7 @@ public enum FloatingElements {
 	SNAKEHEAD("snakeHead",300,99,1),
 	STURGEON("sturgeon",300,64,1),
 	PAPER("paper",99,99,4),
-	SALAMANDER("salamander",200,53,1)
-	;
+	SALAMANDER("salamander",200,53,1);
 	
 	private String name;
 	private int imgWidth;

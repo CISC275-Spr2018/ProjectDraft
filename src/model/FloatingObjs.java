@@ -1,6 +1,8 @@
 package model;
 
 public abstract class FloatingObjs {
+	//super class of animal class and trash class
+	
 	protected String name;
 	protected int xloc;
 	protected int yloc;

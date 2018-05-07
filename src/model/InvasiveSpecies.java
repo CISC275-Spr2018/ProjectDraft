@@ -1,7 +1,7 @@
 package model;
 
 public class InvasiveSpecies extends Animal {
-	
+	//subclass of animal, have different ID than other instances'
 	public InvasiveSpecies(String n, int x, int y) {
 		super(n, x, y);
 		// TODO Auto-generated constructor stub

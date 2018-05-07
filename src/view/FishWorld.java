@@ -19,8 +19,8 @@ import model.ModelWorld;
 import model.ProtectedSpecies;
 
 public class FishWorld extends JPanel {
-	
-	
+	//this panel holds all fishbuttons 
+	//also initializes backgrounds
 	private HashMap<Integer, FishButton> btns = new HashMap<Integer, FishButton>();
 	private ActionListener buttonHandler;
 	

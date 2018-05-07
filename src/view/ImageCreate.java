@@ -8,6 +8,8 @@ import java.util.HashMap;
 import javax.imageio.ImageIO;
 
 public class ImageCreate {
+	//stores individual images to a Hashmap of Buffered images
+	//also contains different directions of the animations
 	private String name;
 	private int imgWidth;
 	private int imgHeight;
