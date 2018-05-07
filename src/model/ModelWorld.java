@@ -1,20 +1,21 @@
 package model;
 
 import java.util.ArrayList;
+import javax.swing.Timer;
+
 
 public class ModelWorld {
 	private ArrayList<FloatingObjs> lof;
 	private int score;
+	//private int time;
+	//private Timer timer;
+
 	
 	public ModelWorld(ArrayList<FloatingObjs> l){
 		this.lof = l;
+		this.time=0;
+		//this.timer = new Timer(1000, new FishTimer());
 	}//constructor
-	
-	public void updateWorld(){
-		for(FloatingObjs f : lof){
-			f.move();
-		}
-	}
 	
 	public ArrayList<FloatingObjs> getListOfFloatingObjs(){
 		return lof;
@@ -38,6 +39,10 @@ public class ModelWorld {
 		score += s;
 	}
 	
+	//public void start(){
+	//	timer.scheduleAtFixedRate(task, 0, 1000);
+	//}
+	
 	public int getScore(){
 		return score;
 	}
@@ -45,17 +50,5 @@ public class ModelWorld {
 	public void destory(){}
 	
 	public void spawn(){}
-
-	public static void main(String[] args){
-		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
-		loFloating.add(new ProtectedSpecies("bogturtle", 4 , 5));
-		loFloating.add(new InvasiveSpecies("bass", 4 , 5));
-		loFloating.add(new InvasiveSpecies("catFish", 4 , 5));
-		loFloating.add(new ProtectedSpecies("horseshoeCrab", 4 , 5));
-		
-		ModelWorld world = new ModelWorld(loFloating);
-		
-		System.out.println(world);
-	}//main
 
 }

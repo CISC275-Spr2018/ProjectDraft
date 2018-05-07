@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -9,10 +11,11 @@ import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import model.FloatingObjs;
 
-public class FishButton extends JButton {
+public class FishButton extends JButton{
 	private String cmd;
 	private int xpos = 0;
 	private int ypos = 0;
@@ -33,7 +36,7 @@ public class FishButton extends JButton {
 		this.setBounds(xpos, ypos, imgWidth, imgHeight);
 		ImageIcon icon = new ImageIcon(pics.get("left")[count]);
 		this.setIcon(icon);
-		//this.setBackground(null);
+		this.setContentAreaFilled(false);
 	}
 	
 	public int getX(){
@@ -57,10 +60,21 @@ public class FishButton extends JButton {
 	}
 	
 	public static void main(String[] args){
-		JFrame frame = new JFrame();
-    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		
+		JFrame testframe = new JFrame();
+		testframe.setLayout(null);
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Image bgImg = tk.createImage("resources/img/background/bg.jpg");
+		ImageIcon bgIcon = new ImageIcon(bgImg);  
+        JLabel jlBackgroundimg = new JLabel(bgIcon);
+        jlBackgroundimg.setBounds(0, 0,1920,1080);
+        testframe.add(jlBackgroundimg);
+        testframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	
     	ImageCreate bass = new ImageCreate(FloatingElements.BASS);
     	FishButton bassBtn = new FishButton(FloatingElements.BASS, bass.getImgs());
+    	/**
     	bassBtn.addActionListener(new ActionListener(){
 
 			@Override
@@ -69,21 +83,21 @@ public class FishButton extends JButton {
 				System.out.println("---------->"+e.getActionCommand()+"<---------");
 			}
     		
-    	});
-		frame.setSize(1280, 960);
-		frame.getContentPane().add(bassBtn);
-		frame.getContentPane().setLayout(null);
-		frame.setVisible(true);
+    	});**/
+		
+		testframe.add(bassBtn);
+		testframe.setSize(1920	,1080);
+		testframe.setVisible(true);
 		int i = 0;
 		while(i < 400){
 			i++;
 			bassBtn.move(i, i*2);
 			try {
     			Thread.sleep(100);
-    		} catch (InterruptedException e) {
+    		} catch (InterruptedException e){
     			e.printStackTrace();
     		}
-			frame.repaint();
+			testframe.repaint();
 		}
 	}
 
