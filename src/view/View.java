@@ -54,13 +54,16 @@ public class View extends JFrame{
 		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//this.setSize(FWIDTH, FHEIGHT);
 		//this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);  
+		//this.setResizable(false);
+		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
 		this.pack();
 		//this.setSize(FWIDTH, FHEIGHT);
-		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);  
-		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);  
-		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);  
+		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
+		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
+		
     	this.setVisible(true);
-    	this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);  
+    	this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
+    	
 		
 	}
 	public Menu getMenu() {

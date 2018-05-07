@@ -1,5 +1,7 @@
 package controller;
 
+
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -10,9 +12,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+
 import javax.imageio.ImageIO;
+import javax.swing.Action;
+import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 import model.FloatingObjs;
 import model.InvasiveSpecies;
@@ -35,20 +42,33 @@ public class Controller {
 	private ModelWorld model;
 	private View view;
 	private String currentTool;
-
+	public Action act1;
+	int counter;
 	public Controller(ArrayList<FloatingObjs> loFloating) {
+		counter=0;
+		
+		act1 = new AbstractAction() {
+			
+			public void actionPerformed(ActionEvent e) {
+				counter++;
+				updateController();
+			}
+		};
 		model = new ModelWorld(loFloating);
 		view = new View();
-		stage1(loFloating);	
-	}
-	public void stage1(ArrayList<FloatingObjs> loFloating) {
-		
 		view.setActionListener(new FishButtonListener(), new ToolBarListener());
 		this.view.updateView(model.getListOfExistedFloatingObjs());
 		currentTool = "Invasion";
 		view.getFworld().initialBG();
 
 		SoundBar.music();
+		stage1(loFloating);
+		Poptutorial();
+	}
+	public Action getact() {
+		return act1;
+	}
+	public void stage1(ArrayList<FloatingObjs> loFloating) {
 
 	}
 	
@@ -130,7 +150,17 @@ public class Controller {
 		}
 		
 	}//FishButtonListener
-	
+	public void Poptutorial() {
+		BufferedImage bufferedImage = null;
+    	try{
+	    	bufferedImage = ImageIO.read(new File("resources/img/background/Intro11.png"));
+	    } catch (IOException e) {
+	    	e.printStackTrace();
+	    }
+    	ImageIcon icon = new ImageIcon(bufferedImage);
+    	JOptionPane.showConfirmDialog(null, "", "Introduction", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
+    	
+	}
 	
 	
 	public static void main(String args[]) {
@@ -143,17 +173,28 @@ public class Controller {
 		loFloating.add(new Trash("paper", 1267, 635,45,100,100));
 		loFloating.add(new ProtectedSpecies("salamander", 1267 , 735,70,350,150));
 		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835,85,230,60));
-		Controller a = new Controller(loFloating);
-		int i = 0;
-		BufferedImage bufferedImage = null;
-    	try{
-	    	bufferedImage = ImageIO.read(new File("resources/img/background/Intro11.png"));
-	    } catch (IOException e) {
-	    	e.printStackTrace();
-	    }
-    	ImageIcon icon = new ImageIcon(bufferedImage);
-    	JOptionPane.showConfirmDialog(null, "", "Introduction", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
-    	
+		
+		EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				Controller a = new Controller(loFloating);
+					
+				Timer t = new Timer(30,a.getact());
+				t.start();
+				
+				//System.out.println(i);
+				if(a.counter>30) {
+					t.stop();
+					System.out.println("Game OVer!!");
+				}
+				
+				//t.stop();
+				//System.out.println(1);
+			}
+		});
+		
+		/**
 		while(true){
 			a.updateController();	
 			//a.updateScore(1);
@@ -162,7 +203,7 @@ public class Controller {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		}//while
+		}//while**/
 		/*HighScore h1 = new HighScore(a.getScore());
 		ArrayList<HighScore> hs = new ArrayList<HighScore>();
 		hs.add(h1);
