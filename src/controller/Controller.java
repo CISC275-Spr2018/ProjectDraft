@@ -1,5 +1,10 @@
 package controller;
 
+/**
+ * Class Controller
+ * @author Team 11 - 8
+ * */
+
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -44,6 +49,14 @@ public class Controller { // controller class runs the game
 	private String currentTool;
 	public Action act1;
 	int counter;
+
+	
+	/**
+	*Controller : a constructor of Controller
+	*@param ArrayList<FloatingObjs> loFloating: the ArrayList of FloatingObjs
+	*@return Controller : Construct a new Controller
+	*/
+
 	public Controller(ArrayList<FloatingObjs> loFloating) {
 		counter=0;
 		
@@ -63,8 +76,15 @@ public class Controller { // controller class runs the game
 
 		SoundBar.music();
 		stage1(loFloating);
-		Poptutorial();
+
+		popTutorial();
 	}
+	
+	/**
+	*getact : a getter function of controller
+	*@param void : nothing
+	*@return Action : property act1 of controller
+	*/
 	public Action getact() {
 		return act1;
 	}
@@ -75,23 +95,50 @@ public class Controller { // controller class runs the game
 	//this function setup model for each game
 	public void setupModeles(){}
 	
+	/**
+	*updateController : this function updates the controller
+	*@param void : nothing
+	*@return void : it returns nothing but updates the status of controller
+	*/
 	public void updateController() {
 			if(view.getMenu().isStarted()&&(view.isAdded==false)) {//stage 1
 				view.initStage1();
 			}else if(view.isAdded){
-				System.out.println("wa");
+				//System.out.println("wa");
 				this.model.updateWorld();
 				ArrayList<FloatingObjs> obj = model.getListOfExistedFloatingObjs();
 				this.view.updateView(obj);	
 			}
+
+		  Poptutorial();
+	}
+	public Action getact() {
+		return act1;
+
+	}
+	public void stage1(ArrayList<FloatingObjs> loFloating) {
+
 	}
 	
+	//this function setup model for each game
+	public void setupModeles(){}
+
+	/**
+	*updateScore : this function updates the score in both model and view
+	*@param void : nothing
+	*@return void : it returns nothing but updates the score in both model and view
+	*/
 	public void updateScore(int i){
 		model.updateScore(i);
 		this.view.getTbar().updateScore(model.getScore());
 
 	}
 	
+	/**
+	*getScore : a getter function of controller
+	*@param void : nothing
+	*@return int : get the score from model
+	*/
 	public int getScore(){
 		return model.getScore();
 	}
@@ -101,6 +148,11 @@ public class Controller { // controller class runs the game
 		//for each Animal button, listener will
 		//apply action towards their ID and count score
 
+		/**
+		*actionPerformed : an overrided function in ActionListener
+		*@param ActionEvent e : where the action occurs 
+		*@return void : perform action when fishbtn is clicked
+		*/
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
@@ -121,7 +173,11 @@ public class Controller { // controller class runs the game
 	}//FishButtonListener
 	
 
-
+	/**
+	*beep : plays the sound to show correct or not
+	*@param int i : getting from the FishButtonListener to see if the action is right or not
+	*@return void : play the right sound according to the choice 
+	*/
 	private void beep(int i){
 		String input = (i==1)? "correct" : "wrong";
         AudioPlayer MGP = AudioPlayer.player;
@@ -145,6 +201,11 @@ public class Controller { // controller class runs the game
 	public class ToolBarListener implements ActionListener{
 		//using radio button to change tools 
 
+		/**
+		*actionPerformed : an overrided function in ActionListener
+		*@param ActionEvent e : where the action occurs 
+		*@return void : perform action when toolbtn is clicked and update the currentTool
+		*/
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
@@ -153,7 +214,13 @@ public class Controller { // controller class runs the game
 		}
 		
 	}//FishButtonListener
-	public void Poptutorial() {
+	
+	/**
+	*popTutorial : pop up the picture tutorial
+	*@param void : it consumes nothing
+	*@return void : show the tutorial picture in comfirmDialog
+	*/
+	public void popTutorial() {
 		BufferedImage bufferedImage = null;
     	try{
 	    	bufferedImage = ImageIO.read(new File("resources/img/background/Intro11.png"));
@@ -165,6 +232,7 @@ public class Controller { // controller class runs the game
     	
 	}
 	
+
 	
 	public static void main(String args[]) {
 		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
@@ -197,7 +265,7 @@ public class Controller { // controller class runs the game
 			}
 		});
 		
-		/**
+
 		while(true){
 			a.updateController();	
 			//a.updateScore(1);
@@ -206,8 +274,10 @@ public class Controller { // controller class runs the game
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		}//while**/
-		/*HighScore h1 = new HighScore(a.getScore());
+
+		}//while
+		HighScore h1 = new HighScore(a.getScore());
+
 		ArrayList<HighScore> hs = new ArrayList<HighScore>();
 		hs.add(h1);
 		HighScore.showHighScoreList(hs);
