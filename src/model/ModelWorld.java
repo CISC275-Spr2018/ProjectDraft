@@ -2,13 +2,21 @@ package model;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class ModelWorld {
+public class ModelWorld implements Serializable{
 	private ArrayList<FloatingObjs> lof;//list of floatingObjs that will spam
 	private ArrayList<FloatingObjs> loEf;//list of existed floatingObjs
 	private int score;
 	private int time=0;
 	
+	/**
+	 * 
+	 * @param l
+	 */
 	public ModelWorld(ArrayList<FloatingObjs> l){
 		this.lof = l;
 		this.loEf = new ArrayList<FloatingObjs>();
@@ -19,7 +27,9 @@ public class ModelWorld {
 		this.spawn();
 		this.spawn();
 	}//constructor
-	
+	/**
+	 * 
+	 */
 	public void updateWorld(){
 		for(FloatingObjs f : loEf){
 			f.move();
@@ -32,11 +42,16 @@ public class ModelWorld {
 		}
 		
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public ArrayList<FloatingObjs> getListOfExistedFloatingObjs(){
 		return loEf;
 	}
-	
+	/**
+	 * 
+	 */
 	public String toString(){
 		String str = "";
 		for(FloatingObjs f : loEf){
@@ -44,7 +59,9 @@ public class ModelWorld {
 		}
 		return str;
 	}
-	
+	/**
+	 * 
+	 */
 	public void move(){
 		for(FloatingObjs f : loEf){
 			f.move();
@@ -55,27 +72,46 @@ public class ModelWorld {
 		}
 		
 	}
-	
+	/**
+	 * 
+	 * @param s
+	 */
 	public void updateScore(int s){
 		score += s;
 	}
-	
+	/**
+	 * 
+	 */
 	public void updateTime(){
 		time++;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getScore(){
 		return score;
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public int getTime(){
 		return time;
 	}
-	
+	/**
+	 * 
+	 * @param i
+	 */
 	public void destory(int i){
 		FloatingObjs f = findFloat(i);
 		loEf.remove(f);
 	}
-	
+	/**
+	 * 
+	 * @param i
+	 * @return
+	 */
 	public FloatingObjs findFloat(int i){
 		FloatingObjs result = null;
 		for(FloatingObjs f: loEf){
@@ -88,7 +124,9 @@ public class ModelWorld {
 		}//for
 		return result;
 	}
-	
+	/**
+	 * 
+	 */
 	public void spawn(){
 		int len = lof.size();
 		int i = (int) (Math.random() * len);
@@ -106,6 +144,7 @@ public class ModelWorld {
 		f.addIndexId(i);
 	}
 
+
 	public static void main(String[] args){
 		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
 		loFloating.add(new ProtectedSpecies("bogturtle", 4 , 5));
@@ -114,6 +153,18 @@ public class ModelWorld {
 		loFloating.add(new ProtectedSpecies("horseshoeCrab", 4 , 5));
 		ModelWorld world = new ModelWorld(loFloating);
 		System.out.println(world);
+//serializable code:
+		/*	try{
+			FileOutputStream fileOut = new FileOutputStream("/tmp/world.ser");
+			ObjectOutputStream out= new ObjectOutputStream(fileOut);
+			out.writeObject(world);
+			out.close();
+			fileOut.close();
+			System.out.printf("Serialized data is saved in /tmp/world.ser");
+		}
+		catch(IOException i){
+			i.printStackTrace();
+		}*/
 		
 		world.destory(1);
 		world.destory(2);
