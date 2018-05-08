@@ -1,5 +1,9 @@
 package view;
 
+/**
+ * enum FloatingElements
+ * @author Team 11 - 8
+ * */
 public enum FloatingElements {
 	//List of all floating objects and holds their strings and image sizes, sprite numbers
 	BASS("bass",249, 132, 1),
@@ -21,6 +25,14 @@ public enum FloatingElements {
 	private int imgHeight;
 	private int count;
 	
+	/**
+	*FloatingElements : a constructor of FloatingElements
+	*@param String s: the name of this FloatingElements
+	*@param int w: the width of this FloatingElements
+	*@param int h: the height of this FloatingElements
+	*@param int c: the sprite number of this FloatingElements
+	*@return FloatingElements : Construct a new FloatingElements
+	*/
 	private FloatingElements(String s, int w, int h, int c){
 		name = s;
 		imgWidth = w;
@@ -28,18 +40,38 @@ public enum FloatingElements {
 		count = c;
 	}
 	
+	/**
+	*getName : a getter function of FloatingElements
+	*@param void : nothing
+	*@return String : the name of this FloatingElements
+	*/
 	public String getName(){
 		return name;
 	}
 	
+	/**
+	*getHeight : a getter function of FloatingElements
+	*@param void : nothing
+	*@return int : the height of this FloatingElements
+	*/
 	public int getHeight(){
 		return imgHeight;
 	}
 	
+	/**
+	*getWidth : a getter function of FloatingElements
+	*@param void : nothing
+	*@return int : the width of this FloatingElements
+	*/
 	public int getWidth(){
 		return imgWidth;
 	}
 	
+	/**
+	*getCount : a getter function of FloatingElements
+	*@param void : nothing
+	*@return int : the sprite number of this FloatingElements
+	*/
 	public int getCount(){
 		return count;
 	}

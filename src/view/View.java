@@ -1,5 +1,10 @@
 package view;
 
+/**
+ * Class View
+ * @author Team 11 - 8
+ * */
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -33,6 +38,11 @@ public class View extends JFrame{
 	//private BackgroundPanel bgp;
 	public boolean isAdded;
 	
+	/**
+	*View : a constructor of View
+	*@param void: nothing
+	*@return View : Construct a new View
+	*/
 	public View() {
 		menu= new Menu();
 		add(menu);
@@ -66,9 +76,21 @@ public class View extends JFrame{
     	
 		
 	}
+	
+	/**
+	*getMenu : a getter function of View
+	*@param void : nothing
+	*@return Menu : the menu of this View
+	*/
 	public Menu getMenu() {
 		return menu;
 	}
+	
+	/**
+	*initStage1 : initialize stage1
+	*@param void : nothing
+	*@return void : initialize the stage1 of this View
+	*/
 	public void initStage1() {
 		System.out.println("added!");
 		this.getFworld().initialBG();
@@ -76,6 +98,12 @@ public class View extends JFrame{
 		this.getContentPane().add(eg1);
 		isAdded=true;						
 	}
+	
+	/**
+	*updateView :updates components in View
+	*@param ArrayList<FloatingObjs> ob1 : a given ArrayList<FloatingObjs>
+	*@return void : this function moves the fishBtns in eg1(FishWorld panel)
+	*/
 	public void updateView(ArrayList<FloatingObjs> ob1) {
 		
 		eg1.updateBtns(ob1);
@@ -87,14 +115,30 @@ public class View extends JFrame{
 		//this.repaint();
 	}
 	
+	/**
+	*getTbar : a getter function of View
+	*@param void : nothing
+	*@return ToolBar : the tb1(Toolbar panel) of this View
+	*/
 	public ToolBar getTbar(){
 		return tb1;
 	}
 	
+	/**
+	*getFworld : a getter function of View
+	*@param void : nothing
+	*@return FishWorld : the eg1(FishWorld panel) of this View
+	*/
 	public FishWorld getFworld(){
 		return eg1;
 	}
-	
+	/**
+	*setActionListener : setup ActionListner
+	*@param ActionListener fBListener : a given FishBtn ActionListener
+	*@param ActionListener tBListener : a given toolBar ActionListener
+	*@return void : give eg1(FishWorld panel) fBListener; 
+	*				give tb1(Toolbar panel) tBListener
+	*/
 	public void setActionListener(ActionListener fBListener, ActionListener tBListener){
 		eg1.setActionListener(fBListener);
 		tb1.setActionListener(tBListener);

@@ -47,6 +47,12 @@ public class Controller { // controller class runs the game
 	private String currentTool;
 	public Action act1;
 	int counter;
+	
+	/**
+	*Controller : a constructor of Controller
+	*@param ArrayList<FloatingObjs> loFloating: the ArrayList of FloatingObjs
+	*@return Controller : Construct a new Controller
+	*/
 	public Controller(ArrayList<FloatingObjs> loFloating) {
 		counter=0;
 		
@@ -66,7 +72,7 @@ public class Controller { // controller class runs the game
 
 		SoundBar.music();
 		stage1(loFloating);
-		Poptutorial();
+		popTutorial();
 	}
 	
 	/**
@@ -241,7 +247,7 @@ public class Controller { // controller class runs the game
 			}
 		});
 		
-		/**
+		/*
 		while(true){
 			a.updateController();	
 			//a.updateScore(1);
@@ -250,8 +256,8 @@ public class Controller { // controller class runs the game
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		}//while**/
-		/*HighScore h1 = new HighScore(a.getScore());
+		}//while
+		HighScore h1 = new HighScore(a.getScore());
 		ArrayList<HighScore> hs = new ArrayList<HighScore>();
 		hs.add(h1);
 		HighScore.showHighScoreList(hs);

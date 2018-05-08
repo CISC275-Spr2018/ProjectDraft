@@ -1,5 +1,10 @@
 package view;
 
+/**
+ * Class Menu
+ * @author Team 11 - 8
+ * */
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -21,6 +26,12 @@ public class Menu extends JPanel{
 	//draw a JPanel as the Menu 
 	//added action listener that will initialize the game
 	boolean started = false;
+	
+	/**
+	*Menu : a constructor of Menu
+	*@param void : nothing
+	*@return Menu : Construct a new Menu
+	*/
 	public Menu() {
 		setLayout(null);
 		add(Box.createVerticalStrut(280));
@@ -40,16 +51,33 @@ public class Menu extends JPanel{
 		}
 		
 	}
+	
+	/**
+	*start : a constructor of Menu
+	*@param void : nothing
+	*@return void : this function release this panel and set started to true
+	*/
 	public void start() {
 		started = true;
 		
 		repaint();
 		this.removeAll();
 	}
-
+	
+	/**
+	*isStarted : a getter function of Menu
+	*@param void : nothing
+	*@return Boolean : the started status of this Menu
+	*/
 	public boolean isStarted() {
 		return started;
 	}
+	
+	/**
+	*paintComponent : an overrided function
+	*@param Graphics g: a given graphics
+	*@return void : draws the Component
+	*/
 	@Override
 	public void paintComponent(Graphics g) {
 			super.paintComponent(g);
