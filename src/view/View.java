@@ -1,9 +1,11 @@
 package view;
 
+
 /**
  * Class View
  * @author Team 11 - 8
  * */
+
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -37,17 +39,19 @@ public class View extends JFrame{
 	
 	//private BackgroundPanel bgp;
 	public boolean isAdded;
-	
+
 	/**
 	*View : a constructor of View
 	*@param void: nothing
 	*@return View : Construct a new View
 	*/
+
 	public View() {
 		menu= new Menu();
 		add(menu);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+
 		
 		eg1 = new FishWorld(new ArrayList<FloatingObjs>());
 		tb1 = new ToolBar();
@@ -67,6 +71,7 @@ public class View extends JFrame{
 		//this.setResizable(false);
 		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
 		
+
 		//this.setSize(FWIDTH, FHEIGHT);
 		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
 		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
@@ -76,7 +81,7 @@ public class View extends JFrame{
     	
 		
 	}
-	
+
 	/**
 	*getMenu : a getter function of View
 	*@param void : nothing
@@ -144,5 +149,6 @@ public class View extends JFrame{
 		tb1.setActionListener(tBListener);
 	}
 	
+
 	
 }

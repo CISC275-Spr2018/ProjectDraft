@@ -1,8 +1,10 @@
 package view;
+
 /**
  * Class ToolBar
  * @author Team 11 - 8
  * */
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -31,11 +33,13 @@ public class ToolBar extends JPanel {
 	private JRadioButton protectedTool;
 	private JRadioButton litterTool;
 	
+
 	/**
 	*ToolBar : a constructor of ToolBar
 	*@param void : nothing
 	*@return ToolBar : Construct a new ToolBar
 	*/
+
 	public ToolBar(){
 		GridLayout g = new GridLayout(4,0);
 		this.setLayout(g);
@@ -52,11 +56,13 @@ public class ToolBar extends JPanel {
 	}//constructor
 	
 
+
 	/**
 	*setBtn : initialize the 3 tool radiobtns
 	*@param void : nothing
 	*@return void : initialize the 3 tool radiobtns and add them to this panel
 	*/
+
 	private void setBtn(){
 		ImageIcon icon = new ImageIcon(createImages("net"));
 		invasiveTool = new JRadioButton("", icon);
@@ -89,11 +95,13 @@ public class ToolBar extends JPanel {
 	}//setBtn
 	
 	
+
 	/**
 	*createImages : read files to load images
 	*@param String name: name of the tool, which is part of the path
 	*@return BufferedImage : the images of this tool(icon)
 	*/
+
 	private BufferedImage createImages(String name){
 	    	BufferedImage bufferedImage = null;
 	    	try{
@@ -104,21 +112,25 @@ public class ToolBar extends JPanel {
 			return bufferedImage;	    	
 	}//createStatusImages
 	
+
 	/**
 	*updateScore : updates the current score
 	*@param int score : a given score
 	*@return void : update the current score according to the given score
 	*/
+
 	public void updateScore(int score){
 		JButton label = ((JButton) this.getComponent(3));
 		label.setText("Score: "+score);
 	}
 	
+
 	/**
 	*setActionListener : setup ActionListner
 	*@param ActionListener tAL : a given ActionListener
 	*@return void : give each tool radiobtn an ActionListener
 	*/
+
 	public void setActionListener(ActionListener tAL){
 		invasiveTool.addActionListener(tAL);
 		protectedTool.addActionListener(tAL);

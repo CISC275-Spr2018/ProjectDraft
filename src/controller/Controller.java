@@ -1,10 +1,15 @@
 package controller;
+
 /**
  * Class Controller
  * @author Team 11 - 8
  * */
 
+<<<<<<< HEAD
 import java.awt.Cursor;
+=======
+
+>>>>>>> 7b89d1312c8359131ab2882571d8f0a5a5828efc
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.Point;
@@ -51,12 +56,14 @@ public class Controller { // controller class runs the game
 	private String currentTool;
 	public Action act1;
 	int counter;
+
 	
 	/**
 	*Controller : a constructor of Controller
 	*@param ArrayList<FloatingObjs> loFloating: the ArrayList of FloatingObjs
 	*@return Controller : Construct a new Controller
 	*/
+
 	public Controller(ArrayList<FloatingObjs> loFloating) {
 		counter=0;
 		
@@ -76,6 +83,7 @@ public class Controller { // controller class runs the game
 
 		SoundBar.music();
 		stage1(loFloating);
+
 		popTutorial();
 	}
 	
@@ -108,8 +116,20 @@ public class Controller { // controller class runs the game
 				ArrayList<FloatingObjs> obj = model.getListOfExistedFloatingObjs();
 				this.view.updateView(obj);	
 			}
+
+		  Poptutorial();
+	}
+	public Action getact() {
+		return act1;
+
+	}
+	public void stage1(ArrayList<FloatingObjs> loFloating) {
+
 	}
 	
+	//this function setup model for each game
+	public void setupModeles(){}
+
 	/**
 	*updateScore : this function updates the score in both model and view
 	*@param void : nothing
@@ -246,6 +266,7 @@ public class Controller { // controller class runs the game
     	
 	}
 	
+
 	
 	public static void main(String args[]) {
 		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
@@ -278,7 +299,7 @@ public class Controller { // controller class runs the game
 			}
 		});
 		
-		/*
+
 		while(true){
 			a.updateController();	
 			//a.updateScore(1);
@@ -287,8 +308,10 @@ public class Controller { // controller class runs the game
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+
 		}//while
 		HighScore h1 = new HighScore(a.getScore());
+
 		ArrayList<HighScore> hs = new ArrayList<HighScore>();
 		hs.add(h1);
 		HighScore.showHighScoreList(hs);
