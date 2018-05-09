@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * Class ModelWorld
+ * @author Team 11 - 8
+ * */
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -11,6 +16,11 @@ public class ModelWorld {
 	private ArrayList<FloatingObjs> loEf;//list of existed floatingObjs
 	private int score;
 	
+	/**
+	*ModelWorld : a constructor of ModelWorld
+	*@param ArrayList<FloatingObjs> l: a given ArrayList<FloatingObjs>
+	*@return ModelWorld : constuct a new ModelWorld
+	*/
 	public ModelWorld(ArrayList<FloatingObjs> l){
 		this.lof = l;
 		this.loEf = new ArrayList<FloatingObjs>();
@@ -22,6 +32,11 @@ public class ModelWorld {
 		this.spawn();
 	}//constructor
 	
+	/**
+	*updateWorld : updates the location of each FloatingObjs
+	*@param void : a given ArrayList<FloatingObjs>
+	*@return void : updates the location of each FloatingObjs by their own move methods
+	*/
 	public void updateWorld(){
 		for(FloatingObjs f : loEf){
 			f.move();
@@ -35,10 +50,20 @@ public class ModelWorld {
 		
 	}
 	
+	/**
+	*getListOfExistedFloatingObjs : a getter function of ModelWorld
+	*@param void : nothing
+	*@return ArrayList<FloatingObjs> : the speed of this ModelWorldthe list of existed FloatingObjs
+	*/
 	public ArrayList<FloatingObjs> getListOfExistedFloatingObjs(){
 		return loEf;
 	}
 	
+	/**
+	*toString : an override function
+	*@param void : nothing
+	*@return String : make this ModelWorld be able to presented by String
+	*/
 	public String toString(){
 		String str = "";
 		for(FloatingObjs f : loEf){
@@ -47,6 +72,11 @@ public class ModelWorld {
 		return str;
 	}
 	
+	/**
+	*move : update the location of this FloatingObjs
+	*@param void : nothing
+	*@return void : update the location of this FloatingObjs 
+	*/
 	public void move(){
 		for(FloatingObjs f : loEf){
 			f.move();
@@ -58,19 +88,39 @@ public class ModelWorld {
 		
 	}
 	
+	/**
+	*updateScore :  a setter function of ModelWorld
+	*@param int s : a given score
+	*@return void : add s to the current score
+	*/
 	public void updateScore(int s){
 		score += s;
 	}
 	
+	/**
+	*getScore : a getter function of ModelWorld
+	*@param void : nothing
+	*@return int : the score of this ModelWorld
+	*/
 	public int getScore(){
 		return score;
 	}
 	
+	/**
+	*destory :  a setter function of ModelWorld
+	*@param int i : a given id
+	*@return void : remove this FloatingObjs from loEf
+	*/
 	public void destory(int i){
 		FloatingObjs f = findFloat(i);
 		loEf.remove(f);
 	}
 	
+	/**
+	*findFloat :  find the FloatingObjs in loEf by compare the id
+	*@param int i : a given id
+	*@return FloatingObjs : the found FloatingObjs, if find nothing, return null
+	*/
 	public FloatingObjs findFloat(int i){
 		FloatingObjs result = null;
 		for(FloatingObjs f: loEf){
@@ -84,6 +134,12 @@ public class ModelWorld {
 		return result;
 	}
 	
+	/**
+	*spawn :  a setter function of ModelWorld
+	*@param void : nothing
+	*@return void : randomly add a copied FloatingObjs from lof to loEf
+	*				and add id to this FloatingObjs
+	*/
 	public void spawn(){
 		int len = lof.size();
 		int i = (int) (Math.random() * len);
