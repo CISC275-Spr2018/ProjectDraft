@@ -59,21 +59,21 @@ public class ToolBar extends JPanel {
 	*/
 	private void setBtn(){
 		ImageIcon icon = new ImageIcon(createImages("net"));
-		invasiveTool = new JRadioButton("Invasion", icon);
+		invasiveTool = new JRadioButton("", icon);
 		invasiveTool.setFont(new Font("SansSerif",Font.BOLD, 22));
-		invasiveTool.setActionCommand("Invasion");//prime num used to find the species
+		invasiveTool.setActionCommand("Invasive");//prime num used to find the species
 		invasiveTool.setContentAreaFilled(false); 
 		invasiveTool.setBorderPainted(false); 
 		
 		icon = new ImageIcon(createImages("camera"));
-		protectedTool = new JRadioButton("Protected", icon);
+		protectedTool = new JRadioButton("", icon);
 		protectedTool.setFont(new Font("SansSerif",Font.BOLD, 22));
 		protectedTool.setActionCommand("Protected");//prime num used to find the species
 		protectedTool.setContentAreaFilled(false); 
 		protectedTool.setBorderPainted(false); 
 		
 		icon = new ImageIcon(createImages("trashpicker"));
-		litterTool = new JRadioButton("Litter", icon);
+		litterTool = new JRadioButton("", icon);
 		litterTool.setFont(new Font("SansSerif",Font.BOLD, 22));
 		litterTool.setActionCommand("Litter");//prime num used to find the species		
 		litterTool.setContentAreaFilled(false); 

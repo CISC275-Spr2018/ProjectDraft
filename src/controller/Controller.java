@@ -4,7 +4,11 @@ package controller;
  * @author Team 11 - 8
  * */
 
+import java.awt.Cursor;
 import java.awt.EventQueue;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -67,7 +71,7 @@ public class Controller { // controller class runs the game
 		view = new View();
 		view.setActionListener(new FishButtonListener(), new ToolBarListener());
 		this.view.updateView(model.getListOfExistedFloatingObjs());
-		currentTool = "Invasion";
+		currentTool = "Invasive";
 		view.getFworld().initialBG();
 
 		SoundBar.music();
@@ -183,6 +187,27 @@ public class Controller { // controller class runs the game
 
 	public class ToolBarListener implements ActionListener{
 		//using radio button to change tools 
+		private Cursor invasive;
+		private Cursor protect;
+		private Cursor litter;
+		
+		/**
+		*ToolBarListener : a constructor of ToolBarListener
+		*@param void : nothing
+		*@return ToolBarListener : Construct a new ToolBarListener
+		*							setup 3 Cursors
+		*/
+		public ToolBarListener(){
+			super();
+			Toolkit tk = Toolkit.getDefaultToolkit();
+			Image invaImage = new ImageIcon("resources/img/tool/net.png").getImage(); 
+			Image proImage = new ImageIcon("resources/img/tool/camera.png").getImage(); 
+			Image litImage = new ImageIcon("resources/img/tool/trashpicker.png").getImage(); 
+			invasive = tk.createCustomCursor(invaImage, new Point(10, 10), "invasive");
+			protect = tk.createCustomCursor(proImage, new Point(10, 10), "protected");
+			litter = tk.createCustomCursor(litImage, new Point(10, 10), "litter");
+			view.setCursor(invasive);
+		}
 
 		/**
 		*actionPerformed : an overrided function in ActionListener
@@ -194,6 +219,12 @@ public class Controller { // controller class runs the game
 			// TODO Auto-generated method stub
 			currentTool = e.getActionCommand();
 			System.out.println("the tool is now: " + currentTool);
+			switch(currentTool){
+			case "Invasive": view.setCursor(invasive);break;
+			case "Protected": view.setCursor(protect);break;
+			case "Litter": view.setCursor(litter);break;
+			default:break;
+			}
 		}
 		
 	}//FishButtonListener
