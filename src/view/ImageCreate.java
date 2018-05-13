@@ -1,6 +1,6 @@
 package view;
 
-
+/**
  * Class ImgStore
  * @author Team 11 - 8
  * */

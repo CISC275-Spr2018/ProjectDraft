@@ -5,11 +5,7 @@ package controller;
  * @author Team 11 - 8
  * */
 
-<<<<<<< HEAD
 import java.awt.Cursor;
-=======
-
->>>>>>> 7b89d1312c8359131ab2882571d8f0a5a5828efc
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.Point;
@@ -116,19 +112,8 @@ public class Controller { // controller class runs the game
 				ArrayList<FloatingObjs> obj = model.getListOfExistedFloatingObjs();
 				this.view.updateView(obj);	
 			}
-
-		  Poptutorial();
+		  popTutorial();
 	}
-	public Action getact() {
-		return act1;
-
-	}
-	public void stage1(ArrayList<FloatingObjs> loFloating) {
-
-	}
-	
-	//this function setup model for each game
-	public void setupModeles(){}
 
 	/**
 	*updateScore : this function updates the score in both model and view
@@ -288,36 +273,12 @@ public class Controller { // controller class runs the game
 				Timer t = new Timer(1,a.getact());
 				t.start();
 				
-				//System.out.println(i);
 				if(a.counter>60) {
 					t.stop();
 					System.out.println("Game OVer!!");
 				}
-				
-				//t.stop();
-				//System.out.println(1);
 			}
 		});
-		
-
-		while(true){
-			a.updateController();	
-			//a.updateScore(1);
-			try {
-				Thread.sleep(30);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-
-		}//while
-		HighScore h1 = new HighScore(a.getScore());
-
-		ArrayList<HighScore> hs = new ArrayList<HighScore>();
-		hs.add(h1);
-		HighScore.showHighScoreList(hs);
-		
-		HighScore.writeOut("outSample", hs);
-		//HighScore.showHighScoreList(HighScore.readIn("outSample"));*/
 	}
 	
 }
