@@ -10,8 +10,10 @@ public class ModelWorld {
 	private ArrayList<FloatingObjs> lof;//list of floatingObjs that will spam
 	private ArrayList<FloatingObjs> loEf;//list of existed floatingObjs
 	private int score;
+	private int countdown;
 	
 	public ModelWorld(ArrayList<FloatingObjs> l){
+		this.countdown=2000;
 		this.lof = l;
 		this.loEf = new ArrayList<FloatingObjs>();
 		this.spawn();
@@ -21,8 +23,13 @@ public class ModelWorld {
 		this.spawn();
 		this.spawn();
 	}//constructor
+	public int getCountDown() {
+		return countdown;
+	}
 	
 	public void updateWorld(){
+		countdown--;
+		//System.out.println("time left is :"+countdown);
 		for(FloatingObjs f : loEf){
 			f.move();
 			f.updateDuration();

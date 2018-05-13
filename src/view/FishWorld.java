@@ -39,7 +39,7 @@ public class FishWorld extends JPanel {
 		for(FloatingObjs f : lof){
 			addFloat(f);
 		}
-		this.setBackground(Color.cyan);
+		//this.setBackground(Color.cyan);
 		//initialBG();
 		/**
 		for(FloatingObjs f : lof){

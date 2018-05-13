@@ -18,6 +18,7 @@ import javax.swing.Action;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
@@ -43,15 +44,34 @@ public class Controller { // controller class runs the game
 	private View view;
 	private String currentTool;
 	public Action act1;
-	int counter;
+	
+    
 	public Controller(ArrayList<FloatingObjs> loFloating) {
-		counter=0;
-		
+		//-----
+	/**	progressBar = new JProgressBar(JProgressBar.VERTICAL, 0, 10);
+        progressBar.setValue(10);
+        ActionListener listener = new ActionListener() {
+            int counter = 10;
+            public void actionPerformed(ActionEvent ae) {
+                counter--;
+                progressBar.setValue(counter);
+                if (counter<1) {
+                    JOptionPane.showMessageDialog(null, "Kaboom!");
+                    timer.stop();
+                } 
+            }}**/
+        //---
 		act1 = new AbstractAction() {
 			
 			public void actionPerformed(ActionEvent e) {
-				counter++;
-				updateController();
+				
+				if(model.getCountDown()>=0) {
+					updateController();
+				}
+				else {
+					System.out.println("GameOVer");
+				}
+				
 			}
 		};
 		model = new ModelWorld(loFloating);
@@ -60,7 +80,6 @@ public class Controller { // controller class runs the game
 		this.view.updateView(model.getListOfExistedFloatingObjs());
 		currentTool = "Invasion";
 		view.getFworld().initialBG();
-
 		SoundBar.music();
 		stage1(loFloating);
 		Poptutorial();
@@ -79,11 +98,13 @@ public class Controller { // controller class runs the game
 			if(view.getMenu().isStarted()&&(view.isAdded==false)) {//stage 1
 				view.initStage1();
 			}else if(view.isAdded){
-				System.out.println("wa");
+				//System.out.println("wa");
 				this.model.updateWorld();
 				ArrayList<FloatingObjs> obj = model.getListOfExistedFloatingObjs();
 				this.view.updateView(obj);	
 			}
+			
+			
 	}
 	
 	public void updateScore(int i){
@@ -176,26 +197,11 @@ public class Controller { // controller class runs the game
 		loFloating.add(new Trash("paper", 1267, 635,12,100,100));
 		loFloating.add(new ProtectedSpecies("salamander", 1267 , 735,17,350,150));
 		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835,13,230,60));
+		Controller a = new Controller(loFloating);
+		Timer t = new Timer(1,a.getact());
+		t.start();
 		
-		EventQueue.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				Controller a = new Controller(loFloating);
-					
-				Timer t = new Timer(1,a.getact());
-				t.start();
-				
-				//System.out.println(i);
-				if(a.counter>60) {
-					t.stop();
-					System.out.println("Game OVer!!");
-				}
-				
-				//t.stop();
-				//System.out.println(1);
-			}
-		});
+	
 		
 		/**
 		while(true){

@@ -36,9 +36,8 @@ public class View extends JFrame{
 	public View() {
 		menu= new Menu();
 		add(menu);
+		menu.setBounds(0,0,1920,1080);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		
 		eg1 = new FishWorld(new ArrayList<FloatingObjs>());
 		tb1 = new ToolBar();
 		// bgp=new BackgroundPanel((new ImageIcon("resources/img/background/underwater2.png")).getImage());
@@ -50,19 +49,22 @@ public class View extends JFrame{
 		//initStage1();
 		 //this.getContentPane().add(tb1,"West");
 		//this.getContentPane().add(eg1);
+		this.setLayout(null);
 		
 		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//this.setSize(FWIDTH, FHEIGHT);
+		//
 		//this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);  
 		//this.setResizable(false);
-		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
+		//this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
 		
-		//this.setSize(FWIDTH, FHEIGHT);
-		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
-		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
-		this.pack();
+		
+		//this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
+		//this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
+		//this.pack();
     	this.setVisible(true);
-    	this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
+    	this.setSize(FWIDTH, FHEIGHT);
+    	//this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
+    	
     	
 		
 	}
@@ -72,8 +74,12 @@ public class View extends JFrame{
 	public void initStage1() {
 		System.out.println("added!");
 		this.getFworld().initialBG();
-		this.getContentPane().add(tb1,"West");
-		this.getContentPane().add(eg1);
+		
+		
+		this.add(eg1);
+		eg1.setBounds(300,0,1920,1080);
+		this.add(tb1);
+		tb1.setBounds(0,0,300,1080);
 		isAdded=true;						
 	}
 	public void updateView(ArrayList<FloatingObjs> ob1) {
