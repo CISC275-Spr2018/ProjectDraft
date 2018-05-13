@@ -1,5 +1,10 @@
 package view;
 
+/**
+ * Class FishWorld
+ * @author Team 11 - 8
+ * */
+
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Image;
@@ -24,6 +29,13 @@ public class FishWorld extends JPanel {
 	private HashMap<Integer, FishButton> btns = new HashMap<Integer, FishButton>();
 	private ActionListener buttonHandler;
 	
+
+	/**
+	*initialBG : initialize the background
+	*@param void : nothing
+	*@return void : initialize the background panel
+	*/
+
 	public void initialBG() {
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image bgImg = tk.createImage("resources\\img\\background\\bg.jpg");
@@ -33,6 +45,13 @@ public class FishWorld extends JPanel {
 	    this.add(jlBackgroundimg);
 	}
 	
+
+	/**
+	*FishWorld : a constructor of FishWorld
+	*@param ArrayList<FloatingObjs> lof: the ArrayList of FloatingObjs
+	*@return FishWorld : Construct a new FishWorld
+	*/
+
 	public FishWorld(ArrayList<FloatingObjs> lof){
 		this.setLayout(null);
 		
@@ -41,26 +60,15 @@ public class FishWorld extends JPanel {
 		}
 		this.setBackground(Color.cyan);
 		//initialBG();
-		/**
-		for(FloatingObjs f : lof){
-			String name = f.getName().toUpperCase();
-			try{
-				FloatingElements fe = FloatingElements.valueOf(name);
-				FishButton temp = new FishButton(fe, new ImageCreate(fe).getImgs());
-				temp.move(f.getXloc(),f.getYloc());
-				btns.put(f.getName(), temp);
-			}catch(IllegalArgumentException e){
-				System.out.println("not in Enum!!!!!");
-			}
-		}
-		
-		for(FishButton btn : btns.values()){
-			this.add(btn);
-		}
-		
-		this.setLayout(null);**/
-		
+
 	}
+	
+	/**
+	*removeFloat : initialize and add a fishBtn to this panel
+	*@param int i: the id of given fishBtn
+	*@return void : remove the fishBtn from both HashMap and this panel
+	*/
+
 	public void removeFloat(int i){
 		FishButton temp = btns.get(i);
 		temp.setVisible(false);
@@ -70,19 +78,33 @@ public class FishWorld extends JPanel {
 		this.remove(temp);
 	}
 	
+
+	/**
+	*setActionListener : setup ActionListner
+	*@param ActionListener aL : a given ActionListener
+	*@return void : give each fishbtn an ActionListener
+	*/
+
 	public void setActionListener(ActionListener al){
 		this.buttonHandler = al;
 		for(FishButton fb : btns.values()){
 			fb.addActionListener(buttonHandler);
 		}
 	}
+
+	/**
+	*addFloat : initialize and add a fishBtn to this panel
+	*@param FloatingObjs f: a given FloatingObjs instance
+	*@return FishButton : the added fishBtn
+	*/
+
 	public void removeFloat(String name){
 		btns.remove(name);
 	}
 	public FishWorld getFishWorld() {
 		return this;
 	}
-	
+
 	public FishButton addFloat(FloatingObjs f){
 		String strName = f.getName().toUpperCase();
 		FishButton temp = null;
@@ -104,6 +126,13 @@ public class FishWorld extends JPanel {
 		return temp;
 	}
 	
+
+	/**
+	*updateBtns : updates the location of each fishBtn
+	*@param ArrayList<FloatingObjs> lof: a given ArrayList of FloatingObjs
+	*@return void : updates the location of each fishBtn according to each FloatingObjs in lof
+	*/
+
 	public void updateBtns(ArrayList<FloatingObjs> lof){
 		for(FloatingObjs f : lof){
 			String[] ss = f.getId().split(" ");
