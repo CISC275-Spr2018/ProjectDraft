@@ -37,6 +37,7 @@ public class Controller implements Runnable { // controller class runs the game
 	private ModelWorld model;
 	private View view;
 	private String currentTool;
+	private ArrayList<FloatingObjs> lof;
 	private Action act1 = new AbstractAction() {
 		
 		public void actionPerformed(ActionEvent e) {
@@ -56,13 +57,15 @@ public class Controller implements Runnable { // controller class runs the game
 	*@return Controller : Construct a new Controller
 	*/
 	public Controller(ArrayList<FloatingObjs> loFloating) {
-		model = new ModelWorld(loFloating);
+		lof = loFloating;
+		model = new ModelWorld(lof);
 		view = new View();
 		view.setActionListener(new FishButtonListener(), new ToolBarListener(), new SoundBarListener());
 		this.view.updateView(model.getListOfExistedFloatingObjs());
 		currentTool = "Invasive";
 		view.getFworld().initialBG();
 		view.startMusic();
+		view.setMenuBar(new MenuActionListener());
 	}
 	
 	/**
@@ -89,7 +92,7 @@ public class Controller implements Runnable { // controller class runs the game
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				view.repaint();
+				view.revalidate();
 			}else if(view.isAdded){
 				//System.out.println("wa");
 				this.model.updateWorld();
@@ -256,6 +259,18 @@ public class Controller implements Runnable { // controller class runs the game
 			((JRadioButton)e.getSource()).setActionCommand(ss0 + " " + ss1);
 		}//SoundBarListener
 	}//SoundBarListener
+	
+	public class MenuActionListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			model = new ModelWorld(lof);
+			view.start();
+			view.revalidate();
+		}
+		
+	}//MenuActionListener
 		
 	
 	/**

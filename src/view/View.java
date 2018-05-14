@@ -46,7 +46,6 @@ public class View extends JFrame{
 		// bgp=new BackgroundPanel((new ImageIcon("resources/img/background/underwater2.png")).getImage());
         //bgp.setBounds(0,0,1920,1080);     
 		this.setTitle("Habatit Mangantment Training Program");
-		this.setMenuBar();
 		//this.getContentPane().add(bgp);
 		isAdded = false;
 		
@@ -70,19 +69,11 @@ public class View extends JFrame{
 		
 	}
 	
-	public void setMenuBar(){
+	public void setMenuBar(ActionListener ac){
 		JMenuBar jMB = new JMenuBar();
 		JMenuItem menuPage = new JMenuItem("Main Page");
 		jMB.add(menuPage);
-		menuPage.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				start();
-			}
-			
-		});
+		menuPage.addActionListener(ac);
 		this.setJMenuBar(jMB);
 	}
 	
@@ -188,6 +179,7 @@ public class View extends JFrame{
 	*@return void : show the game over panel
 	*/
 	public void start(){
+		tb1 = new ToolBar();
 		menu = new Menu();
 		this.getContentPane().removeAll();
 		this.getContentPane().add(menu);
