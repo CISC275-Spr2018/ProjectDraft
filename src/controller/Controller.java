@@ -1,15 +1,10 @@
 package controller;
-
 /**
  * Class Controller
  * @author Team 11 - 8
  * */
 
-<<<<<<< HEAD
 import java.awt.Cursor;
-=======
-
->>>>>>> 7b89d1312c8359131ab2882571d8f0a5a5828efc
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.Point;
@@ -30,6 +25,7 @@ import javax.swing.Action;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
@@ -50,40 +46,38 @@ import view.SoundBar;
 
 import view.View;
 
-public class Controller { // controller class runs the game 
+public class Controller<bgm> { // controller class runs the game 
 	private ModelWorld model;
 	private View view;
 	private String currentTool;
 	public Action act1;
-	int counter;
+	
 
+	public boolean soundFlag = true;
+	public boolean bgmFlag = true;
 	
 	/**
 	*Controller : a constructor of Controller
 	*@param ArrayList<FloatingObjs> loFloating: the ArrayList of FloatingObjs
 	*@return Controller : Construct a new Controller
 	*/
-
 	public Controller(ArrayList<FloatingObjs> loFloating) {
-		counter=0;
 		
 		act1 = new AbstractAction() {
 			
 			public void actionPerformed(ActionEvent e) {
-				counter++;
 				updateController();
 			}
 		};
 		model = new ModelWorld(loFloating);
 		view = new View();
-		view.setActionListener(new FishButtonListener(), new ToolBarListener());
+		view.setActionListener(new FishButtonListener(), new ToolBarListener(), new SoundBarListener());
 		this.view.updateView(model.getListOfExistedFloatingObjs());
 		currentTool = "Invasive";
 		view.getFworld().initialBG();
 
-		SoundBar.music();
+		view.startMusic();
 		stage1(loFloating);
-
 		popTutorial();
 	}
 	
@@ -116,20 +110,8 @@ public class Controller { // controller class runs the game
 				ArrayList<FloatingObjs> obj = model.getListOfExistedFloatingObjs();
 				this.view.updateView(obj);	
 			}
-
-		  Poptutorial();
-	}
-	public Action getact() {
-		return act1;
-
-	}
-	public void stage1(ArrayList<FloatingObjs> loFloating) {
-
 	}
 	
-	//this function setup model for each game
-	public void setupModeles(){}
-
 	/**
 	*updateScore : this function updates the score in both model and view
 	*@param void : nothing
@@ -168,7 +150,9 @@ public class Controller { // controller class runs the game
 			String spices = temp[0];
 			int isPos = (spices.equalsIgnoreCase(currentTool))? 1: -1;
 
-			beep(isPos);
+			if(soundFlag){
+				SoundBar.beep(isPos);
+			}
 
 			view.getFworld().removeFloat(index);
 			int score = model.findFloat(index).getScore();
@@ -180,30 +164,7 @@ public class Controller { // controller class runs the game
 	}//FishButtonListener
 	
 
-	/**
-	*beep : plays the sound to show correct or not
-	*@param int i : getting from the FishButtonListener to see if the action is right or not
-	*@return void : play the right sound according to the choice 
-	*/
-	private void beep(int i){
-		String input = (i==1)? "correct" : "wrong";
-        AudioPlayer MGP = AudioPlayer.player;
-        AudioStream BGM;
 
-        try{
-            InputStream test = new FileInputStream("resources//music//" + input + ".wav");
-            BGM = new AudioStream(test);
-            AudioPlayer.player.start(BGM);
-        }
-        catch(FileNotFoundException e){
-            System.out.print(e.toString());
-        }
-        catch(IOException error)
-        {
-            System.out.print(error.toString());
-        }
-    }
-	
 
 	public class ToolBarListener implements ActionListener{
 		//using radio button to change tools 
@@ -249,6 +210,39 @@ public class Controller { // controller class runs the game
 		
 	}//FishButtonListener
 	
+
+	public class SoundBarListener implements ActionListener{
+		
+		/**
+		*actionPerformed : an overrided function in ActionListener
+		*@param ActionEvent e : where the action occurs 
+		*@return void : perform action when soundBtn is clicked and update the currentTool
+		*/
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			String str = e.getActionCommand();
+			System.out.println(str);
+			String[] ss = str.split(" ");
+			String ss0 = ss[0];
+			String ss1 = ss[1].equalsIgnoreCase("on")? "off": "on";
+			boolean ssb = ss1.equalsIgnoreCase("on")? true: false;
+
+			if(ss0.equalsIgnoreCase("BGM")){
+				if(bgmFlag){
+					view.stopMusic();
+				}else{
+					view.startMusic();
+				}//inner if-else, either stop or play
+				bgmFlag = ssb;
+			}else{
+				soundFlag = ssb;
+			}//outter if-else, either sound or bgm
+			view.getSb().setIcons(soundFlag, bgmFlag);
+			((JRadioButton)e.getSource()).setActionCommand(ss0 + " " + ss1);
+		}//SoundBarListener
+	}//SoundBarListener
+	
 	/**
 	*popTutorial : pop up the picture tutorial
 	*@param void : it consumes nothing
@@ -264,9 +258,7 @@ public class Controller { // controller class runs the game
     	ImageIcon icon = new ImageIcon(bufferedImage);
     	JOptionPane.showConfirmDialog(null, "", "Introduction", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
     	
-	}
-	
-
+	}	
 	
 	public static void main(String args[]) {
 		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
@@ -287,37 +279,8 @@ public class Controller { // controller class runs the game
 					
 				Timer t = new Timer(1,a.getact());
 				t.start();
-				
-				//System.out.println(i);
-				if(a.counter>60) {
-					t.stop();
-					System.out.println("Game OVer!!");
-				}
-				
-				//t.stop();
-				//System.out.println(1);
 			}
 		});
-		
-
-		while(true){
-			a.updateController();	
-			//a.updateScore(1);
-			try {
-				Thread.sleep(30);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-
-		}//while
-		HighScore h1 = new HighScore(a.getScore());
-
-		ArrayList<HighScore> hs = new ArrayList<HighScore>();
-		hs.add(h1);
-		HighScore.showHighScoreList(hs);
-		
-		HighScore.writeOut("outSample", hs);
-		//HighScore.showHighScoreList(HighScore.readIn("outSample"));*/
 	}
 	
 }

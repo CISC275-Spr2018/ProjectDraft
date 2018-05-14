@@ -1,10 +1,8 @@
 package view;
-
 /**
  * Class ToolBar
  * @author Team 11 - 8
  * */
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -32,16 +30,15 @@ public class ToolBar extends JPanel {
 	private JRadioButton invasiveTool;
 	private JRadioButton protectedTool;
 	private JRadioButton litterTool;
+	private SoundBar sb = new SoundBar();
 	
-
 	/**
 	*ToolBar : a constructor of ToolBar
 	*@param void : nothing
 	*@return ToolBar : Construct a new ToolBar
 	*/
-
 	public ToolBar(){
-		GridLayout g = new GridLayout(4,0);
+		GridLayout g = new GridLayout(5,0);
 		this.setLayout(g);
 		setBtn();
 		
@@ -51,36 +48,35 @@ public class ToolBar extends JPanel {
 		//scoreBtn.setEnabled(false);
 		scoreBtn.setContentAreaFilled(false); 
 		scoreBtn.setBorderPainted(false); 
+		this.add(sb);
 		this.add(scoreBtn);
 		this.setBackground(new Color(100,255,255));
 	}//constructor
 	
-
 
 	/**
 	*setBtn : initialize the 3 tool radiobtns
 	*@param void : nothing
 	*@return void : initialize the 3 tool radiobtns and add them to this panel
 	*/
-
 	private void setBtn(){
 		ImageIcon icon = new ImageIcon(createImages("net"));
 		invasiveTool = new JRadioButton("", icon);
-		invasiveTool.setFont(new Font("SansSerif",Font.BOLD, 22));
+		//invasiveTool.setFont(new Font("SansSerif",Font.BOLD, 22));
 		invasiveTool.setActionCommand("Invasive");//prime num used to find the species
 		invasiveTool.setContentAreaFilled(false); 
 		invasiveTool.setBorderPainted(false); 
 		
 		icon = new ImageIcon(createImages("camera"));
 		protectedTool = new JRadioButton("", icon);
-		protectedTool.setFont(new Font("SansSerif",Font.BOLD, 22));
+		//protectedTool.setFont(new Font("SansSerif",Font.BOLD, 22));
 		protectedTool.setActionCommand("Protected");//prime num used to find the species
 		protectedTool.setContentAreaFilled(false); 
 		protectedTool.setBorderPainted(false); 
 		
 		icon = new ImageIcon(createImages("trashpicker"));
 		litterTool = new JRadioButton("", icon);
-		litterTool.setFont(new Font("SansSerif",Font.BOLD, 22));
+		//litterTool.setFont(new Font("SansSerif",Font.BOLD, 22));
 		litterTool.setActionCommand("Litter");//prime num used to find the species		
 		litterTool.setContentAreaFilled(false); 
 		litterTool.setBorderPainted(false); 
@@ -95,13 +91,11 @@ public class ToolBar extends JPanel {
 	}//setBtn
 	
 	
-
 	/**
 	*createImages : read files to load images
 	*@param String name: name of the tool, which is part of the path
 	*@return BufferedImage : the images of this tool(icon)
 	*/
-
 	private BufferedImage createImages(String name){
 	    	BufferedImage bufferedImage = null;
 	    	try{
@@ -112,29 +106,30 @@ public class ToolBar extends JPanel {
 			return bufferedImage;	    	
 	}//createStatusImages
 	
-
 	/**
 	*updateScore : updates the current score
 	*@param int score : a given score
 	*@return void : update the current score according to the given score
 	*/
-
 	public void updateScore(int score){
-		JButton label = ((JButton) this.getComponent(3));
+		JButton label = ((JButton) this.getComponent(4));
 		label.setText("Score: "+score);
 	}
 	
-
 	/**
 	*setActionListener : setup ActionListner
 	*@param ActionListener tAL : a given ActionListener
 	*@return void : give each tool radiobtn an ActionListener
 	*/
-
-	public void setActionListener(ActionListener tAL){
+	public void setActionListener(ActionListener tAL, ActionListener sAL){
 		invasiveTool.addActionListener(tAL);
 		protectedTool.addActionListener(tAL);
 		litterTool.addActionListener(tAL);
+		sb.setActionListener(sAL);
+	}
+	
+	public SoundBar getSb(){
+		return sb;
 	}
 	
 	public static void main(String[] args){

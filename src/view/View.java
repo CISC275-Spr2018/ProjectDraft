@@ -1,11 +1,9 @@
 package view;
 
-
 /**
  * Class View
  * @author Team 11 - 8
  * */
-
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -39,19 +37,17 @@ public class View extends JFrame{
 	
 	//private BackgroundPanel bgp;
 	public boolean isAdded;
-
+	
 	/**
 	*View : a constructor of View
 	*@param void: nothing
 	*@return View : Construct a new View
 	*/
-
 	public View() {
 		menu= new Menu();
 		add(menu);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-
 		
 		eg1 = new FishWorld(new ArrayList<FloatingObjs>());
 		tb1 = new ToolBar();
@@ -71,7 +67,6 @@ public class View extends JFrame{
 		//this.setResizable(false);
 		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
 		
-
 		//this.setSize(FWIDTH, FHEIGHT);
 		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
 		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
@@ -81,7 +76,7 @@ public class View extends JFrame{
     	
 		
 	}
-
+	
 	/**
 	*getMenu : a getter function of View
 	*@param void : nothing
@@ -89,6 +84,33 @@ public class View extends JFrame{
 	*/
 	public Menu getMenu() {
 		return menu;
+	}
+	
+	/**
+	*startMusic : a setter function of View
+	*@param void : nothing
+	*@return void : starts the play of BGM
+	*/
+	public void startMusic(){
+		tb1.getSb().startMusic();
+	}
+	
+	/**
+	*stopMusic : a setter function of View
+	*@param void : nothing
+	*@return void : stops the play of BGM
+	*/
+	public void stopMusic(){
+		tb1.getSb().stopMusic();
+	}
+	
+	/**
+	*getSb : a getter function of View
+	*@param void : nothing
+	*@return SoundBar : the SoundBar of this View
+	*/
+	public SoundBar getSb(){
+		return tb1.getSb();
 	}
 	
 	/**
@@ -144,11 +166,10 @@ public class View extends JFrame{
 	*@return void : give eg1(FishWorld panel) fBListener; 
 	*				give tb1(Toolbar panel) tBListener
 	*/
-	public void setActionListener(ActionListener fBListener, ActionListener tBListener){
+	public void setActionListener(ActionListener fBListener, ActionListener tBListener, ActionListener sBListener){
 		eg1.setActionListener(fBListener);
-		tb1.setActionListener(tBListener);
+		tb1.setActionListener(tBListener, sBListener);
 	}
 	
-
 	
 }

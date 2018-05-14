@@ -1,10 +1,9 @@
 package view;
 
-
+/**
  * Class ImgStore
  * @author Team 11 - 8
  * */
-
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -22,7 +21,6 @@ public class ImageCreate {
 	private int count;
 	private HashMap<String, BufferedImage[]> imgs= new  HashMap<String, BufferedImage[]>();
 	
-
 	/**
 	*ImageCreate : a constructor of ImageCreate
 	*@param String n: the name of this ImageCreate(species)
@@ -31,7 +29,6 @@ public class ImageCreate {
 	*@param int c: the sprite number of this ImageCreate(species)
 	*@return ImageCreate : Construct a new ImageCreate
 	*/
-
 	public ImageCreate(String n, int w, int h, int c){
 		this.name = n;
 		this.count = c;
@@ -43,13 +40,11 @@ public class ImageCreate {
 		this.imgs.put(dir, createImages(dir));
 	}//constructor
 	
-
 	/**
 	*ImageCreate : a constructor of ImageCreate
 	*@param FloatingElements e: FloatingElements enum
 	*@return ImageCreate : Construct a new ImageCreate by properties of this enum
 	*/
-
 	public ImageCreate(FloatingElements e){
 		this.name = e.getName();
 		this.count = e.getCount();
@@ -62,7 +57,6 @@ public class ImageCreate {
 		
 	}//constructor
 	
-
 	/**
 	*getImgs : a getter function of FloatingElements
 	*@param void : nothing
@@ -92,6 +86,5 @@ public class ImageCreate {
 	    }//for
 		return imgs;
 	}//createStatusImages
-
 
 }
