@@ -87,12 +87,14 @@ public class Controller implements Runnable { // controller class runs the game
 	*/
 	public void updateController() {
 			if(view.getMenu().isStarted()&&(view.isAdded==false)) {//stage 1
-				view.initStage1();		try {
-					Thread.sleep(500);
+				view.initStage1();		
+				try {
+					Thread.sleep(300);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 				view.revalidate();
+				view.setVisible(true);
 			}else if(view.isAdded){
 				//System.out.println("wa");
 				this.model.updateWorld();

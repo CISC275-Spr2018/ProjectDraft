@@ -182,11 +182,14 @@ public class View extends JFrame{
 		tb1 = new ToolBar();
 		menu = new Menu();
 		this.getContentPane().removeAll();
+		isAdded = false;
 		this.getContentPane().add(menu);
 		this.repaint();
-		isAdded = false;
 	}
-	
+	/**updateTime : 
+	 * @param double d : the update period
+	 * @return void : updates the time in timepane
+	 * */
 	public void updateTime(double d){
 		tb1.updateTime(d);
 	}//updateTime
