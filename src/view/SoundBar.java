@@ -1,5 +1,12 @@
 package view;
 
+
+/**
+ * Class SoundBar
+ * @author Team 11 - 8
+ * */
+
+
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -23,8 +30,14 @@ public class SoundBar extends JPanel{
 	
 	private JRadioButton sound;
 	
-	public SoundBar() {
-		
+
+	/**
+	*SoundBar : a constructor of SoundBar
+	*@param void : nothing
+	*@return SoundBar : Construct a new SoundBar
+	*/
+	public SoundBar() {	
+
 		this.setLayout(new GridLayout(2,0));
 		ImageIcon icon = new ImageIcon(createImages("sound"));
 		sound = new JRadioButton("sound", icon);
@@ -34,10 +47,24 @@ public class SoundBar extends JPanel{
 		
 	}
 	
+
+	/**
+	*setActionListener : setup ActionListner
+	*@param ActionListener l : a given ActionListener
+	*@return void : give each soundBtn an ActionListener
+	*/
+
 	public void setActionListener(ActionListener l) {
 		sound.addActionListener(l);
 	}
 	
+
+	/**
+	*createImages : read files to load images
+	*@param String name: name of the tool, which is part of the path
+	*@return BufferedImage : the images of this tool(icon)
+	*/
+
 	private BufferedImage createImages(String name){
     	BufferedImage bufferedImage = null;
     	try{
@@ -47,6 +74,13 @@ public class SoundBar extends JPanel{
 	    }
 		return bufferedImage;	    	
 }//createStatusImages
+
+	
+	/**
+	*music : plays background music
+	*@param void: nothing
+	*@return void : this is a static function that palys the background music
+	*/
 
 	public static void music() 
     {       

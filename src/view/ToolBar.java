@@ -1,5 +1,10 @@
 package view;
 
+/**
+ * Class ToolBar
+ * @author Team 11 - 8
+ * */
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -47,6 +52,13 @@ public class ToolBar extends JPanel {
 		return timmah;
 	}
 	
+
+	/**
+	*ToolBar : a constructor of ToolBar
+	*@param void : nothing
+	*@return ToolBar : Construct a new ToolBar
+	*/
+
 	public ToolBar(){
 		progressBar = new JProgressBar(JProgressBar.VERTICAL, 0, counter);
         progressBar.setValue(counter);
@@ -89,13 +101,18 @@ public class ToolBar extends JPanel {
 	}//constructor
 	
 
-	
-	
+
+	/**
+	*setBtn : initialize the 3 tool radiobtns
+	*@param void : nothing
+	*@return void : initialize the 3 tool radiobtns and add them to this panel
+	*/
+
 	private void setBtn(){
 		ImageIcon icon = new ImageIcon(createImages("net"));
 		invasiveTool = new JRadioButton("", icon);
 		invasiveTool.setFont(new Font("SansSerif",Font.BOLD, 22));
-		invasiveTool.setActionCommand("Invasion");//prime num used to find the species
+		invasiveTool.setActionCommand("Invasive");//prime num used to find the species
 		invasiveTool.setContentAreaFilled(false); 
 		invasiveTool.setBorderPainted(false); 
 		invasiveTool.setBounds(0,0,260,260);
@@ -126,7 +143,13 @@ public class ToolBar extends JPanel {
 	}//setBtn
 	
 	
-	
+
+	/**
+	*createImages : read files to load images
+	*@param String name: name of the tool, which is part of the path
+	*@return BufferedImage : the images of this tool(icon)
+	*/
+
 	private BufferedImage createImages(String name){
 	    	BufferedImage bufferedImage = null;
 	    	try{
@@ -137,11 +160,25 @@ public class ToolBar extends JPanel {
 			return bufferedImage;	    	
 	}//createStatusImages
 	
+
+	/**
+	*updateScore : updates the current score
+	*@param int score : a given score
+	*@return void : update the current score according to the given score
+	*/
+
 	public void updateScore(int score){
 		JButton label = ((JButton) this.getComponent(4));
 		label.setText("Score: "+score);
 	}
 	
+
+	/**
+	*setActionListener : setup ActionListner
+	*@param ActionListener tAL : a given ActionListener
+	*@return void : give each tool radiobtn an ActionListener
+	*/
+
 	public void setActionListener(ActionListener tAL){
 		invasiveTool.addActionListener(tAL);
 		protectedTool.addActionListener(tAL);

@@ -1,7 +1,15 @@
 package controller;
 
+/**
+ * Class Controller
+ * @author Team 11 - 8
+ * */
 
+import java.awt.Cursor;
 import java.awt.EventQueue;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -44,8 +52,18 @@ public class Controller { // controller class runs the game
 	private View view;
 	private String currentTool;
 	public Action act1;
+
 	public boolean isEnded =false;
     
+
+
+	
+	/**
+	*Controller : a constructor of Controller
+	*@param ArrayList<FloatingObjs> loFloating: the ArrayList of FloatingObjs
+	*@return Controller : Construct a new Controller
+	*/
+
 	public Controller(ArrayList<FloatingObjs> loFloating) {
 		//-----
 	/**	progressBar = new JProgressBar(JProgressBar.VERTICAL, 0, 10);
@@ -78,12 +96,19 @@ public class Controller { // controller class runs the game
 		view = new View();
 		view.setActionListener(new FishButtonListener(), new ToolBarListener());
 		this.view.updateView(model.getListOfExistedFloatingObjs());
-		currentTool = "Invasion";
+		currentTool = "Invasive";
 		view.getFworld().initialBG();
 		SoundBar.music();
 		stage1(loFloating);
 		view.Poptutorial();
+
 	}
+	
+	/**
+	*getact : a getter function of controller
+	*@param void : nothing
+	*@return Action : property act1 of controller
+	*/
 	public Action getact() {
 		return act1;
 	}
@@ -94,6 +119,11 @@ public class Controller { // controller class runs the game
 	//this function setup model for each game
 	public void setupModeles(){}
 	
+	/**
+	*updateController : this function updates the controller
+	*@param void : nothing
+	*@return void : it returns nothing but updates the status of controller
+	*/
 	public void updateController() {
 			if(view.getMenu().isStarted()&&(view.isAdded==false)) {//stage 1
 				view.initStage1();
@@ -104,6 +134,7 @@ public class Controller { // controller class runs the game
 				ArrayList<FloatingObjs> obj = model.getListOfExistedFloatingObjs();
 				this.view.updateView(obj);	
 			}
+
 			
 			if((view.getTbar().getPbar().getValue()<=0)&&(isEnded==false)) {
 				//pop up game over
@@ -113,14 +144,25 @@ public class Controller { // controller class runs the game
 				
 			}
 			
+
 	}
-	
+
+	/**
+	*updateScore : this function updates the score in both model and view
+	*@param void : nothing
+	*@return void : it returns nothing but updates the score in both model and view
+	*/
 	public void updateScore(int i){
 		model.updateScore(i);
 		this.view.getTbar().updateScore(model.getScore());
 
 	}
 	
+	/**
+	*getScore : a getter function of controller
+	*@param void : nothing
+	*@return int : get the score from model
+	*/
 	public int getScore(){
 		return model.getScore();
 	}
@@ -130,6 +172,11 @@ public class Controller { // controller class runs the game
 		//for each Animal button, listener will
 		//apply action towards their ID and count score
 
+		/**
+		*actionPerformed : an overrided function in ActionListener
+		*@param ActionEvent e : where the action occurs 
+		*@return void : perform action when fishbtn is clicked
+		*/
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
@@ -150,7 +197,11 @@ public class Controller { // controller class runs the game
 	}//FishButtonListener
 	
 
-
+	/**
+	*beep : plays the sound to show correct or not
+	*@param int i : getting from the FishButtonListener to see if the action is right or not
+	*@return void : play the right sound according to the choice 
+	*/
 	private void beep(int i){
 		String input = (i==1)? "correct" : "wrong";
         AudioPlayer MGP = AudioPlayer.player;
@@ -173,39 +224,54 @@ public class Controller { // controller class runs the game
 
 	public class ToolBarListener implements ActionListener{
 		//using radio button to change tools 
+		private Cursor invasive;
+		private Cursor protect;
+		private Cursor litter;
+		
+		/**
+		*ToolBarListener : a constructor of ToolBarListener
+		*@param void : nothing
+		*@return ToolBarListener : Construct a new ToolBarListener
+		*							setup 3 Cursors
+		*/
+		public ToolBarListener(){
+			super();
+			Toolkit tk = Toolkit.getDefaultToolkit();
+			Image invaImage = new ImageIcon("resources/img/tool/net.png").getImage(); 
+			Image proImage = new ImageIcon("resources/img/tool/camera.png").getImage(); 
+			Image litImage = new ImageIcon("resources/img/tool/trashpicker.png").getImage(); 
+			invasive = tk.createCustomCursor(invaImage, new Point(10, 10), "invasive");
+			protect = tk.createCustomCursor(proImage, new Point(10, 10), "protected");
+			litter = tk.createCustomCursor(litImage, new Point(10, 10), "litter");
+			view.setCursor(invasive);
+		}
 
+		/**
+		*actionPerformed : an overrided function in ActionListener
+		*@param ActionEvent e : where the action occurs 
+		*@return void : perform action when toolbtn is clicked and update the currentTool
+		*/
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			currentTool = e.getActionCommand();
 			System.out.println("the tool is now: " + currentTool);
+			switch(currentTool){
+			case "Invasive": view.setCursor(invasive);break;
+			case "Protected": view.setCursor(protect);break;
+			case "Litter": view.setCursor(litter);break;
+			default:break;
+			}
 		}
 		
 	}//FishButtonListener
-	/**
-	public void Poptutorial() {
-		BufferedImage bufferedImage = null;
-    	try{
-	    	bufferedImage = ImageIO.read(new File("resources/img/background/Intro11.png"));
-	    } catch (IOException e) {
-	    	e.printStackTrace();
-	    }
-    	ImageIcon icon = new ImageIcon(bufferedImage);
-    	JOptionPane.showConfirmDialog(null, "", "Introduction", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
-    	
-	}
-	public void PopGameOver() {
-		BufferedImage bufferedImage = null;
-    	try{
-	    	bufferedImage = ImageIO.read(new File("resources/img/background/Intro11.png"));
-	    } catch (IOException e) {
-	    	e.printStackTrace();
-	    }
-    	ImageIcon icon = new ImageIcon(bufferedImage);
-    	JOptionPane.showConfirmDialog(null, "", "Introduction", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
-	}
+
+
 	
-	**/
+
+
+	
+
 	public static void main(String args[]) {
 		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
 		loFloating.add(new ProtectedSpecies("bogturtle", 800 , 765,15,200,100));
@@ -220,25 +286,7 @@ public class Controller { // controller class runs the game
 		Timer t = new Timer(1,a.getact());
 		t.start();
 		
-	
-		
-		/**
-		while(true){
-			a.updateController();	
-			//a.updateScore(1);
-			try {
-				Thread.sleep(30);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}//while**/
-		/*HighScore h1 = new HighScore(a.getScore());
-		ArrayList<HighScore> hs = new ArrayList<HighScore>();
-		hs.add(h1);
-		HighScore.showHighScoreList(hs);
-		
-		HighScore.writeOut("outSample", hs);
-		//HighScore.showHighScoreList(HighScore.readIn("outSample"));*/
+
 	}
 	
 }

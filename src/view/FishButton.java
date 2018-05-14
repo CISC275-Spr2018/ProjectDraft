@@ -1,5 +1,10 @@
 package view;
 
+/**
+ * Class FishButton
+ * @author Team 11 - 8
+ * */
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +30,14 @@ public class FishButton extends JButton {
 	private int frameCount;
 	private HashMap<String, BufferedImage[]> pics;
 	
+
+	/**
+	*FishButton : a constructor of FishButton
+	*@param FloatingObjs f: a given FloatingObjs instance
+	*@param HashMap<String, BufferedImage[]> imgs: the images of that given FloatingObjs
+	*@return FishButton : Construct a new FishButton
+	*/
+
 	public FishButton(FloatingObjs f, HashMap<String, BufferedImage[]> imgs){
 		super();
 		cmd = f.getId();
@@ -47,14 +60,36 @@ public class FishButton extends JButton {
 		this.setBorderPainted(false); 
 	}
 	
+
+	/**
+	*getX : a getter function of FishButton
+	*@param void : nothing
+	*@return int : the x-position of FishButton
+	*/
+
 	public int getX(){
 		return xpos;
 	}
 	
+
+	/**
+	*getY : a getter function of FishButton
+	*@param void : nothing
+	*@return int : the y-position of FishButton
+	*/
 	public int getY(){
 		return ypos;
 	}
-	
+
+	/**
+	*move : updates the location of FishButton
+	*@param int x : a given x location
+	*@param int y : a given y location
+	*@return void : move the FishButton to the given x y location
+	*				it also determines the direction by the difference of x
+	*				and draw the image if it has next sprite
+	*/
+
 	public void move(int x, int y){
 		String dir = (x < xpos)? "left" : "right";
 		this.xpos = x;
