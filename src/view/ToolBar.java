@@ -31,6 +31,7 @@ public class ToolBar extends JPanel {
 	private JRadioButton protectedTool;
 	private JRadioButton litterTool;
 	private SoundBar sb = new SoundBar();
+	private TimerPane timeP = new TimerPane();
 	
 	/**
 	*ToolBar : a constructor of ToolBar
@@ -38,7 +39,7 @@ public class ToolBar extends JPanel {
 	*@return ToolBar : Construct a new ToolBar
 	*/
 	public ToolBar(){
-		GridLayout g = new GridLayout(5,0);
+		GridLayout g = new GridLayout(6,0);
 		this.setLayout(g);
 		setBtn();
 		
@@ -49,6 +50,7 @@ public class ToolBar extends JPanel {
 		scoreBtn.setContentAreaFilled(false); 
 		scoreBtn.setBorderPainted(false); 
 		this.add(sb);
+		this.add(timeP);
 		this.add(scoreBtn);
 		this.setBackground(new Color(100,255,255));
 	}//constructor
@@ -107,12 +109,30 @@ public class ToolBar extends JPanel {
 	}//createStatusImages
 	
 	/**
+	*updateTime : updates the current time image
+	*@param double timeRate : the ratio of current time and total time
+	*@return void : update the current image according to the given ratio
+	*/
+	public void updateTime(double d){
+		timeP.updateTime(d);
+	}
+	
+	/**
+	*getSb : a getter function of ToolBar
+	*@param void : nothing
+	*@return SoundBar : the SoundBar of this ToolBar
+	*/
+	public SoundBar getSb(){
+		return sb;
+	}
+	
+	/**
 	*updateScore : updates the current score
 	*@param int score : a given score
 	*@return void : update the current score according to the given score
 	*/
 	public void updateScore(int score){
-		JButton label = ((JButton) this.getComponent(4));
+		JButton label = ((JButton) this.getComponent(5));
 		label.setText("Score: "+score);
 	}
 	
@@ -128,9 +148,7 @@ public class ToolBar extends JPanel {
 		sb.setActionListener(sAL);
 	}
 	
-	public SoundBar getSb(){
-		return sb;
-	}
+
 	
 	public static void main(String[] args){
 		JFrame frame = new JFrame();

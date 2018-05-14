@@ -8,8 +8,6 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
-import org.junit.jupiter.api.Test;
-
 import junit.framework.Assert;
 import model.FloatingObjs;
 import model.InvasiveSpecies;
@@ -25,7 +23,7 @@ class ModelTest {
 	*@param void : nothing
 	*@return void : this function tests whether the function in Animal class is malfunctioning
 	*/
-	@Test
+	//@Test
 	void Animaltest() {
 		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
 		loFloating.add(new ProtectedSpecies("bogturtle", 4 , 5));
@@ -58,7 +56,7 @@ class ModelTest {
 	*@param void : nothing
 	*@return void : this function tests whether the function in Trash class is malfunctioning
 	*/
-	@Test
+	//@Test
 	void Trashtest() {
 		Trash trash = new Trash("plastic", 0, 0);
 		System.out.println(trash);
@@ -68,7 +66,7 @@ class ModelTest {
 	*@param void : nothing
 	*@return void : this function tests whether the function in ModelWorld class is malfunctioning
 	*/
-	@Test
+	//@Test
 	void ModelWorldtest() {
 		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
 		loFloating.add(new ProtectedSpecies("bogturtle", 4 , 5));

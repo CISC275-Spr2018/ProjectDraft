@@ -15,6 +15,8 @@ public class ModelWorld {
 	private ArrayList<FloatingObjs> lof;//list of floatingObjs that will spam
 	private ArrayList<FloatingObjs> loEf;//list of existed floatingObjs
 	private int score;
+	private int totalTime = 150;//in ms, 100ms/s
+	private int timeRemain = totalTime;
 	
 	/**
 	*ModelWorld : a constructor of ModelWorld
@@ -44,11 +46,30 @@ public class ModelWorld {
 			
 		}
 		
-		if(loEf.size()<5){//make sure there is always more than 5 objs on the screen
+		if(loEf.size()<=5){//make sure there is always more than 5 objs on the screen
 			this.spawn();
 		}
 		
 	}
+	
+	/**
+	*updateTime :  a setter function of ModelWorld
+	*@param int t : a given period according to that in controller
+	*@return void : subtract t to the current time
+	*/
+	public void updateTime(int t){
+		this.timeRemain -= t;
+	}
+	/**
+	*getTime : a getter function of ModelWorld
+	*@param void : nothing
+	*@return int : the time of this ModelWorld
+	*/
+	public double getTimeRate(){
+		double result = (double) timeRemain / (double)totalTime;
+		return result;
+	}
+	
 	
 	/**
 	*getListOfExistedFloatingObjs : a getter function of ModelWorld

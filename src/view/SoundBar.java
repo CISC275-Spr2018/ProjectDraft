@@ -23,7 +23,10 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 import sun.audio.*;
-
+/**
+ * Class SoundBar
+ * @author Team 11 - 8
+ * */
 public class SoundBar extends JPanel{
 	
 	private JRadioButton sound = new JRadioButton("Music affect");
@@ -34,6 +37,12 @@ public class SoundBar extends JPanel{
 	private ImageIcon bgicon_F = new ImageIcon(createImages("bgmF"));
 	
 	public AudioClip bgMusic = null;
+	
+	/**
+	*SoundBar : a constructor of SoundBar
+	*@param void : nothing
+	*@return SoundBar : Construct a new SoundBar
+	*/
 	public SoundBar() {
 		
 		this.setLayout(new GridLayout(0,2));
@@ -47,13 +56,19 @@ public class SoundBar extends JPanel{
 		this.setSize(300, 100);
 		//bgm.setToolTipText("Background musics");
 		this.setBounds(1550,0,300,100);
-		this.setBackground(Color.cyan);
+		this.setBackground(new Color(100,255,255));
 		this.add(sound);
 		this.add(bgm);
 		this.setBGMusic();
 		
 	}
 	
+	/**
+	*setIcons : setup Icons according to the status of sound & music
+	*@param Boolean b1 : a flag of status of play sound or not
+	*@param Boolean b2 : a flag of status of play music or not
+	*@return void :setup the icons depends on the status of play sound& music or not
+	*/
 	public void setIcons(Boolean b1, Boolean b2){
 		if(b1){
 			sound.setIcon(soundicon_T);
@@ -68,11 +83,21 @@ public class SoundBar extends JPanel{
 		}
 	}//setIcons
 	
+	/**
+	*setActionListener : setup ActionListner
+	*@param ActionListener l : a given ActionListener
+	*@return void : give each soundBtn an ActionListener
+	*/
 	public void setActionListener(ActionListener l) {
 		sound.addActionListener(l);
 		bgm.addActionListener(l);
 	}
 	
+	/**
+	*createImages : read files to load images
+	*@param String name: name of the tool, which is part of the path
+	*@return BufferedImage : the images of this tool(icon)
+	*/
 	private BufferedImage createImages(String name){
     	BufferedImage bufferedImage = null;
     	try{
@@ -83,6 +108,11 @@ public class SoundBar extends JPanel{
 		return bufferedImage;	    	
 }//createStatusImages
 	
+	/**
+	*setBGMusic : read files to load BGM
+	*@param void: hard code the path to this function
+	*@return void : the bgMusic field is noe setted
+	*/
 	public void setBGMusic(){
 		URL url = null;
 		File f1 = new File("resources/music/bg.wav");
@@ -97,12 +127,22 @@ public class SoundBar extends JPanel{
 		   
 	}//setBGMusic
 	
+	/**
+	*startMusic : starts looping the music
+	*@param void: nothing
+	*@return void : play & loop the music
+	*/
 	public void startMusic(){
         if(bgMusic != null) {  
         	bgMusic.loop();  
         }  
 	}//startMusic
 	
+	/**
+	*stopMusic : stops looping the music
+	*@param void: nothing
+	*@return void : stop playing the music
+	*/
 	public void stopMusic() {  
         if(bgMusic != null) {  
         	bgMusic.stop();  

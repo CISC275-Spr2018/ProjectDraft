@@ -5,7 +5,6 @@ package controller;
  * */
 
 import java.awt.Cursor;
-import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -13,10 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 
@@ -26,7 +22,6 @@ import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
-import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 import model.FloatingObjs;
@@ -34,23 +29,22 @@ import model.InvasiveSpecies;
 import model.ModelWorld;
 import model.ProtectedSpecies;
 import model.Trash;
-
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-
-import view.FishWorld;
-
-import view.Menu;
-
 import view.SoundBar;
 
 import view.View;
 
-public class Controller<bgm> { // controller class runs the game 
+public class Controller implements Runnable { // controller class runs the game 
 	private ModelWorld model;
 	private View view;
 	private String currentTool;
-	public Action act1;
+	private Action act1 = new AbstractAction() {
+		
+		public void actionPerformed(ActionEvent e) {
+			updateController();
+		}
+	};;
+	private int delay = 1;//in ms
+	Timer t = new Timer(delay,act1);
 	
 
 	public boolean soundFlag = true;
@@ -62,23 +56,13 @@ public class Controller<bgm> { // controller class runs the game
 	*@return Controller : Construct a new Controller
 	*/
 	public Controller(ArrayList<FloatingObjs> loFloating) {
-		
-		act1 = new AbstractAction() {
-			
-			public void actionPerformed(ActionEvent e) {
-				updateController();
-			}
-		};
 		model = new ModelWorld(loFloating);
 		view = new View();
 		view.setActionListener(new FishButtonListener(), new ToolBarListener(), new SoundBarListener());
 		this.view.updateView(model.getListOfExistedFloatingObjs());
 		currentTool = "Invasive";
 		view.getFworld().initialBG();
-
 		view.startMusic();
-		stage1(loFloating);
-		popTutorial();
 	}
 	
 	/**
@@ -88,9 +72,6 @@ public class Controller<bgm> { // controller class runs the game
 	*/
 	public Action getact() {
 		return act1;
-	}
-	public void stage1(ArrayList<FloatingObjs> loFloating) {
-
 	}
 	
 	//this function setup model for each game
@@ -103,13 +84,19 @@ public class Controller<bgm> { // controller class runs the game
 	*/
 	public void updateController() {
 			if(view.getMenu().isStarted()&&(view.isAdded==false)) {//stage 1
-				view.initStage1();
+				view.initStage1();		try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				view.repaint();
 			}else if(view.isAdded){
 				//System.out.println("wa");
 				this.model.updateWorld();
 				ArrayList<FloatingObjs> obj = model.getListOfExistedFloatingObjs();
 				this.view.updateView(obj);	
 			}
+			this.updateTime();
 	}
 	
 	/**
@@ -130,6 +117,31 @@ public class Controller<bgm> { // controller class runs the game
 	*/
 	public int getScore(){
 		return model.getScore();
+	}
+	
+	/**
+	*updateTime : this function updates the time in both model and view
+	*@param void : nothing
+	*@return void : it returns nothing but updates the time in both model and view
+	*/
+	public void updateTime(){
+		if(view.isAdded){
+		model.updateTime(delay);
+		view.updateTime(getTimeRate());
+		if(getTimeRate() <= 0.0){
+			t.stop();
+			view.gameover(getScore());
+			System.out.println("GameOver");
+		}}
+	}
+	
+	/**
+	*getTimeRate : a getter function of controller
+	*@param void : nothing
+	*@return int : get the time from model
+	*/
+	public double getTimeRate(){
+		return model.getTimeRate();
 	}
 	
 
@@ -181,13 +193,15 @@ public class Controller<bgm> { // controller class runs the game
 		public ToolBarListener(){
 			super();
 			Toolkit tk = Toolkit.getDefaultToolkit();
+			Image Absorb = new ImageIcon("resources/img/tool/Absorb.png").getImage(); 
 			Image invaImage = new ImageIcon("resources/img/tool/net.png").getImage(); 
 			Image proImage = new ImageIcon("resources/img/tool/camera.png").getImage(); 
 			Image litImage = new ImageIcon("resources/img/tool/trashpicker.png").getImage(); 
+			Cursor AbsorbC = tk.createCustomCursor(Absorb, new Point(10, 10), "invasive");
 			invasive = tk.createCustomCursor(invaImage, new Point(10, 10), "invasive");
 			protect = tk.createCustomCursor(proImage, new Point(10, 10), "protected");
 			litter = tk.createCustomCursor(litImage, new Point(10, 10), "litter");
-			view.setCursor(invasive);
+			view.setCursor(AbsorbC);
 		}
 
 		/**
@@ -242,23 +256,18 @@ public class Controller<bgm> { // controller class runs the game
 			((JRadioButton)e.getSource()).setActionCommand(ss0 + " " + ss1);
 		}//SoundBarListener
 	}//SoundBarListener
+		
 	
 	/**
-	*popTutorial : pop up the picture tutorial
-	*@param void : it consumes nothing
-	*@return void : show the tutorial picture in comfirmDialog
+	 * run : implempent function in Runnable
+	 * @param void : it consumes nothing
+	 * @return void : repeatly run
 	*/
-	public void popTutorial() {
-		BufferedImage bufferedImage = null;
-    	try{
-	    	bufferedImage = ImageIO.read(new File("resources/img/background/Intro11.png"));
-	    } catch (IOException e) {
-	    	e.printStackTrace();
-	    }
-    	ImageIcon icon = new ImageIcon(bufferedImage);
-    	JOptionPane.showConfirmDialog(null, "", "Introduction", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
-    	
-	}	
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		t.start();
+	}//run
 	
 	public static void main(String args[]) {
 		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
@@ -270,17 +279,9 @@ public class Controller<bgm> { // controller class runs the game
 		loFloating.add(new Trash("paper", 1267, 635,12,100,100));
 		loFloating.add(new ProtectedSpecies("salamander", 1267 , 735,17,350,150));
 		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835,13,230,60));
-		
-		EventQueue.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				Controller a = new Controller(loFloating);
-					
-				Timer t = new Timer(1,a.getact());
-				t.start();
-			}
-		});
+	
+		Controller a = new Controller(loFloating);
+		a.run();
 	}
 	
 }

@@ -1,32 +1,25 @@
 package view;
 
+import java.awt.MenuBar;
+
 /**
  * Class View
  * @author Team 11 - 8
  * */
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import model.FloatingObjs;
-import model.ModelWorld;
 
 public class View extends JFrame{
 	//a JFrame that takes everything thing and present the layers of images 
-	Menu menu;
+	Menu menu = new Menu();
 	final int frameCount = 10;
 	final static int FWIDTH = 1960;
 	final static int FHEIGHT = 1080;
@@ -44,8 +37,7 @@ public class View extends JFrame{
 	*@return View : Construct a new View
 	*/
 	public View() {
-		menu= new Menu();
-		add(menu);
+		this.getContentPane().add(menu);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
@@ -53,7 +45,8 @@ public class View extends JFrame{
 		tb1 = new ToolBar();
 		// bgp=new BackgroundPanel((new ImageIcon("resources/img/background/underwater2.png")).getImage());
         //bgp.setBounds(0,0,1920,1080);     
-		this.setTitle("beta");
+		this.setTitle("Habatit Mangantment Training Program");
+		this.setMenuBar();
 		//this.getContentPane().add(bgp);
 		isAdded = false;
 		
@@ -65,16 +58,32 @@ public class View extends JFrame{
 		//this.setSize(FWIDTH, FHEIGHT);
 		//this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);  
 		//this.setResizable(false);
-		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
+		//this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
 		
-		//this.setSize(FWIDTH, FHEIGHT);
-		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
-		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
+		
+		//this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
+		//this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
+    	this.setSize(FWIDTH, FHEIGHT);
+    	this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
 		this.pack();
     	this.setVisible(true);
-    	this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
-    	
 		
+	}
+	
+	public void setMenuBar(){
+		JMenuBar jMB = new JMenuBar();
+		JMenuItem menuPage = new JMenuItem("Main Page");
+		jMB.add(menuPage);
+		menuPage.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				start();
+			}
+			
+		});
+		this.setJMenuBar(jMB);
 	}
 	
 	/**
@@ -119,7 +128,7 @@ public class View extends JFrame{
 	*@return void : initialize the stage1 of this View
 	*/
 	public void initStage1() {
-		System.out.println("added!");
+		//System.out.println("added!");
 		this.getFworld().initialBG();
 		this.getContentPane().add(tb1,"West");
 		this.getContentPane().add(eg1);
@@ -159,6 +168,36 @@ public class View extends JFrame{
 	public FishWorld getFworld(){
 		return eg1;
 	}
+	
+	/**
+	*gameover : call the game over panel
+	*@param int i : the score
+	*@return void : show the game over panel
+	*/
+	public void gameover(int i){
+		this.getContentPane().removeAll();
+		GameOverPane gm = new GameOverPane();
+		this.getContentPane().add(gm);
+		this.repaint();
+		gm.gameover(i);		
+	}//gameover
+	
+	/**
+	*gameover : call the game over panel
+	*@param int i : the score
+	*@return void : show the game over panel
+	*/
+	public void start(){
+		menu = new Menu();
+		this.getContentPane().removeAll();
+		this.getContentPane().add(menu);
+		this.repaint();
+		isAdded = false;
+	}
+	
+	public void updateTime(double d){
+		tb1.updateTime(d);
+	}//updateTime
 	/**
 	*setActionListener : setup ActionListner
 	*@param ActionListener fBListener : a given FishBtn ActionListener
