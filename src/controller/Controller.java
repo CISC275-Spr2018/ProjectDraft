@@ -44,7 +44,7 @@ public class Controller { // controller class runs the game
 	private View view;
 	private String currentTool;
 	public Action act1;
-	
+	public boolean isEnded =false;
     
 	public Controller(ArrayList<FloatingObjs> loFloating) {
 		//-----
@@ -82,7 +82,7 @@ public class Controller { // controller class runs the game
 		view.getFworld().initialBG();
 		SoundBar.music();
 		stage1(loFloating);
-		Poptutorial();
+		view.Poptutorial();
 	}
 	public Action getact() {
 		return act1;
@@ -97,6 +97,7 @@ public class Controller { // controller class runs the game
 	public void updateController() {
 			if(view.getMenu().isStarted()&&(view.isAdded==false)) {//stage 1
 				view.initStage1();
+				view.getTbar().getTimer().start();
 			}else if(view.isAdded){
 				//System.out.println("wa");
 				this.model.updateWorld();
@@ -104,6 +105,13 @@ public class Controller { // controller class runs the game
 				this.view.updateView(obj);	
 			}
 			
+			if((view.getTbar().getPbar().getValue()<=0)&&(isEnded==false)) {
+				//pop up game over
+				view.PopGameOver(model.getScore());
+				isEnded=true;
+				//view.getTbar().getTimer().stop();
+				
+			}
 			
 	}
 	
@@ -174,6 +182,7 @@ public class Controller { // controller class runs the game
 		}
 		
 	}//FishButtonListener
+	/**
 	public void Poptutorial() {
 		BufferedImage bufferedImage = null;
     	try{
@@ -185,18 +194,28 @@ public class Controller { // controller class runs the game
     	JOptionPane.showConfirmDialog(null, "", "Introduction", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
     	
 	}
+	public void PopGameOver() {
+		BufferedImage bufferedImage = null;
+    	try{
+	    	bufferedImage = ImageIO.read(new File("resources/img/background/Intro11.png"));
+	    } catch (IOException e) {
+	    	e.printStackTrace();
+	    }
+    	ImageIcon icon = new ImageIcon(bufferedImage);
+    	JOptionPane.showConfirmDialog(null, "", "Introduction", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
+	}
 	
-	
+	**/
 	public static void main(String args[]) {
 		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
-		loFloating.add(new ProtectedSpecies("bogturtle", 800 , 765,5,200,100));
-		loFloating.add(new InvasiveSpecies("bluecatFish", 900 , 700,8,45,110));
-		loFloating.add(new ProtectedSpecies("horseshoeCrab", 400 , 516,10,300,200));
+		loFloating.add(new ProtectedSpecies("bogturtle", 800 , 765,15,200,100));
+		loFloating.add(new InvasiveSpecies("bluecatFish", 900 , 700,18,45,110));
+		loFloating.add(new ProtectedSpecies("horseshoeCrab", 400 , 516,14,300,200));
 		loFloating.add(new InvasiveSpecies("redswampcrayfish", 1200 , 535,18,30,150));
 		loFloating.add(new InvasiveSpecies("snakehead", 1200 , 1035,11,75,60));
 		loFloating.add(new Trash("paper", 1267, 635,12,100,100));
-		loFloating.add(new ProtectedSpecies("salamander", 1267 , 735,17,350,150));
-		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835,13,230,60));
+		loFloating.add(new ProtectedSpecies("salamander", 1267 , 735,21,350,150));
+		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835,18,230,60));
 		Controller a = new Controller(loFloating);
 		Timer t = new Timer(1,a.getact());
 		t.start();

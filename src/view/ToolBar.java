@@ -35,14 +35,21 @@ public class ToolBar extends JPanel {
 	private JRadioButton litterTool;
 	Timer timmah;
     JProgressBar progressBar;
-    int counter = 100;
+    int counter = 20;
 	//BarTest bar;
 	public void SetCounter(int num) {
 		counter=num;
 	}
+	public JProgressBar getPbar() {
+		return progressBar;
+	}
+	public Timer getTimer() {
+		return timmah;
+	}
+	
 	public ToolBar(){
-		progressBar = new JProgressBar(JProgressBar.VERTICAL, 0, 100);
-        progressBar.setValue(100);
+		progressBar = new JProgressBar(JProgressBar.VERTICAL, 0, counter);
+        progressBar.setValue(counter);
         progressBar.setBounds(0, 0, 20, 30);
         progressBar.setPreferredSize(new Dimension(100,25));
         
@@ -62,7 +69,7 @@ public class ToolBar extends JPanel {
         this.add(progressBar);
         progressBar.setBounds(270,0,30,1080);
         timmah = new Timer(1000, listener);
-        timmah.start();
+        //timmah.start();
         
 		//bar= new BarTest();
 		//GridLayout g = new GridLayout(5,0);
@@ -131,7 +138,7 @@ public class ToolBar extends JPanel {
 	}//createStatusImages
 	
 	public void updateScore(int score){
-		JButton label = ((JButton) this.getComponent(3));
+		JButton label = ((JButton) this.getComponent(4));
 		label.setText("Score: "+score);
 	}
 	

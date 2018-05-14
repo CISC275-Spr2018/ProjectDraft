@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.FloatingObjs;
@@ -39,38 +41,50 @@ public class View extends JFrame{
 		menu.setBounds(0,0,1920,1080);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		eg1 = new FishWorld(new ArrayList<FloatingObjs>());
-		tb1 = new ToolBar();
-		// bgp=new BackgroundPanel((new ImageIcon("resources/img/background/underwater2.png")).getImage());
-        //bgp.setBounds(0,0,1920,1080);     
-		this.setTitle("beta");
-		//this.getContentPane().add(bgp);
+		tb1 = new ToolBar();  
+		this.setTitle("Habitat Management Training Program");
 		isAdded = false;
-		
-		//initStage1();
-		 //this.getContentPane().add(tb1,"West");
-		//this.getContentPane().add(eg1);
 		this.setLayout(null);
-		
-		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//
-		//this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);  
-		//this.setResizable(false);
-		//this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
-		
-		
-		//this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
-		//this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
-		//this.pack();
     	this.setVisible(true);
     	this.setSize(FWIDTH, FHEIGHT);
-    	//this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
-    	
-    	
-		
 	}
 	public Menu getMenu() {
 		return menu;
 	}
+	public void Poptutorial() {
+		BufferedImage bufferedImage = null;
+    	try{
+	    	bufferedImage = ImageIO.read(new File("resources/img/background/Intro11.png"));
+	    } catch (IOException e) {
+	    	e.printStackTrace();
+	    }
+    	ImageIcon icon = new ImageIcon(bufferedImage);
+    	JOptionPane.showConfirmDialog(null, "", "Introduction", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
+    	
+	}
+	public void PopGameOver(int hightscore) {
+		this.removeAll();
+		BufferedImage bufferedImage = null;
+    	try{
+	    	bufferedImage = ImageIO.read(new File("resources/img/background/over.jpg"));
+	    	
+	    } catch (IOException e) {
+	    	e.printStackTrace();
+	    }
+    	ImageIcon icon = new ImageIcon(bufferedImage);
+    	JPanel a = new GameOverPane();
+    	a.setSize(1920, 1080);
+		a.setVisible(true);
+    	JLabel b = new JLabel(icon);
+    	
+    	a.add(b);
+    	this.add(a);
+    	this.repaint();
+    	JOptionPane.showConfirmDialog(null, "GameOver \r\n\r\n Score: " + hightscore,
+    			"GameOver", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);
+		//JOptionPane.showConfirmDialog(this, "GameOver \r\n\r\n Score: " + hightscore);
+	}
+	
 	public void initStage1() {
 		System.out.println("added!");
 		this.getFworld().initialBG();

@@ -11,11 +11,15 @@ public class ModelWorld {
 	private ArrayList<FloatingObjs> loEf;//list of existed floatingObjs
 	private int score;
 	private int countdown;
-	
+	private int spawnNum=0;
 	public ModelWorld(ArrayList<FloatingObjs> l){
 		this.countdown=2000;
 		this.lof = l;
 		this.loEf = new ArrayList<FloatingObjs>();
+		this.spawn();
+		this.spawn();
+		this.spawn();
+		this.spawn();
 		this.spawn();
 		this.spawn();
 		this.spawn();
@@ -35,9 +39,12 @@ public class ModelWorld {
 			f.updateDuration();
 			
 		}
-		
+		spawnNum=(spawnNum+1)%10;
 		if(loEf.size()<5){//make sure there is always more than 5 objs on the screen
 			this.spawn();
+		}
+		if(spawnNum==25) {
+			this.spawn();//spwan every
 		}
 		
 	}
