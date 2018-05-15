@@ -6,6 +6,8 @@ package model;
  * */
 
 public abstract class Animal extends FloatingObjs{
+	//the superclass for invasive&protected species
+	// use this to set up animal attributes such as time&score&speed
 
 	/**
 	*Animal : a constructor of Animal
@@ -15,6 +17,7 @@ public abstract class Animal extends FloatingObjs{
 	*@return Animal : Construct a new Animal
 	*/
 	//TO DO :Please fill in the functions
+
 	public Animal(String n, int x, int y) {
 		super(n, x, y);
 		// TODO Auto-generated constructor stub

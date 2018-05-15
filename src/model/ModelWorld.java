@@ -15,13 +15,19 @@ public class ModelWorld {
 	private ArrayList<FloatingObjs> lof;//list of floatingObjs that will spam
 	private ArrayList<FloatingObjs> loEf;//list of existed floatingObjs
 	private int score;
+
+	private int countdown;
+	private int spawnNum=0;
+
 	
 	/**
 	*ModelWorld : a constructor of ModelWorld
 	*@param ArrayList<FloatingObjs> l: a given ArrayList<FloatingObjs>
 	*@return ModelWorld : constuct a new ModelWorld
 	*/
+
 	public ModelWorld(ArrayList<FloatingObjs> l){
+		this.countdown=2000;
 		this.lof = l;
 		this.loEf = new ArrayList<FloatingObjs>();
 		this.spawn();
@@ -30,7 +36,14 @@ public class ModelWorld {
 		this.spawn();
 		this.spawn();
 		this.spawn();
+		this.spawn();
+		this.spawn();
+		this.spawn();
+		this.spawn();
 	}//constructor
+	public int getCountDown() {
+		return countdown;
+	}
 	
 	/**
 	*updateWorld : updates the location of each FloatingObjs
@@ -38,14 +51,19 @@ public class ModelWorld {
 	*@return void : updates the location of each FloatingObjs by their own move methods
 	*/
 	public void updateWorld(){
+		countdown--;
+		//System.out.println("time left is :"+countdown);
 		for(FloatingObjs f : loEf){
 			f.move();
 			f.updateDuration();
 			
 		}
-		
+		spawnNum=(spawnNum+1)%10;
 		if(loEf.size()<5){//make sure there is always more than 5 objs on the screen
 			this.spawn();
+		}
+		if(spawnNum==25) {
+			this.spawn();//spwan every
 		}
 		
 	}

@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.FloatingObjs;
@@ -49,37 +51,18 @@ public class View extends JFrame{
 	public View() {
 		menu= new Menu();
 		add(menu);
+		menu.setBounds(0,0,1920,1080);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 
-		
 		eg1 = new FishWorld(new ArrayList<FloatingObjs>());
-		tb1 = new ToolBar();
-		// bgp=new BackgroundPanel((new ImageIcon("resources/img/background/underwater2.png")).getImage());
-        //bgp.setBounds(0,0,1920,1080);     
-		this.setTitle("beta");
-		//this.getContentPane().add(bgp);
+		tb1 = new ToolBar();  
+		this.setTitle("Habitat Management Training Program");
 		isAdded = false;
-		
-		//initStage1();
-		 //this.getContentPane().add(tb1,"West");
-		//this.getContentPane().add(eg1);
-		
-		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//this.setSize(FWIDTH, FHEIGHT);
-		//this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);  
-		//this.setResizable(false);
-		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
-		
 
-		//this.setSize(FWIDTH, FHEIGHT);
-		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
-		this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
-		this.pack();
+		this.setLayout(null);
+
     	this.setVisible(true);
-    	this.setExtendedState(this.getExtendedState()|JFrame.MAXIMIZED_BOTH);
-    	
-		
+    	this.setSize(FWIDTH, FHEIGHT);
 	}
 
 	/**
@@ -90,17 +73,62 @@ public class View extends JFrame{
 	public Menu getMenu() {
 		return menu;
 	}
+  /**
+	*popTutorial : pop up the picture tutorial
+	*@param void : it consumes nothing
+	*@return void : show the tutorial picture in comfirmDialog
+	*/
+	public void Poptutorial() {
+		BufferedImage bufferedImage = null;
+    	try{
+	    	bufferedImage = ImageIO.read(new File("resources/img/background/Intro11.png"));
+	    } catch (IOException e) {
+	    	e.printStackTrace();
+	    }
+    	ImageIcon icon = new ImageIcon(bufferedImage);
+    	JOptionPane.showConfirmDialog(null, "", "Introduction", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
+    	
+	}
+	public void PopGameOver(int hightscore) {
+		this.removeAll();
+		BufferedImage bufferedImage = null;
+    	try{
+	    	bufferedImage = ImageIO.read(new File("resources/img/background/over.jpg"));
+	    	
+	    } catch (IOException e) {
+	    	e.printStackTrace();
+	    }
+    	ImageIcon icon = new ImageIcon(bufferedImage);
+    	JPanel a = new GameOverPane();
+    	a.setSize(1920, 1080);
+		a.setVisible(true);
+    	JLabel b = new JLabel(icon);
+    	
+    	a.add(b);
+    	this.add(a);
+    	this.repaint();
+    	JOptionPane.showConfirmDialog(null, "GameOver \r\n\r\n Score: " + hightscore,
+    			"GameOver", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);
+		//JOptionPane.showConfirmDialog(this, "GameOver \r\n\r\n Score: " + hightscore);
+	}
+	
+
 	
 	/**
 	*initStage1 : initialize stage1
 	*@param void : nothing
 	*@return void : initialize the stage1 of this View
 	*/
+
 	public void initStage1() {
 		System.out.println("added!");
 		this.getFworld().initialBG();
-		this.getContentPane().add(tb1,"West");
-		this.getContentPane().add(eg1);
+		
+		
+		this.add(eg1);
+		eg1.setBounds(300,0,1920,1080);
+		this.add(tb1);
+		tb1.setBounds(0,0,300,1080);
 		isAdded=true;						
 	}
 	

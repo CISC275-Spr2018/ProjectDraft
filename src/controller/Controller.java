@@ -26,6 +26,7 @@ import javax.swing.Action;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
@@ -51,7 +52,10 @@ public class Controller { // controller class runs the game
 	private View view;
 	private String currentTool;
 	public Action act1;
-	int counter;
+
+	public boolean isEnded =false;
+    
+
 
 	
 	/**
@@ -61,13 +65,31 @@ public class Controller { // controller class runs the game
 	*/
 
 	public Controller(ArrayList<FloatingObjs> loFloating) {
-		counter=0;
-		
+		//-----
+	/**	progressBar = new JProgressBar(JProgressBar.VERTICAL, 0, 10);
+        progressBar.setValue(10);
+        ActionListener listener = new ActionListener() {
+            int counter = 10;
+            public void actionPerformed(ActionEvent ae) {
+                counter--;
+                progressBar.setValue(counter);
+                if (counter<1) {
+                    JOptionPane.showMessageDialog(null, "Kaboom!");
+                    timer.stop();
+                } 
+            }}**/
+        //---
 		act1 = new AbstractAction() {
 			
 			public void actionPerformed(ActionEvent e) {
-				counter++;
-				updateController();
+				
+				if(model.getCountDown()>=0) {
+					updateController();
+				}
+				else {
+					System.out.println("GameOVer");
+				}
+				
 			}
 		};
 		model = new ModelWorld(loFloating);
@@ -76,11 +98,10 @@ public class Controller { // controller class runs the game
 		this.view.updateView(model.getListOfExistedFloatingObjs());
 		currentTool = "Invasive";
 		view.getFworld().initialBG();
-
 		SoundBar.music();
 		stage1(loFloating);
+		view.Poptutorial();
 
-		popTutorial();
 	}
 	
 	/**
@@ -106,13 +127,24 @@ public class Controller { // controller class runs the game
 	public void updateController() {
 			if(view.getMenu().isStarted()&&(view.isAdded==false)) {//stage 1
 				view.initStage1();
+				view.getTbar().getTimer().start();
 			}else if(view.isAdded){
 				//System.out.println("wa");
 				this.model.updateWorld();
 				ArrayList<FloatingObjs> obj = model.getListOfExistedFloatingObjs();
 				this.view.updateView(obj);	
 			}
-		  popTutorial();
+
+			
+			if((view.getTbar().getPbar().getValue()<=0)&&(isEnded==false)) {
+				//pop up game over
+				view.PopGameOver(model.getScore());
+				isEnded=true;
+				//view.getTbar().getTimer().stop();
+				
+			}
+			
+
 	}
 
 	/**
@@ -233,52 +265,28 @@ public class Controller { // controller class runs the game
 		}
 		
 	}//FishButtonListener
-	
-	/**
-	*popTutorial : pop up the picture tutorial
-	*@param void : it consumes nothing
-	*@return void : show the tutorial picture in comfirmDialog
-	*/
-	public void popTutorial() {
-		BufferedImage bufferedImage = null;
-    	try{
-	    	bufferedImage = ImageIO.read(new File("resources/img/background/Intro11.png"));
-	    } catch (IOException e) {
-	    	e.printStackTrace();
-	    }
-    	ImageIcon icon = new ImageIcon(bufferedImage);
-    	JOptionPane.showConfirmDialog(null, "", "Introduction", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
-    	
-	}
-	
+
 
 	
+
+
+	
+
 	public static void main(String args[]) {
 		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
-		loFloating.add(new ProtectedSpecies("bogturtle", 800 , 765,5,200,100));
-		loFloating.add(new InvasiveSpecies("bluecatFish", 900 , 700,8,45,110));
-		loFloating.add(new ProtectedSpecies("horseshoeCrab", 400 , 516,10,300,200));
+		loFloating.add(new ProtectedSpecies("bogturtle", 800 , 765,15,200,100));
+		loFloating.add(new InvasiveSpecies("bluecatFish", 900 , 700,18,45,110));
+		loFloating.add(new ProtectedSpecies("horseshoeCrab", 400 , 516,14,300,200));
 		loFloating.add(new InvasiveSpecies("redswampcrayfish", 1200 , 535,18,30,150));
 		loFloating.add(new InvasiveSpecies("snakehead", 1200 , 1035,11,75,60));
 		loFloating.add(new Trash("paper", 1267, 635,12,100,100));
-		loFloating.add(new ProtectedSpecies("salamander", 1267 , 735,17,350,150));
-		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835,13,230,60));
+		loFloating.add(new ProtectedSpecies("salamander", 1267 , 735,21,350,150));
+		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835,18,230,60));
+		Controller a = new Controller(loFloating);
+		Timer t = new Timer(1,a.getact());
+		t.start();
 		
-		EventQueue.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				Controller a = new Controller(loFloating);
-					
-				Timer t = new Timer(1,a.getact());
-				t.start();
-				
-				if(a.counter>60) {
-					t.stop();
-					System.out.println("Game OVer!!");
-				}
-			}
-		});
+
 	}
 	
 }
