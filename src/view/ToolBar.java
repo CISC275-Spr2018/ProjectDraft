@@ -14,7 +14,11 @@ import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
@@ -25,7 +29,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-public class ToolBar extends JPanel {
+public class ToolBar extends JPanel implements Serializable{
 	//a JPanel that contains tool images and shows scores 
 	private JRadioButton invasiveTool;
 	private JRadioButton protectedTool;

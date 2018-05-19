@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
@@ -25,7 +26,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class Menu extends JPanel{
+public class Menu extends JPanel implements Serializable{
 	//draw a JPanel as the Menu 
 	//added action listener that will initialize the game
 	boolean started = false;
@@ -56,29 +57,11 @@ public class Menu extends JPanel{
 	}
 	
 	/**
-	*popTutorial : pop up the picture tutorial
-	*@param void : it consumes nothing
-	*@return void : show the tutorial picture in comfirmDialog
-	*/
-	public void popTutorial() {
-		BufferedImage bufferedImage = null;
-    	try{
-	    	bufferedImage = ImageIO.read(new File("resources/img/background/Intro11.png"));
-	    } catch (IOException e) {
-	    	e.printStackTrace();
-	    }
-    	ImageIcon icon = new ImageIcon(bufferedImage);
-    	JOptionPane.showConfirmDialog(null, "", "Introduction", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
-    	
-	}
-	
-	/**
 	*start : a constructor of Menu
 	*@param void : nothing
 	*@return void : this function release this panel and set started to true
 	*/
 	public void start() {
-		popTutorial();
 		try {
 			Thread.sleep(300);
 		} catch (InterruptedException e) {

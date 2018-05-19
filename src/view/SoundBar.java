@@ -3,6 +3,7 @@ package view;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -27,7 +29,7 @@ import sun.audio.*;
  * Class SoundBar
  * @author Team 11 - 8
  * */
-public class SoundBar extends JPanel{
+public class SoundBar extends JPanel implements Serializable{
 	
 	private JRadioButton sound = new JRadioButton("Music affect");
 	private JRadioButton bgm = new JRadioButton("Background music");
@@ -49,12 +51,14 @@ public class SoundBar extends JPanel{
 		sound.setIcon(soundicon_T);
 		sound.setActionCommand("sound on");
 		sound.setContentAreaFilled(false);
+		sound.setFont(new Font("TimesRome", Font.PLAIN, 10));
 		//sound.setToolTipText("Sound effects");
 		bgm.setIcon(bgicon_T);
 		bgm.setActionCommand("BGM on");
 		bgm.setContentAreaFilled(false);
-		this.setSize(300, 100);
+		bgm.setFont(sound.getFont());
 		//bgm.setToolTipText("Background musics");
+		this.setSize(300, 100);
 		this.setBounds(1550,0,300,100);
 		this.setBackground(new Color(100,255,255));
 		this.add(sound);

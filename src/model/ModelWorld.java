@@ -1,5 +1,11 @@
 package model;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
 /**
  * Class ModelWorld
  * @author Team 11 - 8
@@ -8,7 +14,7 @@ package model;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class ModelWorld {
+public class ModelWorld implements Serializable{
 	//the class handles all data and object we imported
 	//takes a list of animals and update their status
 	
@@ -190,6 +196,19 @@ public class ModelWorld {
 		world.destory(1);
 		world.destory(2);
 		System.out.println(world);
+		
+/*		ObjectOutputStream out;
+		try {
+			out = new ObjectOutputStream(new FileOutputStream("Test"));
+	        out.writeObject(world);
+	        out.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 	}//main
 
 }

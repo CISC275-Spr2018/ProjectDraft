@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -13,7 +14,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-public class HighScore implements Comparable<HighScore>{
+public class HighScore implements Comparable<HighScore>, Serializable{
 	private int grade;
 	private String name;
 	

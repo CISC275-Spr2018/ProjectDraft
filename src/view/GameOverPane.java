@@ -4,13 +4,14 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class GameOverPane extends JPanel{
+public class GameOverPane extends JPanel implements Serializable{
 	public GameOverPane(){
 		this.setSize(1920, 1280);
 		this.setBackground(Color.PINK);

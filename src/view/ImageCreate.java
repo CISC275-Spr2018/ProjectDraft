@@ -8,11 +8,12 @@ package view;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
-public class ImageCreate {
+public class ImageCreate implements Serializable{
 	//stores individual images to a Hashmap of Buffered images
 	//also contains different directions of the animations
 	private String name;

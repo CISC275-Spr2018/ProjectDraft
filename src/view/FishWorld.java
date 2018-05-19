@@ -8,6 +8,11 @@ import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -21,7 +26,7 @@ import model.InvasiveSpecies;
 import model.ModelWorld;
 import model.ProtectedSpecies;
 
-public class FishWorld extends JPanel {
+public class FishWorld extends JPanel implements Serializable{
 	//this panel holds all fishbuttons 
 	//also initializes backgrounds
 	private HashMap<Integer, FishButton> btns = new HashMap<Integer, FishButton>();

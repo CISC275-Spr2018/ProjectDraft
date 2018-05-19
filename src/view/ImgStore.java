@@ -1,5 +1,7 @@
 package view;
 
+import java.io.Serializable;
+
 /**
  * Class ImgStore
  * @author Team 11 - 8
@@ -7,7 +9,7 @@ package view;
 
 import java.util.HashMap;
 
-public class ImgStore {
+public class ImgStore implements Serializable{
 	//all the floatingObjs imgs stored here
 	private HashMap<String, ImageCreate> imgs = new HashMap<String, ImageCreate>();
 	

@@ -9,6 +9,11 @@ import java.awt.MenuBar;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -17,7 +22,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import model.FloatingObjs;
 
-public class View extends JFrame{
+public class View extends JFrame implements Serializable{
 	//a JFrame that takes everything thing and present the layers of images 
 	Menu menu = new Menu();
 	final int frameCount = 10;
@@ -72,7 +77,14 @@ public class View extends JFrame{
 	public void setMenuBar(ActionListener ac){
 		JMenuBar jMB = new JMenuBar();
 		JMenuItem menuPage = new JMenuItem("Main Page");
+		menuPage.setActionCommand("home");
+		JMenuItem menuSave = new JMenuItem("save");
+		menuSave.setActionCommand("sava");
+		JMenuItem menuLoad = new JMenuItem("load");
+		menuLoad.setActionCommand("load");
 		jMB.add(menuPage);
+		jMB.add(menuSave);
+		jMB.add(menuLoad);
 		menuPage.addActionListener(ac);
 		this.setJMenuBar(jMB);
 	}
@@ -205,5 +217,8 @@ public class View extends JFrame{
 		tb1.setActionListener(tBListener, sBListener);
 	}
 	
+	public static void main(String[] args){
+		View v = new View();
+	}
 	
 }

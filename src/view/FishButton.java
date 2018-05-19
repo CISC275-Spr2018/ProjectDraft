@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.HashMap;
 
 import javax.swing.ImageIcon;
@@ -16,7 +17,7 @@ import javax.swing.JFrame;
 import model.FloatingObjs;
 import model.InvasiveSpecies;
 
-public class FishButton extends JButton {
+public class FishButton extends JButton implements Serializable{
 	//individual component that acts as a button but function as a animal object
 	//contains action listener as well
 	private String cmd;

@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -13,7 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-public class TimerPane extends JPanel{
+public class TimerPane extends JPanel implements Serializable{
 	private BufferedImage[] bubbles = new BufferedImage[21];
 	private int current= 0;
 	private int green = 0;

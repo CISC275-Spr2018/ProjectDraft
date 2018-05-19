@@ -11,8 +11,16 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -33,23 +41,20 @@ import view.SoundBar;
 
 import view.View;
 
-public class Controller implements Runnable { // controller class runs the game 
+public class Controller implements Runnable, Serializable { // controller class runs the game 
+	private static final long serialVersionUID = 1L;
 	private ModelWorld model;
 	private View view;
 	private String currentTool;
 	private ArrayList<FloatingObjs> lof;
-	private Action act1 = new AbstractAction() {
-		
-		public void actionPerformed(ActionEvent e) {
-			updateController();
-		}
-	};;
+	private Action act1 = new Act1();
 	private int delay = 1;//in ms
-	Timer t = new Timer(delay,act1);
+	private Timer t = new Timer(delay, act1);
 	
 
 	public boolean soundFlag = true;
 	public boolean bgmFlag = true;
+
 	
 	/**
 	*Controller : a constructor of Controller
@@ -148,9 +153,8 @@ public class Controller implements Runnable { // controller class runs the game
 	public double getTimeRate(){
 		return model.getTimeRate();
 	}
-	
 
-	public class FishButtonListener implements ActionListener{ 
+	public class FishButtonListener implements ActionListener, Serializable{ 
 		//for each Animal button, listener will
 		//apply action towards their ID and count score
 
@@ -180,10 +184,54 @@ public class Controller implements Runnable { // controller class runs the game
 		
 	}//FishButtonListener
 	
+	/**
+	 * load : read the string and go back to certain stage
+	 * @param String str : the serialization String 
+	 * @return void : update the Controller
+	 * */
+	public void load(String str){
+		ObjectInputStream in;
+		try {
+			in = new ObjectInputStream(new FileInputStream(str));
+			Object c = in.readObject();    
+			model = (ModelWorld) c;
+			in.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch(ClassNotFoundException e){
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}//load
+	
+	/**
+	 * save : read the Controller and save it to String
+	 * @param void : nothing 
+	 * @return String : the saved String
+	 * */
+	public void save(String str){
+		ObjectOutputStream out;
+		try {
+			out = new ObjectOutputStream(new FileOutputStream(str));
+	        out.writeObject(model);
+	        out.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}//load
+	
 
 
 
-	public class ToolBarListener implements ActionListener{
+	public class ToolBarListener implements ActionListener, Serializable{
 		//using radio button to change tools 
 		private Cursor invasive;
 		private Cursor protect;
@@ -229,8 +277,21 @@ public class Controller implements Runnable { // controller class runs the game
 		
 	}//FishButtonListener
 	
+	public class Act1 extends AbstractAction implements Serializable{
 
-	public class SoundBarListener implements ActionListener{
+		/**
+		*actionPerformed : an override function in ActionListener
+		*@param ActionEvent e : where the action occurs 
+		*@return void : perform action while loop
+		*/
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			updateController();
+		}}
+	
+
+	public class SoundBarListener implements ActionListener, Serializable{
 		
 		/**
 		*actionPerformed : an overrided function in ActionListener
@@ -262,14 +323,16 @@ public class Controller implements Runnable { // controller class runs the game
 		}//SoundBarListener
 	}//SoundBarListener
 	
-	public class MenuActionListener implements ActionListener{
+	public class MenuActionListener implements ActionListener, Serializable{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			model = new ModelWorld(lof);
-			view.start();
-			view.revalidate();
+			switch(e.getActionCommand()){
+			case "home" : load("resources/text/start.txt");break;
+			case "save" : save("resources/text/save.txt");break;
+			case "load" : load("resources/text/save.txt");break;
+			}
 		}
 		
 	}//MenuActionListener
@@ -298,6 +361,7 @@ public class Controller implements Runnable { // controller class runs the game
 		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835,13,230,60));
 	
 		Controller a = new Controller(loFloating);
+		a.save("resources/text/start.txt");
 		a.run();
 	}
 	

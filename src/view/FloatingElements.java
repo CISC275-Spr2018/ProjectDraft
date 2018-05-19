@@ -1,10 +1,12 @@
 package view;
 
+import java.io.Serializable;
+
 /**
  * enum FloatingElements
  * @author Team 11 - 8
  * */
-public enum FloatingElements {
+public enum FloatingElements implements Serializable{
 	//List of all floating objects and holds their strings and image sizes, sprite numbers
 	BASS("bass",249, 132, 1),
 	BOGTURTLE("bogTurtle",227,125,3),
