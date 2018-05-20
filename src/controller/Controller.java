@@ -17,8 +17,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -303,13 +306,57 @@ public class Controller implements Serializable{ // controller class runs the ga
 		}
 
 	}//FishButtonListener
+	
+<<<<<<< HEAD
+=======
+	/**
+	 *writeObject : generate serizable object
+	 *@param ModelWorld m : the iniital model world 
+	 *@return void : pnothing
+	 */
+>>>>>>> master
+	public final static void writeObject(ModelWorld m) throws IOException{
+		try {
+	         FileOutputStream fileOut =
+	         new FileOutputStream("resources//state//restart.ser");
+	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	         out.writeObject(m);
+	         out.close();
+	         fileOut.close();
+	      } catch (IOException i) {
+	         i.printStackTrace();
+	      }
+	}
+	
+<<<<<<< HEAD
+=======
+	/**
+	 *readObject : read seriziable object
+	 *@param ActionEvent e : where the action occurs 
+	 *@return ModelWorld m:return the initial model world
+	 */
+>>>>>>> master
+	public final static ModelWorld readObject() throws IOException, ClassNotFoundException{
+		ModelWorld m = null;
+		try {
+	         FileInputStream fileIn = new FileInputStream("resources//state//restart.ser");
+	         ObjectInputStream in = new ObjectInputStream(fileIn);
+	         m = (ModelWorld) in.readObject();
+	         in.close();
+	         fileIn.close();
+	      } catch (IOException i) {
+	         i.printStackTrace();
+	      } catch (ClassNotFoundException c) {
+	         c.printStackTrace();
+	      }
+		return m;
+	}
 
 
 	public static void main(String args[]) {
 		Controller a = new Controller();
 		Timer t = new Timer(1,a.getact());
 		t.start();
-
 	}
 
 }

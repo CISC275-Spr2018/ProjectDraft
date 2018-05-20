@@ -1,9 +1,12 @@
 package model;
+
+import java.io.Serializable;
+
 /**
  * Class FloatingObjs
  * @author Team 11 - 8
  * */
-public abstract class FloatingObjs {
+public abstract class FloatingObjs implements Serializable{
 	//super class of animal class and trash class
 
 	protected String name;
