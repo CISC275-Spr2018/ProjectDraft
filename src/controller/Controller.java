@@ -307,14 +307,11 @@ public class Controller implements Serializable{ // controller class runs the ga
 
 	}//FishButtonListener
 	
-<<<<<<< HEAD
-=======
 	/**
 	 *writeObject : generate serizable object
 	 *@param ModelWorld m : the iniital model world 
-	 *@return void : pnothing
+	 *@return void : nothing
 	 */
->>>>>>> master
 	public final static void writeObject(ModelWorld m) throws IOException{
 		try {
 	         FileOutputStream fileOut =
@@ -328,14 +325,11 @@ public class Controller implements Serializable{ // controller class runs the ga
 	      }
 	}
 	
-<<<<<<< HEAD
-=======
 	/**
 	 *readObject : read seriziable object
 	 *@param ActionEvent e : where the action occurs 
 	 *@return ModelWorld m:return the initial model world
 	 */
->>>>>>> master
 	public final static ModelWorld readObject() throws IOException, ClassNotFoundException{
 		ModelWorld m = null;
 		try {
