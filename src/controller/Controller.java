@@ -78,6 +78,12 @@ public class Controller implements Serializable{ // controller class runs the ga
 		gamePreset();
 
 	}
+	
+	/**
+	 *gamePreset : init model, view and background music
+	 *@param void: nothing
+	 *@return void : nothing
+	 */
 	public void gamePreset() {
 
 		initialFishes();
@@ -90,6 +96,11 @@ public class Controller implements Serializable{ // controller class runs the ga
 		SoundBar.music();
 	}
 
+	/**
+	 *tutorial : pop up tutorial
+	 *@param void: nothing
+	 *@return void : nothing
+	 */
 	public void tutorial() {
 		initialSlowFishes();
 		model= new ModelWorld(loFloating);
@@ -105,6 +116,11 @@ public class Controller implements Serializable{ // controller class runs the ga
 		return act1;
 	}
 	
+	/**
+	 *tutorial : initial fishes
+	 *@param void: nothing
+	 *@return void : nothing
+	 */
 	public void initialFishes() {
 		loFloating.clear();//always clear before add!
 		loFloating.add(new ProtectedSpecies("bogturtle", 800 , 765,15,200,100));
@@ -116,6 +132,12 @@ public class Controller implements Serializable{ // controller class runs the ga
 		loFloating.add(new ProtectedSpecies("salamander", 1267 , 735,21,350,150));
 		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835,18,230,60));
 	}
+	
+	/**
+	 *tutorial : initial slow fishes, for tutorial only
+	 *@param void: nothing
+	 *@return void : nothing
+	 */
 	public void initialSlowFishes() {//for tutorial only
 		loFloating.clear();//always clear before add!
 		loFloating.add(new ProtectedSpecies("bogturtle", 800 , 765,3,200,100));

@@ -89,6 +89,11 @@ public class View extends JFrame{
 		JOptionPane.showConfirmDialog(null, "", "Introduction", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
 
 	}
+	/**
+	 *PopGameOver : pop up the game over
+	 *@param int highscore : the ending score
+	 *@return void : show the game over
+	 */
 	public void PopGameOver(int hightscore) {
 		this.removeAll();
 		BufferedImage bufferedImage = null;
@@ -113,6 +118,11 @@ public class View extends JFrame{
 		//JOptionPane.showConfirmDialog(this, "GameOver \r\n\r\n Score: " + hightscore);
 	}
 
+	/**
+	 *TutorialOver : show that the tutorial has ended
+	 *@param void : it consumes nothing
+	 *@return void : show the startGame option
+	 */
 	public void TutorialOver() {
 		this.repaint();
 		JOptionPane.showConfirmDialog(null, "Tutorial Ends!",

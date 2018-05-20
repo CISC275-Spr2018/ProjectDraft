@@ -17,6 +17,12 @@ public class SoundBar{
 	private static AudioPlayer MGP = AudioPlayer.player;
 	private static AudioStream BGM;
 	private static ContinuousAudioDataStream loop = null;
+	
+	/**
+	 *music : play the background music
+	 *@param void : nothing
+	 *@return void : Nothing
+	 */
 
 	public static void music() {       
 		try{

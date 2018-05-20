@@ -41,13 +41,28 @@ public class ToolBar extends JPanel {
 	Timer timmah;
 	JProgressBar progressBar;
 	int counter = 20;
-	//BarTest bar;
+
+	/**
+	 *SetCounter : set counter to specfic number
+	 *@param int num : the counter number
+	 *@return void : nothing
+	 */
 	public void SetCounter(int num) {
 		counter=num;
 	}
+	/**
+	 *getPbar : return the progressBar
+	 *@param void : nothing
+	 *@return JProgressBar : the progressBar
+	 */
 	public JProgressBar getPbar() {
 		return progressBar;
 	}
+	/**
+	 *getTimer : return the timer
+	 *@param void : nothing
+	 *@return Timer : the timer
+	 */
 	public Timer getTimer() {
 		return timmah;
 	}

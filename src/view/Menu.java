@@ -78,13 +78,17 @@ public class Menu extends JPanel{
 		repaint();
 		this.removeAll();
 	}
+	
+	/**
+	 *tutorial : the tutorial 
+	 *@param void : nothing
+	 *@return void : this function pop up tutorial
+	 */
 	public void tutorial() {
 		started = false;
 		tutorial = true;
 		repaint();
 		this.removeAll();
-
-
 	}
 
 	/**
@@ -95,6 +99,11 @@ public class Menu extends JPanel{
 	public boolean isStarted() {
 		return started;
 	}
+	/**
+	 *isTutorial : a getter function of Menu
+	 *@param void : nothing
+	 *@return Boolean : the tutorial status of this Menu
+	 */
 	public boolean isTutorial() {
 		return tutorial;
 	}

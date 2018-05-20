@@ -93,17 +93,29 @@ public class FishWorld extends JPanel {
 	}
 
 	/**
-	 *addFloat : initialize and add a fishBtn to this panel
-	 *@param FloatingObjs f: a given FloatingObjs instance
-	 *@return FishButton : the added fishBtn
+	 *removeFloat : remove the specific floating object
+	 *@param String name: the name of the floating object
+	 *@return void : nothing
 	 */
 
 	public void removeFloat(String name){
 		btns.remove(name);
 	}
+	
+	/**
+	 *getFishWorld : getFishWorld
+	 *@param void : nothing
+	 *@return FishWorld : the current fishWorld 
+	 */
 	public FishWorld getFishWorld() {
 		return this;
 	}
+	
+	/**
+	 *addFloat : initialize and add a fishBtn to this panel
+	 *@param FloatingObjs f: a given FloatingObjs instance
+	 *@return FishButton : the added fishBtn
+	 */
 
 	public FishButton addFloat(FloatingObjs f){
 		String strName = f.getName().toUpperCase();
