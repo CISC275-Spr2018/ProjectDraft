@@ -91,7 +91,7 @@ public class Controller implements Serializable{ // controller class runs the ga
 		};
 		loFloating= new ArrayList<FloatingObjs>();
 		gamePreset();
-		//view.Poptutorial();
+		view.Poptutorial();
 		
 	}
 	public void gamePreset() {
@@ -173,6 +173,7 @@ public class Controller implements Serializable{ // controller class runs the ga
 				//TutorialOver();
 			}else if((view.getTbar().getPbar().getValue()<=0)&&(isEnded==false)&&(view.getMenu().isTutorial())) {
 				view.TutorialOver();
+				isEnded=true;
 				
 			}
 			

@@ -29,7 +29,7 @@ class ModelTest {
 		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
 		loFloating.add(new ProtectedSpecies("bogturtle", 4 , 5));
 		loFloating.add(new InvasiveSpecies("bass", 4 , 5));
-		loFloating.add(new InvasiveSpecies("catFish", 4 , 5));
+		loFloating.add(new InvasiveSpecies("blueCatfish", 4 , 5));
 		loFloating.add(new ProtectedSpecies("horseshoeCrab", 4 , 5));
 
 		ProtectedSpecies t1 = new ProtectedSpecies("bogturtle", 10 , 10);

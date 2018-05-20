@@ -146,35 +146,4 @@ public class FishWorld extends JPanel {
 		}//for
 		this.repaint();
 	}//updateBtns
-	
-	public static void main(String[] args){
-		JFrame frame = new JFrame();
-    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(960, 960);
-		 	
-		
-		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
-		//loFloating.add(new ProtectedSpecies("bogTurtle", 480 , 500));
-		loFloating.add(new InvasiveSpecies("snakeHead", 480 , 500));
-		loFloating.add(new InvasiveSpecies("blueCatfish", 480 , 500));
-		loFloating.add(new ProtectedSpecies("horseShoeCrab", 480 , 500));
-		
-		ModelWorld world = new ModelWorld(loFloating);
-		FishWorld eg1 = new FishWorld(world.getListOfExistedFloatingObjs());
-		frame.getContentPane().add(eg1);
-		
-		frame.setVisible(true);
-		
-		while(true){
-			world.move();
-			eg1.updateBtns(world.getListOfExistedFloatingObjs());
-			try {
-    			Thread.sleep(100);
-    		} catch (InterruptedException e) {
-    			e.printStackTrace();
-    		}
-			frame.repaint();
-			//System.out.println("Update@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		}
-	}
 }
