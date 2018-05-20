@@ -13,7 +13,14 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.*;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Serializable;
+
 import java.util.ArrayList;
 
 
@@ -43,19 +50,15 @@ import view.SoundBar;
 
 import view.View;
 
-public class Controller { // controller class runs the game 
+public class Controller implements Serializable{ // controller class runs the game 
+	ArrayList<FloatingObjs> loFloating;
 	private ModelWorld model;
 	private View view;
 	private String currentTool;
-<<<<<<< HEAD
-	public Action act1;
 
-	public boolean isEnded =false;
-    
-=======
-	private Action updateWorld;
+	public Action act1;	
+	public boolean isEnded =false;	
 
->>>>>>> Cong-Meng
 
 
 	/**
@@ -64,8 +67,9 @@ public class Controller { // controller class runs the game
 	 *@return Controller : Construct a new Controller
 	 */
 
-	public Controller(ArrayList<FloatingObjs> loFloating) {
-<<<<<<< HEAD
+
+	public Controller() {
+
 		//-----
 	/**	progressBar = new JProgressBar(JProgressBar.VERTICAL, 0, 10);
         progressBar.setValue(10);
@@ -84,35 +88,38 @@ public class Controller { // controller class runs the game
 			
 			public void actionPerformed(ActionEvent e) {
 				
-				if(model.getCountDown()>=0) {
+				//if(model.getCountDown()>=0) {
 					updateController();
-				}
-				else {
-					System.out.println("GameOVer");
-				}
+				//}
+				//else {
+				//	System.out.println("GameOVer");
+				//}
 				
-=======
-		updateWorld = new AbstractAction() {	
-			public void actionPerformed(ActionEvent e) {
-				updateController();
->>>>>>> Cong-Meng
+
 			}
 		};
 
-
-
-
+		loFloating= new ArrayList<FloatingObjs>();
+		gamePreset();
+		//view.Poptutorial();
+		
+	}
+	public void gamePreset() {
+		
+		initialFishes();
 
 		model = new ModelWorld(loFloating);
 		view = new View();
 		view.setActionListener(new FishButtonListener(), new ToolBarListener());
 		this.view.updateView(model.getListOfExistedFloatingObjs());
 		currentTool = "Invasive";
-		view.getFworld().initialBG();
 		SoundBar.music();
-		stage1(loFloating);
-		view.Poptutorial();
-
+	}
+	
+	public void tutorial() {
+		initialSlowFishes();
+		model= new ModelWorld(loFloating);
+		this.view.updateView(model.getListOfExistedFloatingObjs());
 	}
 
 	/**
@@ -123,12 +130,28 @@ public class Controller { // controller class runs the game
 	public Action getact() {
 		return updateWorld;
 	}
-	public void stage1(ArrayList<FloatingObjs> loFloating) {
-
+	public void initialFishes() {
+		loFloating.clear();//always clear before add!
+		loFloating.add(new ProtectedSpecies("bogturtle", 800 , 765,15,200,100));
+		loFloating.add(new InvasiveSpecies("bluecatFish", 900 , 700,18,45,110));
+		loFloating.add(new ProtectedSpecies("horseshoeCrab", 400 , 516,14,300,200));
+		loFloating.add(new InvasiveSpecies("redswampcrayfish", 1200 , 535,18,30,150));
+		loFloating.add(new InvasiveSpecies("snakehead", 1200 , 1035,11,75,60));
+		loFloating.add(new Trash("paper", 1267, 635,12,100,100));
+		loFloating.add(new ProtectedSpecies("salamander", 1267 , 735,21,350,150));
+		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835,18,230,60));
 	}
-
-	//this function setup model for each game
-	public void setupModeles(){}
+	public void initialSlowFishes() {//for tutorial only
+		loFloating.clear();//always clear before add!
+		loFloating.add(new ProtectedSpecies("bogturtle", 800 , 765,3,200,100));
+		loFloating.add(new InvasiveSpecies("bluecatFish", 900 , 700,4,45,110));
+		loFloating.add(new ProtectedSpecies("horseshoeCrab", 400 , 516,5,300,200));
+		loFloating.add(new InvasiveSpecies("redswampcrayfish", 1200 , 535,4,30,150));
+		loFloating.add(new InvasiveSpecies("snakehead", 1200 , 1035,3,75,60));
+		loFloating.add(new Trash("paper", 1267, 635,1,100,100));
+		loFloating.add(new ProtectedSpecies("salamander", 1267 , 735,3,350,150));
+		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835,4,230,60));
+	}
 
 	/**
 	 *updateController : this function updates the controller
@@ -136,11 +159,17 @@ public class Controller { // controller class runs the game
 	 *@return void : it returns nothing but updates the status of controller
 	 */
 	public void updateController() {
-<<<<<<< HEAD
+
 			if(view.getMenu().isStarted()&&(view.isAdded==false)) {//stage 1
 				view.initStage1();
 				view.getTbar().getTimer().start();
-			}else if(view.isAdded){
+			}else if(view.getMenu().isTutorial()&&(view.isAdded==false)) {//tutorial
+				tutorial() ;
+				view.initStage1();
+				view.getTbar().getTimer().start();
+			}
+			
+			else if(view.isAdded){
 				//System.out.println("wa");
 				this.model.updateWorld();
 				ArrayList<FloatingObjs> obj = model.getListOfExistedFloatingObjs();
@@ -148,24 +177,17 @@ public class Controller { // controller class runs the game
 			}
 
 			
-			if((view.getTbar().getPbar().getValue()<=0)&&(isEnded==false)) {
+			if((view.getTbar().getPbar().getValue()<=0)&&(isEnded==false)&&(view.getMenu().isStarted())) {
 				//pop up game over
 				view.PopGameOver(model.getScore());
 				isEnded=true;
 				//view.getTbar().getTimer().stop();
-				
+				//TutorialOver();
+			}else if((view.getTbar().getPbar().getValue()<=0)&&(isEnded==false)&&(view.getMenu().isTutorial())) {
+				view.TutorialOver();
+				isEnded=true;
 			}
 			
-
-=======
-		if(view.getMenu().isStarted()&&(view.isAdded==false)) {//stage 1
-			view.initStage1();
-		}else if(view.isAdded){
-			this.model.updateWorld();
-			ArrayList<FloatingObjs> obj = model.getListOfExistedFloatingObjs();
-			this.view.updateView(obj);	
-		}
->>>>>>> Cong-Meng
 	}
 
 	/**
@@ -284,94 +306,15 @@ public class Controller { // controller class runs the game
 			default:break;
 			}
 		}
-
+	
 	}//FishButtonListener
 
-<<<<<<< HEAD
-
-	
-
-
-	
 
 	public static void main(String args[]) {
-=======
-	/**
-	 *popTutorial : pop up the picture tutorial
-	 *@param void : it consumes nothing
-	 *@return void : show the tutorial picture in comfirmDialog
-	 */
-	public void popTutorial() {
-		BufferedImage bufferedImage = null;
-		try{
-			bufferedImage = ImageIO.read(new File("resources/img/background/Intro11.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		ImageIcon icon = new ImageIcon(bufferedImage);
-		JOptionPane.showConfirmDialog(null, "", "Introduction", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
-
-	}
-	
-	public final static void writeObject(ModelWorld m) throws IOException{
-		try {
-	         FileOutputStream fileOut =
-	         new FileOutputStream("resources//state//restart.ser");
-	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
-	         out.writeObject(m);
-	         out.close();
-	         fileOut.close();
-	      } catch (IOException i) {
-	         i.printStackTrace();
-	      }
-	}
-	
-	public final static ModelWorld readObject() throws IOException, ClassNotFoundException{
-		ModelWorld m = null;
-		try {
-	         FileInputStream fileIn = new FileInputStream("resources//state//restart.ser");
-	         ObjectInputStream in = new ObjectInputStream(fileIn);
-	         m = (ModelWorld) in.readObject();
-	         in.close();
-	         fileIn.close();
-	      } catch (IOException i) {
-	         i.printStackTrace();
-	      } catch (ClassNotFoundException c) {
-	         c.printStackTrace();
-	      }
-		return m;
-	}
-
-
-
-	public static void main(String args[]) throws IOException, ClassNotFoundException {
->>>>>>> Cong-Meng
-		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
-		loFloating.add(new ProtectedSpecies("bogturtle", 800 , 765,15,200,100));
-		loFloating.add(new InvasiveSpecies("bluecatFish", 900 , 700,18,45,110));
-		loFloating.add(new ProtectedSpecies("horseshoeCrab", 400 , 516,14,300,200));
-		loFloating.add(new InvasiveSpecies("redswampcrayfish", 1200 , 535,18,30,150));
-		loFloating.add(new InvasiveSpecies("snakehead", 1200 , 1035,11,75,60));
-		loFloating.add(new Trash("paper", 1267, 635,12,100,100));
-<<<<<<< HEAD
-		loFloating.add(new ProtectedSpecies("salamander", 1267 , 735,21,350,150));
-		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835,18,230,60));
-		Controller a = new Controller(loFloating);
+		Controller a = new Controller();
 		Timer t = new Timer(1,a.getact());
 		t.start();
-		
 
-=======
-		loFloating.add(new ProtectedSpecies("salamander", 1267 , 735,17,350,150));
-		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835,13,230,60));
-
-		Controller a = new Controller(loFloating);
-		
-		writeObject(a.model);
-		a.model = readObject();
-		Timer t = new Timer(10,a.getact());
-		t.start();
->>>>>>> Cong-Meng
 	}
 
 }

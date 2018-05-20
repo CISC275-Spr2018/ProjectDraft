@@ -15,18 +15,7 @@ public class ModelWorld {
 	private ArrayList<FloatingObjs> lof;//list of floatingObjs that will spam
 	private ArrayList<FloatingObjs> loEf;//list of existed floatingObjs
 	private int score;
-<<<<<<< HEAD
 
-	private int countdown;
-	private int spawnNum=0;
-
-	
-	/**
-	*ModelWorld : a constructor of ModelWorld
-	*@param ArrayList<FloatingObjs> l: a given ArrayList<FloatingObjs>
-	*@return ModelWorld : constuct a new ModelWorld
-	*/
-=======
 	private int spawnNum=0;
 
 
@@ -35,7 +24,7 @@ public class ModelWorld {
 	 *@param ArrayList<FloatingObjs> l: a given ArrayList<FloatingObjs>
 	 *@return ModelWorld : constuct a new ModelWorld
 	 */
->>>>>>> Cong-Meng
+
 
 	public ModelWorld(ArrayList<FloatingObjs> l){
 		this.countdown=2000;
@@ -51,16 +40,10 @@ public class ModelWorld {
 		this.spawn();
 		this.spawn();
 		this.spawn();
-<<<<<<< HEAD
-	}//constructor
-	public int getCountDown() {
-		return countdown;
-	}
-	
-=======
-	}
 
->>>>>>> Cong-Meng
+	}//constructor
+	
+
 	/**
 	 *updateWorld : updates the location of each FloatingObjs
 	 *@param void : a given ArrayList<FloatingObjs>
@@ -74,25 +57,15 @@ public class ModelWorld {
 			f.updateDuration();
 
 		}
-<<<<<<< HEAD
-		spawnNum=(spawnNum+1)%10;
-		if(loEf.size()<5){//make sure there is always more than 5 objs on the screen
-			this.spawn();
-		}
-		if(spawnNum==25) {
-			this.spawn();//spwan every
-		}
-		
-=======
-		spawnNum=(spawnNum+1)%100;
-		if(loEf.size()<5){//make sure there is always more than 5 objs on the screen
-			this.spawn();
-		}
-		if(spawnNum==1) {
-			this.spawn();//spwan every
-		}
 
->>>>>>> Cong-Meng
+		spawnNum=(spawnNum+1)%100;
+
+		if(loEf.size()<5){//make sure there is always more than 5 objs on the screen
+			this.spawn();
+		}
+		if(spawnNum%5==1) {
+			this.spawn();//spwan every
+		}
 	}
 
 	/**
@@ -157,6 +130,7 @@ public class ModelWorld {
 	 *				and add id to this FloatingObjs
 	 */
 	public void spawn(){
+		
 		int len = lof.size();
 		int i = (int) (Math.random() * len);
 		FloatingObjs temp = lof.get(i);

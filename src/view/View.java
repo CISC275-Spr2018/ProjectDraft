@@ -107,11 +107,17 @@ public class View extends JFrame{
     	a.add(b);
     	this.add(a);
     	this.repaint();
+    	
     	JOptionPane.showConfirmDialog(null, "GameOver \r\n\r\n Score: " + hightscore,
     			"GameOver", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);
 		//JOptionPane.showConfirmDialog(this, "GameOver \r\n\r\n Score: " + hightscore);
 	}
 	
+	public void TutorialOver() {
+		this.repaint();
+		JOptionPane.showConfirmDialog(null, "Tutorial Ends!",
+    			"StartGame", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);
+	}
 
 	
 	/**

@@ -28,7 +28,7 @@ public class Menu extends JPanel{
 	//draw a JPanel as the Menu 
 	//added action listener that will initialize the game
 	boolean started = false;
-
+	boolean tutorial = false;
 	
 	/**
 	*Menu : a constructor of Menu
@@ -40,7 +40,9 @@ public class Menu extends JPanel{
 		setLayout(null);
 		add(Box.createVerticalStrut(280));
 		JButton button = new JButton("START");
+		JButton button2= new JButton("Totorial");
 		button.setBounds(900, 600, 90, 30);
+		button2.setBounds(900,700,90,30);
 		//button.setAlignmentY(BOTTOM_ALIGNMENT);
 		button.addActionListener(new AbstractAction() {
 			@Override
@@ -48,7 +50,14 @@ public class Menu extends JPanel{
 				start();
 			}
 		});
+		button2.addActionListener(new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tutorial();
+			}
+		});
 		add(button);
+		add(button2);
 		add(Box.createVerticalGlue());
 		try {}catch(Exception ex) {
 			
@@ -65,11 +74,21 @@ public class Menu extends JPanel{
 
 	public void start() {
 		started = true;
-		
+		tutorial = false;
 		repaint();
 		this.removeAll();
 	}
-
+	public void tutorial() {
+		started = false;
+		tutorial = true;
+		
+		
+		repaint();
+		this.removeAll();
+		//this.setBackground(Color.CYAN);
+		
+		
+	}
 	
 	/**
 	*isStarted : a getter function of Menu
@@ -79,7 +98,9 @@ public class Menu extends JPanel{
 	public boolean isStarted() {
 		return started;
 	}
-	
+	public boolean isTutorial() {
+		return tutorial;
+	}
 	/**
 	*paintComponent : an overrided function
 	*@param Graphics g: a given graphics
@@ -101,13 +122,13 @@ public class Menu extends JPanel{
 				//setBackground(Color.CYAN);
 			}
 	}
-	public static void main(String args[]) {
+	/**public static void main(String args[]) {
 		JFrame a = new JFrame();
 		a.setSize(1920,1080);
 		a.setResizable(false);
 		a.add(new Menu());
 		a.setVisible(true);
 		a.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
+	}**/
 }
 	
