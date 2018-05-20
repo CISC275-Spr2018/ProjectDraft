@@ -27,7 +27,6 @@ public class ModelWorld {
 
 
 	public ModelWorld(ArrayList<FloatingObjs> l){
-		this.countdown=2000;
 		this.lof = l;
 		this.loEf = new ArrayList<FloatingObjs>();
 		this.spawn();
@@ -42,7 +41,7 @@ public class ModelWorld {
 		this.spawn();
 
 	}//constructor
-	
+
 
 	/**
 	 *updateWorld : updates the location of each FloatingObjs
@@ -50,8 +49,6 @@ public class ModelWorld {
 	 *@return void : updates the location of each FloatingObjs by their own move methods
 	 */
 	public void updateWorld(){
-		countdown--;
-		//System.out.println("time left is :"+countdown);
 		for(FloatingObjs f : loEf){
 			f.move();
 			f.updateDuration();
@@ -130,7 +127,7 @@ public class ModelWorld {
 	 *				and add id to this FloatingObjs
 	 */
 	public void spawn(){
-		
+
 		int len = lof.size();
 		int i = (int) (Math.random() * len);
 		FloatingObjs temp = lof.get(i);

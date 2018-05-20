@@ -34,19 +34,19 @@ public class View extends JFrame{
 	final int frameCount = 10;
 	final static int FWIDTH = 1960;
 	final static int FHEIGHT = 1080;
-	
-	
+
+
 	private FishWorld eg1;
 	private ToolBar tb1;
-	
+
 	//private BackgroundPanel bgp;
 	public boolean isAdded;
 
 	/**
-	*View : a constructor of View
-	*@param void: nothing
-	*@return View : Construct a new View
-	*/
+	 *View : a constructor of View
+	 *@param void: nothing
+	 *@return View : Construct a new View
+	 */
 
 	public View() {
 		menu= new Menu();
@@ -61,90 +61,90 @@ public class View extends JFrame{
 
 		this.setLayout(null);
 
-    	this.setVisible(true);
-    	this.setSize(FWIDTH, FHEIGHT);
+		this.setVisible(true);
+		this.setSize(FWIDTH, FHEIGHT);
 	}
 
 	/**
-	*getMenu : a getter function of View
-	*@param void : nothing
-	*@return Menu : the menu of this View
-	*/
+	 *getMenu : a getter function of View
+	 *@param void : nothing
+	 *@return Menu : the menu of this View
+	 */
 	public Menu getMenu() {
 		return menu;
 	}
-  /**
-	*popTutorial : pop up the picture tutorial
-	*@param void : it consumes nothing
-	*@return void : show the tutorial picture in comfirmDialog
-	*/
+	/**
+	 *popTutorial : pop up the picture tutorial
+	 *@param void : it consumes nothing
+	 *@return void : show the tutorial picture in comfirmDialog
+	 */
 	public void Poptutorial() {
 		BufferedImage bufferedImage = null;
-    	try{
-	    	bufferedImage = ImageIO.read(new File("resources/img/background/Intro11.png"));
-	    } catch (IOException e) {
-	    	e.printStackTrace();
-	    }
-    	ImageIcon icon = new ImageIcon(bufferedImage);
-    	JOptionPane.showConfirmDialog(null, "", "Introduction", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
-    	
+		try{
+			bufferedImage = ImageIO.read(new File("resources/img/background/Intro11.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		ImageIcon icon = new ImageIcon(bufferedImage);
+		JOptionPane.showConfirmDialog(null, "", "Introduction", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE, icon);
+
 	}
 	public void PopGameOver(int hightscore) {
 		this.removeAll();
 		BufferedImage bufferedImage = null;
-    	try{
-	    	bufferedImage = ImageIO.read(new File("resources/img/background/over.jpg"));
-	    	
-	    } catch (IOException e) {
-	    	e.printStackTrace();
-	    }
-    	ImageIcon icon = new ImageIcon(bufferedImage);
-    	JPanel a = new GameOverPane();
-    	a.setSize(1920, 1080);
+		try{
+			bufferedImage = ImageIO.read(new File("resources/img/background/over.jpg"));
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		ImageIcon icon = new ImageIcon(bufferedImage);
+		JPanel a = new GameOverPane();
+		a.setSize(1920, 1080);
 		a.setVisible(true);
-    	JLabel b = new JLabel(icon);
-    	
-    	a.add(b);
-    	this.add(a);
-    	this.repaint();
-    	
-    	JOptionPane.showConfirmDialog(null, "GameOver \r\n\r\n Score: " + hightscore,
-    			"GameOver", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);
+		JLabel b = new JLabel(icon);
+
+		a.add(b);
+		this.add(a);
+		this.repaint();
+
+		JOptionPane.showConfirmDialog(null, "GameOver \r\n\r\n Score: " + hightscore,
+				"GameOver", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);
 		//JOptionPane.showConfirmDialog(this, "GameOver \r\n\r\n Score: " + hightscore);
 	}
-	
+
 	public void TutorialOver() {
 		this.repaint();
 		JOptionPane.showConfirmDialog(null, "Tutorial Ends!",
-    			"StartGame", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);
+				"StartGame", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);
 	}
 
-	
+
 	/**
-	*initStage1 : initialize stage1
-	*@param void : nothing
-	*@return void : initialize the stage1 of this View
-	*/
+	 *initStage1 : initialize stage1
+	 *@param void : nothing
+	 *@return void : initialize the stage1 of this View
+	 */
 
 	public void initStage1() {
 		System.out.println("added!");
 		this.getFworld().initialBG();
-		
-		
+
+
 		this.add(eg1);
 		eg1.setBounds(300,0,1920,1080);
 		this.add(tb1);
 		tb1.setBounds(0,0,300,1080);
 		isAdded=true;						
 	}
-	
+
 	/**
-	*updateView :updates components in View
-	*@param ArrayList<FloatingObjs> ob1 : a given ArrayList<FloatingObjs>
-	*@return void : this function moves the fishBtns in eg1(FishWorld panel)
-	*/
+	 *updateView :updates components in View
+	 *@param ArrayList<FloatingObjs> ob1 : a given ArrayList<FloatingObjs>
+	 *@return void : this function moves the fishBtns in eg1(FishWorld panel)
+	 */
 	public void updateView(ArrayList<FloatingObjs> ob1) {
-		
+
 		eg1.updateBtns(ob1);
 		try {
 			Thread.sleep(100);
@@ -153,36 +153,36 @@ public class View extends JFrame{
 		}
 		//this.repaint();
 	}
-	
+
 	/**
-	*getTbar : a getter function of View
-	*@param void : nothing
-	*@return ToolBar : the tb1(Toolbar panel) of this View
-	*/
+	 *getTbar : a getter function of View
+	 *@param void : nothing
+	 *@return ToolBar : the tb1(Toolbar panel) of this View
+	 */
 	public ToolBar getTbar(){
 		return tb1;
 	}
-	
+
 	/**
-	*getFworld : a getter function of View
-	*@param void : nothing
-	*@return FishWorld : the eg1(FishWorld panel) of this View
-	*/
+	 *getFworld : a getter function of View
+	 *@param void : nothing
+	 *@return FishWorld : the eg1(FishWorld panel) of this View
+	 */
 	public FishWorld getFworld(){
 		return eg1;
 	}
 	/**
-	*setActionListener : setup ActionListner
-	*@param ActionListener fBListener : a given FishBtn ActionListener
-	*@param ActionListener tBListener : a given toolBar ActionListener
-	*@return void : give eg1(FishWorld panel) fBListener; 
-	*				give tb1(Toolbar panel) tBListener
-	*/
+	 *setActionListener : setup ActionListner
+	 *@param ActionListener fBListener : a given FishBtn ActionListener
+	 *@param ActionListener tBListener : a given toolBar ActionListener
+	 *@return void : give eg1(FishWorld panel) fBListener; 
+	 *				give tb1(Toolbar panel) tBListener
+	 */
 	public void setActionListener(ActionListener fBListener, ActionListener tBListener){
 		eg1.setActionListener(fBListener);
 		tb1.setActionListener(tBListener);
 	}
-	
 
-	
+
+
 }

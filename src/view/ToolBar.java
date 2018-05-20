@@ -33,14 +33,14 @@ import javax.swing.JRadioButton;
 import javax.swing.Timer;
 
 public class ToolBar extends JPanel {
-	
+
 	//a JPanel that contains tool images and shows scores 
 	private JRadioButton invasiveTool;
 	private JRadioButton protectedTool;
 	private JRadioButton litterTool;
 	Timer timmah;
-    JProgressBar progressBar;
-    int counter = 20;
+	JProgressBar progressBar;
+	int counter = 20;
 	//BarTest bar;
 	public void SetCounter(int num) {
 		counter=num;
@@ -51,44 +51,44 @@ public class ToolBar extends JPanel {
 	public Timer getTimer() {
 		return timmah;
 	}
-	
+
 
 	/**
-	*ToolBar : a constructor of ToolBar
-	*@param void : nothing
-	*@return ToolBar : Construct a new ToolBar
-	*/
+	 *ToolBar : a constructor of ToolBar
+	 *@param void : nothing
+	 *@return ToolBar : Construct a new ToolBar
+	 */
 
 	public ToolBar(){
 		progressBar = new JProgressBar(JProgressBar.VERTICAL, 0, counter);
-        progressBar.setValue(counter);
-        progressBar.setBounds(0, 0, 20, 30);
-        progressBar.setPreferredSize(new Dimension(100,25));
-        
-        ActionListener listener = new ActionListener() {
-            
-            public void actionPerformed(ActionEvent ae) {
-                counter--;
-                progressBar.setValue(counter);
-                if (counter<1) {
-                    //JOptionPane.showMessageDialog(null, "Kaboom!");
-                	timmah.stop();
-                } 
-            }
-        };
-        progressBar.setBackground(new Color(128, 0, 128));
-        progressBar.setForeground(Color.cyan);
-        this.add(progressBar);
-        progressBar.setBounds(270,0,30,1080);
-        timmah = new Timer(1000, listener);
-        //timmah.start();
-        
+		progressBar.setValue(counter);
+		progressBar.setBounds(0, 0, 20, 30);
+		progressBar.setPreferredSize(new Dimension(100,25));
+
+		ActionListener listener = new ActionListener() {
+
+			public void actionPerformed(ActionEvent ae) {
+				counter--;
+				progressBar.setValue(counter);
+				if (counter<1) {
+					//JOptionPane.showMessageDialog(null, "Kaboom!");
+					timmah.stop();
+				} 
+			}
+		};
+		progressBar.setBackground(new Color(128, 0, 128));
+		progressBar.setForeground(Color.cyan);
+		this.add(progressBar);
+		progressBar.setBounds(270,0,30,1080);
+		timmah = new Timer(1000, listener);
+		//timmah.start();
+
 		//bar= new BarTest();
 		//GridLayout g = new GridLayout(5,0);
 		this.setLayout(null);
-		
+
 		setBtn();
-		
+
 		ImageIcon icon = new ImageIcon(createImages("Dialogue2"));
 		JButton scoreBtn = new JButton("Score: 0");
 		scoreBtn.setFont(new Font("SansSerif",Font.ITALIC ,36));
@@ -99,14 +99,14 @@ public class ToolBar extends JPanel {
 		this.add(scoreBtn);
 		this.setBackground(new Color(100,255,255));
 	}//constructor
-	
+
 
 
 	/**
-	*setBtn : initialize the 3 tool radiobtns
-	*@param void : nothing
-	*@return void : initialize the 3 tool radiobtns and add them to this panel
-	*/
+	 *setBtn : initialize the 3 tool radiobtns
+	 *@param void : nothing
+	 *@return void : initialize the 3 tool radiobtns and add them to this panel
+	 */
 
 	private void setBtn(){
 		ImageIcon icon = new ImageIcon(createImages("net"));
@@ -116,7 +116,7 @@ public class ToolBar extends JPanel {
 		invasiveTool.setContentAreaFilled(false); 
 		invasiveTool.setBorderPainted(false); 
 		invasiveTool.setBounds(0,0,260,260);
-		
+
 		icon = new ImageIcon(createImages("camera"));
 		protectedTool = new JRadioButton("", icon);
 		protectedTool.setFont(new Font("SansSerif",Font.BOLD, 22));
@@ -124,7 +124,7 @@ public class ToolBar extends JPanel {
 		protectedTool.setContentAreaFilled(false); 
 		protectedTool.setBorderPainted(false); 
 		protectedTool.setBounds(0,260,260,260);
-		
+
 		icon = new ImageIcon(createImages("trashpicker"));
 		litterTool = new JRadioButton("", icon);
 		litterTool.setFont(new Font("SansSerif",Font.BOLD, 22));
@@ -132,7 +132,7 @@ public class ToolBar extends JPanel {
 		litterTool.setContentAreaFilled(false); 
 		litterTool.setBorderPainted(false); 
 		litterTool.setBounds(0,520,260,260);
-		
+
 		ButtonGroup bp = new ButtonGroup();
 		bp.add(invasiveTool);
 		bp.add(protectedTool);
@@ -141,57 +141,47 @@ public class ToolBar extends JPanel {
 		this.add(protectedTool);
 		this.add(litterTool);
 	}//setBtn
-	
-	
+
+
 
 	/**
-	*createImages : read files to load images
-	*@param String name: name of the tool, which is part of the path
-	*@return BufferedImage : the images of this tool(icon)
-	*/
+	 *createImages : read files to load images
+	 *@param String name: name of the tool, which is part of the path
+	 *@return BufferedImage : the images of this tool(icon)
+	 */
 
 	private BufferedImage createImages(String name){
-	    	BufferedImage bufferedImage = null;
-	    	try{
-		    	bufferedImage = ImageIO.read(new File("resources/img/tool/"+ name +".png"));
-		    } catch (IOException e) {
-		    	e.printStackTrace();
-		    }
-			return bufferedImage;	    	
+		BufferedImage bufferedImage = null;
+		try{
+			bufferedImage = ImageIO.read(new File("resources/img/tool/"+ name +".png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return bufferedImage;	    	
 	}//createStatusImages
-	
+
 
 	/**
-	*updateScore : updates the current score
-	*@param int score : a given score
-	*@return void : update the current score according to the given score
-	*/
+	 *updateScore : updates the current score
+	 *@param int score : a given score
+	 *@return void : update the current score according to the given score
+	 */
 
 	public void updateScore(int score){
 		JButton label = ((JButton) this.getComponent(4));
 		label.setText("Score: "+score);
 	}
-	
+
 
 	/**
-	*setActionListener : setup ActionListner
-	*@param ActionListener tAL : a given ActionListener
-	*@return void : give each tool radiobtn an ActionListener
-	*/
+	 *setActionListener : setup ActionListner
+	 *@param ActionListener tAL : a given ActionListener
+	 *@return void : give each tool radiobtn an ActionListener
+	 */
 
 	public void setActionListener(ActionListener tAL){
 		invasiveTool.addActionListener(tAL);
 		protectedTool.addActionListener(tAL);
 		litterTool.addActionListener(tAL);
 	}
-	
-	public static void main(String[] args){
-		JFrame frame = new JFrame();
-    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(320 ,1080);
-		ToolBar tb = new ToolBar();
-		frame.getContentPane().add(tb);
-		frame.setVisible(true);
-	}//main
-
 }

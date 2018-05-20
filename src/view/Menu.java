@@ -29,12 +29,12 @@ public class Menu extends JPanel{
 	//added action listener that will initialize the game
 	boolean started = false;
 	boolean tutorial = false;
-	
+
 	/**
-	*Menu : a constructor of Menu
-	*@param void : nothing
-	*@return Menu : Construct a new Menu
-	*/
+	 *Menu : a constructor of Menu
+	 *@param void : nothing
+	 *@return Menu : Construct a new Menu
+	 */
 
 	public Menu() {
 		setLayout(null);
@@ -60,17 +60,17 @@ public class Menu extends JPanel{
 		add(button2);
 		add(Box.createVerticalGlue());
 		try {}catch(Exception ex) {
-			
+
 		}
-		
+
 	}
 
-	
+
 	/**
-	*start : a constructor of Menu
-	*@param void : nothing
-	*@return void : this function release this panel and set started to true
-	*/
+	 *start : a constructor of Menu
+	 *@param void : nothing
+	 *@return void : this function release this panel and set started to true
+	 */
 
 	public void start() {
 		started = true;
@@ -81,20 +81,17 @@ public class Menu extends JPanel{
 	public void tutorial() {
 		started = false;
 		tutorial = true;
-		
-		
 		repaint();
 		this.removeAll();
-		//this.setBackground(Color.CYAN);
-		
-		
+
+
 	}
-	
+
 	/**
-	*isStarted : a getter function of Menu
-	*@param void : nothing
-	*@return Boolean : the started status of this Menu
-	*/
+	 *isStarted : a getter function of Menu
+	 *@param void : nothing
+	 *@return Boolean : the started status of this Menu
+	 */
 	public boolean isStarted() {
 		return started;
 	}
@@ -102,33 +99,19 @@ public class Menu extends JPanel{
 		return tutorial;
 	}
 	/**
-	*paintComponent : an overrided function
-	*@param Graphics g: a given graphics
-	*@return void : draws the Component
-	*/
+	 *paintComponent : an overrided function
+	 *@param Graphics g: a given graphics
+	 *@return void : draws the Component
+	 */
 
 	@Override
 	public void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			Toolkit tk = Toolkit.getDefaultToolkit();
-			Image bgImg = tk.createImage("resources/img/menu/menu.png");
-			//ImageIcon bgIcon = new ImageIcon(bgImg); 
-			//JLabel jlBackgroundimg = new JLabel(bgIcon);
-			//jlBackgroundimg.setBounds(0, 0,1920,1080);
-			//this.add(jlBackgroundimg);
-			if(!started) {
-				g.drawImage(new ImageIcon(bgImg).getImage(),0,0,1920,1080,this);
-			}else {
-				//setBackground(Color.CYAN);
-			}
+		super.paintComponent(g);
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Image bgImg = tk.createImage("resources/img/menu/menu.png");
+		if(!started) {
+			g.drawImage(new ImageIcon(bgImg).getImage(),0,0,1920,1080,this);
+		}else {
+		}
 	}
-	/**public static void main(String args[]) {
-		JFrame a = new JFrame();
-		a.setSize(1920,1080);
-		a.setResizable(false);
-		a.add(new Menu());
-		a.setVisible(true);
-		a.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}**/
 }
-	

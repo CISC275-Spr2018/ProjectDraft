@@ -69,43 +69,17 @@ public class Controller implements Serializable{ // controller class runs the ga
 
 
 	public Controller() {
-
-		//-----
-	/**	progressBar = new JProgressBar(JProgressBar.VERTICAL, 0, 10);
-        progressBar.setValue(10);
-        ActionListener listener = new ActionListener() {
-            int counter = 10;
-            public void actionPerformed(ActionEvent ae) {
-                counter--;
-                progressBar.setValue(counter);
-                if (counter<1) {
-                    JOptionPane.showMessageDialog(null, "Kaboom!");
-                    timer.stop();
-                } 
-            }}**/
-        //---
 		act1 = new AbstractAction() {
-			
 			public void actionPerformed(ActionEvent e) {
-				
-				//if(model.getCountDown()>=0) {
-					updateController();
-				//}
-				//else {
-				//	System.out.println("GameOVer");
-				//}
-				
-
+				updateController();
 			}
 		};
-
 		loFloating= new ArrayList<FloatingObjs>();
 		gamePreset();
-		//view.Poptutorial();
-		
+
 	}
 	public void gamePreset() {
-		
+
 		initialFishes();
 
 		model = new ModelWorld(loFloating);
@@ -115,7 +89,7 @@ public class Controller implements Serializable{ // controller class runs the ga
 		currentTool = "Invasive";
 		SoundBar.music();
 	}
-	
+
 	public void tutorial() {
 		initialSlowFishes();
 		model= new ModelWorld(loFloating);
@@ -128,8 +102,9 @@ public class Controller implements Serializable{ // controller class runs the ga
 	 *@return Action : property act1 of controller
 	 */
 	public Action getact() {
-		return updateWorld;
+		return act1;
 	}
+	
 	public void initialFishes() {
 		loFloating.clear();//always clear before add!
 		loFloating.add(new ProtectedSpecies("bogturtle", 800 , 765,15,200,100));
@@ -160,34 +135,34 @@ public class Controller implements Serializable{ // controller class runs the ga
 	 */
 	public void updateController() {
 
-			if(view.getMenu().isStarted()&&(view.isAdded==false)) {//stage 1
-				view.initStage1();
-				view.getTbar().getTimer().start();
-			}else if(view.getMenu().isTutorial()&&(view.isAdded==false)) {//tutorial
-				tutorial() ;
-				view.initStage1();
-				view.getTbar().getTimer().start();
-			}
-			
-			else if(view.isAdded){
-				//System.out.println("wa");
-				this.model.updateWorld();
-				ArrayList<FloatingObjs> obj = model.getListOfExistedFloatingObjs();
-				this.view.updateView(obj);	
-			}
+		if(view.getMenu().isStarted()&&(view.isAdded==false)) {//stage 1
+			view.initStage1();
+			view.getTbar().getTimer().start();
+		}else if(view.getMenu().isTutorial()&&(view.isAdded==false)) {//tutorial
+			tutorial() ;
+			view.initStage1();
+			view.getTbar().getTimer().start();
+		}
 
-			
-			if((view.getTbar().getPbar().getValue()<=0)&&(isEnded==false)&&(view.getMenu().isStarted())) {
-				//pop up game over
-				view.PopGameOver(model.getScore());
-				isEnded=true;
-				//view.getTbar().getTimer().stop();
-				//TutorialOver();
-			}else if((view.getTbar().getPbar().getValue()<=0)&&(isEnded==false)&&(view.getMenu().isTutorial())) {
-				view.TutorialOver();
-				isEnded=true;
-			}
-			
+		else if(view.isAdded){
+			//System.out.println("wa");
+			this.model.updateWorld();
+			ArrayList<FloatingObjs> obj = model.getListOfExistedFloatingObjs();
+			this.view.updateView(obj);	
+		}
+
+
+		if((view.getTbar().getPbar().getValue()<=0)&&(isEnded==false)&&(view.getMenu().isStarted())) {
+			//pop up game over
+			view.PopGameOver(model.getScore());
+			isEnded=true;
+			//view.getTbar().getTimer().stop();
+			//TutorialOver();
+		}else if((view.getTbar().getPbar().getValue()<=0)&&(isEnded==false)&&(view.getMenu().isTutorial())) {
+			view.TutorialOver();
+			isEnded=true;
+		}
+
 	}
 
 	/**
@@ -222,7 +197,6 @@ public class Controller implements Serializable{ // controller class runs the ga
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			String[] temp = e.getActionCommand().split(" ");
 			int index = Integer.parseInt(temp[1]);
 			String spices = temp[0];
@@ -234,7 +208,7 @@ public class Controller implements Serializable{ // controller class runs the ga
 			int score = model.findFloat(index).getScore();
 			updateScore(score*isPos);
 			model.destory(index);
-			//System.out.println(spices);
+
 		}
 
 	}//FishButtonListener
@@ -296,7 +270,6 @@ public class Controller implements Serializable{ // controller class runs the ga
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			currentTool = e.getActionCommand();
 			System.out.println("the tool is now: " + currentTool);
 			switch(currentTool){
@@ -306,7 +279,7 @@ public class Controller implements Serializable{ // controller class runs the ga
 			default:break;
 			}
 		}
-	
+
 	}//FishButtonListener
 
 

@@ -10,22 +10,12 @@ public abstract class Animal extends FloatingObjs{
 	// use this to set up animal attributes such as time&score&speed
 
 	/**
-<<<<<<< HEAD
-	*Animal : a constructor of Animal
-	*@param String s: the name of this Animal
-	*@param int x: the x-position of this Animal
-	*@param int y: the y-position of this Animal
-	*@return Animal : Construct a new Animal
-	*/
-	//TO DO :Please fill in the functions
-=======
 	 *Animal : a constructor of Animal
 	 *@param String s: the name of this Animal
 	 *@param int x: the x-position of this Animal
 	 *@param int y: the y-position of this Animal
 	 *@return Animal : Construct a new Animal
 	 */
->>>>>>> Cong-Meng
 
 	public Animal(String n, int x, int y) {
 		super(n, x, y);
