@@ -13,12 +13,14 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+
 import java.util.ArrayList;
 
 
@@ -53,15 +55,21 @@ public class Controller implements Serializable{ // controller class runs the ga
 	private ModelWorld model;
 	private View view;
 	private String currentTool;
+
 	public Action act1;	
 	public boolean isEnded =false;	
+
+
+
 	/**
-	*Controller : a constructor of Controller
-	*@param ArrayList<FloatingObjs> loFloating: the ArrayList of FloatingObjs
-	*@return Controller : Construct a new Controller
-	*/
+	 *Controller : a constructor of Controller
+	 *@param ArrayList<FloatingObjs> loFloating: the ArrayList of FloatingObjs
+	 *@return Controller : Construct a new Controller
+	 */
+
 
 	public Controller() {
+
 		//-----
 	/**	progressBar = new JProgressBar(JProgressBar.VERTICAL, 0, 10);
         progressBar.setValue(10);
@@ -87,8 +95,10 @@ public class Controller implements Serializable{ // controller class runs the ga
 				//	System.out.println("GameOVer");
 				//}
 				
+
 			}
 		};
+
 		loFloating= new ArrayList<FloatingObjs>();
 		gamePreset();
 		//view.Poptutorial();
@@ -97,6 +107,7 @@ public class Controller implements Serializable{ // controller class runs the ga
 	public void gamePreset() {
 		
 		initialFishes();
+
 		model = new ModelWorld(loFloating);
 		view = new View();
 		view.setActionListener(new FishButtonListener(), new ToolBarListener());
@@ -110,14 +121,14 @@ public class Controller implements Serializable{ // controller class runs the ga
 		model= new ModelWorld(loFloating);
 		this.view.updateView(model.getListOfExistedFloatingObjs());
 	}
-	
+
 	/**
-	*getact : a getter function of controller
-	*@param void : nothing
-	*@return Action : property act1 of controller
-	*/
+	 *getact : a getter function of controller
+	 *@param void : nothing
+	 *@return Action : property act1 of controller
+	 */
 	public Action getact() {
-		return act1;
+		return updateWorld;
 	}
 	public void initialFishes() {
 		loFloating.clear();//always clear before add!
@@ -141,13 +152,14 @@ public class Controller implements Serializable{ // controller class runs the ga
 		loFloating.add(new ProtectedSpecies("salamander", 1267 , 735,3,350,150));
 		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835,4,230,60));
 	}
-	
+
 	/**
-	*updateController : this function updates the controller
-	*@param void : nothing
-	*@return void : it returns nothing but updates the status of controller
-	*/
+	 *updateController : this function updates the controller
+	 *@param void : nothing
+	 *@return void : it returns nothing but updates the status of controller
+	 */
 	public void updateController() {
+
 			if(view.getMenu().isStarted()&&(view.isAdded==false)) {//stage 1
 				view.initStage1();
 				view.getTbar().getTimer().start();
@@ -176,39 +188,38 @@ public class Controller implements Serializable{ // controller class runs the ga
 				isEnded=true;
 			}
 			
-
 	}
 
 	/**
-	*updateScore : this function updates the score in both model and view
-	*@param void : nothing
-	*@return void : it returns nothing but updates the score in both model and view
-	*/
+	 *updateScore : this function updates the score in both model and view
+	 *@param void : nothing
+	 *@return void : it returns nothing but updates the score in both model and view
+	 */
 	public void updateScore(int i){
 		model.updateScore(i);
 		this.view.getTbar().updateScore(model.getScore());
 
 	}
-	
+
 	/**
-	*getScore : a getter function of controller
-	*@param void : nothing
-	*@return int : get the score from model
-	*/
+	 *getScore : a getter function of controller
+	 *@param void : nothing
+	 *@return int : get the score from model
+	 */
 	public int getScore(){
 		return model.getScore();
 	}
-	
+
 
 	public class FishButtonListener implements ActionListener{ 
 		//for each Animal button, listener will
 		//apply action towards their ID and count score
 
 		/**
-		*actionPerformed : an overrided function in ActionListener
-		*@param ActionEvent e : where the action occurs 
-		*@return void : perform action when fishbtn is clicked
-		*/
+		 *actionPerformed : an overrided function in ActionListener
+		 *@param ActionEvent e : where the action occurs 
+		 *@return void : perform action when fishbtn is clicked
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
@@ -225,47 +236,47 @@ public class Controller implements Serializable{ // controller class runs the ga
 			model.destory(index);
 			//System.out.println(spices);
 		}
-		
+
 	}//FishButtonListener
-	
+
 
 	/**
-	*beep : plays the sound to show correct or not
-	*@param int i : getting from the FishButtonListener to see if the action is right or not
-	*@return void : play the right sound according to the choice 
-	*/
+	 *beep : plays the sound to show correct or not
+	 *@param int i : getting from the FishButtonListener to see if the action is right or not
+	 *@return void : play the right sound according to the choice 
+	 */
 	private void beep(int i){
 		String input = (i==1)? "correct" : "wrong";
-        AudioPlayer MGP = AudioPlayer.player;
-        AudioStream BGM;
+		AudioPlayer MGP = AudioPlayer.player;
+		AudioStream BGM;
 
-        try{
-            InputStream test = new FileInputStream("resources//music//" + input + ".wav");
-            BGM = new AudioStream(test);
-            AudioPlayer.player.start(BGM);
-        }
-        catch(FileNotFoundException e){
-            System.out.print(e.toString());
-        }
-        catch(IOException error)
-        {
-            System.out.print(error.toString());
-        }
-    }
-	
+		try{
+			InputStream test = new FileInputStream("resources//music//" + input + ".wav");
+			BGM = new AudioStream(test);
+			AudioPlayer.player.start(BGM);
+		}
+		catch(FileNotFoundException e){
+			System.out.print(e.toString());
+		}
+		catch(IOException error)
+		{
+			System.out.print(error.toString());
+		}
+	}
+
 
 	public class ToolBarListener implements ActionListener{
 		//using radio button to change tools 
 		private Cursor invasive;
 		private Cursor protect;
 		private Cursor litter;
-		
+
 		/**
-		*ToolBarListener : a constructor of ToolBarListener
-		*@param void : nothing
-		*@return ToolBarListener : Construct a new ToolBarListener
-		*							setup 3 Cursors
-		*/
+		 *ToolBarListener : a constructor of ToolBarListener
+		 *@param void : nothing
+		 *@return ToolBarListener : Construct a new ToolBarListener
+		 *							setup 3 Cursors
+		 */
 		public ToolBarListener(){
 			super();
 			Toolkit tk = Toolkit.getDefaultToolkit();
@@ -279,10 +290,10 @@ public class Controller implements Serializable{ // controller class runs the ga
 		}
 
 		/**
-		*actionPerformed : an overrided function in ActionListener
-		*@param ActionEvent e : where the action occurs 
-		*@return void : perform action when toolbtn is clicked and update the currentTool
-		*/
+		 *actionPerformed : an overrided function in ActionListener
+		 *@param ActionEvent e : where the action occurs 
+		 *@return void : perform action when toolbtn is clicked and update the currentTool
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
@@ -295,9 +306,6 @@ public class Controller implements Serializable{ // controller class runs the ga
 			default:break;
 			}
 		}
-		public void StartRunning() {
-			
-		}
 	
 	}//FishButtonListener
 
@@ -306,6 +314,7 @@ public class Controller implements Serializable{ // controller class runs the ga
 		Controller a = new Controller();
 		Timer t = new Timer(1,a.getact());
 		t.start();
+
 	}
-	
+
 }
