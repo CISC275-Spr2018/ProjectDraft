@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * Class ModelWorld
  * @author Team 11 - 8
@@ -8,7 +10,7 @@ package model;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class ModelWorld {
+public class ModelWorld implements Serializable{
 	//the class handles all data and object we imported
 	//takes a list of animals and update their status
 

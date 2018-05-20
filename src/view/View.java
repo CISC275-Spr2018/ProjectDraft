@@ -115,7 +115,6 @@ public class View extends JFrame{
 
 		JOptionPane.showConfirmDialog(null, "GameOver \r\n\r\n Score: " + hightscore,
 				"GameOver", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);
-		//JOptionPane.showConfirmDialog(this, "GameOver \r\n\r\n Score: " + hightscore);
 	}
 
 	/**
