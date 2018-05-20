@@ -58,11 +58,11 @@ public class ModelWorld {
 			f.updateDuration();
 			
 		}
-		spawnNum=(spawnNum+1)%10;
+		spawnNum=(spawnNum+1)%100;
 		if(loEf.size()<5){//make sure there is always more than 5 objs on the screen
 			this.spawn();
 		}
-		if(spawnNum==25) {
+		if(spawnNum%5==1) {
 			this.spawn();//spwan every
 		}
 		
@@ -159,6 +159,7 @@ public class ModelWorld {
 	*				and add id to this FloatingObjs
 	*/
 	public void spawn(){
+		
 		int len = lof.size();
 		int i = (int) (Math.random() * len);
 		FloatingObjs temp = lof.get(i);
@@ -174,7 +175,7 @@ public class ModelWorld {
 		i = loEf.indexOf(f);
 		f.addIndexId(i);
 	}
-
+/**
 	public static void main(String[] args){
 		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
 		loFloating.add(new ProtectedSpecies("bogturtle", 4 , 5));
@@ -187,6 +188,6 @@ public class ModelWorld {
 		world.destory(1);
 		world.destory(2);
 		System.out.println(world);
-	}//main
+	}//main**/
 
 }

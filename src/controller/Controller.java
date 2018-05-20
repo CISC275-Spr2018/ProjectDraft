@@ -18,6 +18,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -47,24 +48,20 @@ import view.SoundBar;
 
 import view.View;
 
-public class Controller { // controller class runs the game 
+public class Controller implements Serializable{ // controller class runs the game 
+	ArrayList<FloatingObjs> loFloating;
 	private ModelWorld model;
 	private View view;
 	private String currentTool;
-	public Action act1;
-
-	public boolean isEnded =false;
-    
-
-
-	
+	public Action act1;	
+	public boolean isEnded =false;	
 	/**
 	*Controller : a constructor of Controller
 	*@param ArrayList<FloatingObjs> loFloating: the ArrayList of FloatingObjs
 	*@return Controller : Construct a new Controller
 	*/
 
-	public Controller(ArrayList<FloatingObjs> loFloating) {
+	public Controller() {
 		//-----
 	/**	progressBar = new JProgressBar(JProgressBar.VERTICAL, 0, 10);
         progressBar.setValue(10);
@@ -83,25 +80,35 @@ public class Controller { // controller class runs the game
 			
 			public void actionPerformed(ActionEvent e) {
 				
-				if(model.getCountDown()>=0) {
+				//if(model.getCountDown()>=0) {
 					updateController();
-				}
-				else {
-					System.out.println("GameOVer");
-				}
+				//}
+				//else {
+				//	System.out.println("GameOVer");
+				//}
 				
 			}
 		};
+		loFloating= new ArrayList<FloatingObjs>();
+		gamePreset();
+		//view.Poptutorial();
+		
+	}
+	public void gamePreset() {
+		
+		initialFishes();
 		model = new ModelWorld(loFloating);
 		view = new View();
 		view.setActionListener(new FishButtonListener(), new ToolBarListener());
 		this.view.updateView(model.getListOfExistedFloatingObjs());
 		currentTool = "Invasive";
-		view.getFworld().initialBG();
 		SoundBar.music();
-		stage1(loFloating);
-		view.Poptutorial();
-
+	}
+	
+	public void tutorial() {
+		initialSlowFishes();
+		model= new ModelWorld(loFloating);
+		this.view.updateView(model.getListOfExistedFloatingObjs());
 	}
 	
 	/**
@@ -112,12 +119,28 @@ public class Controller { // controller class runs the game
 	public Action getact() {
 		return act1;
 	}
-	public void stage1(ArrayList<FloatingObjs> loFloating) {
-
+	public void initialFishes() {
+		loFloating.clear();//always clear before add!
+		loFloating.add(new ProtectedSpecies("bogturtle", 800 , 765,15,200,100));
+		loFloating.add(new InvasiveSpecies("bluecatFish", 900 , 700,18,45,110));
+		loFloating.add(new ProtectedSpecies("horseshoeCrab", 400 , 516,14,300,200));
+		loFloating.add(new InvasiveSpecies("redswampcrayfish", 1200 , 535,18,30,150));
+		loFloating.add(new InvasiveSpecies("snakehead", 1200 , 1035,11,75,60));
+		loFloating.add(new Trash("paper", 1267, 635,12,100,100));
+		loFloating.add(new ProtectedSpecies("salamander", 1267 , 735,21,350,150));
+		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835,18,230,60));
 	}
-	
-	//this function setup model for each game
-	public void setupModeles(){}
+	public void initialSlowFishes() {//for tutorial only
+		loFloating.clear();//always clear before add!
+		loFloating.add(new ProtectedSpecies("bogturtle", 800 , 765,3,200,100));
+		loFloating.add(new InvasiveSpecies("bluecatFish", 900 , 700,4,45,110));
+		loFloating.add(new ProtectedSpecies("horseshoeCrab", 400 , 516,5,300,200));
+		loFloating.add(new InvasiveSpecies("redswampcrayfish", 1200 , 535,4,30,150));
+		loFloating.add(new InvasiveSpecies("snakehead", 1200 , 1035,3,75,60));
+		loFloating.add(new Trash("paper", 1267, 635,1,100,100));
+		loFloating.add(new ProtectedSpecies("salamander", 1267 , 735,3,350,150));
+		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835,4,230,60));
+	}
 	
 	/**
 	*updateController : this function updates the controller
@@ -128,7 +151,13 @@ public class Controller { // controller class runs the game
 			if(view.getMenu().isStarted()&&(view.isAdded==false)) {//stage 1
 				view.initStage1();
 				view.getTbar().getTimer().start();
-			}else if(view.isAdded){
+			}else if(view.getMenu().isTutorial()&&(view.isAdded==false)) {//tutorial
+				tutorial() ;
+				view.initStage1();
+				view.getTbar().getTimer().start();
+			}
+			
+			else if(view.isAdded){
 				//System.out.println("wa");
 				this.model.updateWorld();
 				ArrayList<FloatingObjs> obj = model.getListOfExistedFloatingObjs();
@@ -136,12 +165,15 @@ public class Controller { // controller class runs the game
 			}
 
 			
-			if((view.getTbar().getPbar().getValue()<=0)&&(isEnded==false)) {
+			if((view.getTbar().getPbar().getValue()<=0)&&(isEnded==false)&&(view.getMenu().isStarted())) {
 				//pop up game over
 				view.PopGameOver(model.getScore());
 				isEnded=true;
 				//view.getTbar().getTimer().stop();
-				
+				//TutorialOver();
+			}else if((view.getTbar().getPbar().getValue()<=0)&&(isEnded==false)&&(view.getMenu().isTutorial())) {
+				view.TutorialOver();
+				isEnded=true;
 			}
 			
 
@@ -263,30 +295,17 @@ public class Controller { // controller class runs the game
 			default:break;
 			}
 		}
-		
+		public void StartRunning() {
+			
+		}
+	
 	}//FishButtonListener
 
 
-	
-
-
-	
-
 	public static void main(String args[]) {
-		ArrayList<FloatingObjs> loFloating = new ArrayList<FloatingObjs>();
-		loFloating.add(new ProtectedSpecies("bogturtle", 800 , 765,15,200,100));
-		loFloating.add(new InvasiveSpecies("bluecatFish", 900 , 700,18,45,110));
-		loFloating.add(new ProtectedSpecies("horseshoeCrab", 400 , 516,14,300,200));
-		loFloating.add(new InvasiveSpecies("redswampcrayfish", 1200 , 535,18,30,150));
-		loFloating.add(new InvasiveSpecies("snakehead", 1200 , 1035,11,75,60));
-		loFloating.add(new Trash("paper", 1267, 635,12,100,100));
-		loFloating.add(new ProtectedSpecies("salamander", 1267 , 735,21,350,150));
-		loFloating.add(new ProtectedSpecies("Sturgeon", 1435 , 835,18,230,60));
-		Controller a = new Controller(loFloating);
+		Controller a = new Controller();
 		Timer t = new Timer(1,a.getact());
 		t.start();
-		
-
 	}
 	
 }
